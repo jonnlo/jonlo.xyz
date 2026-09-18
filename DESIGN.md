@@ -24,12 +24,18 @@ A personal journal where a passing observation has the same standing as a finish
 All writing is illustrative. This is a local reading prototype, not an authoring or publishing system. Recording new thoughts currently means adding content records; a future editor should capture the creation instant automatically and preserve it independently from later edits.
 
 
-## Experiment revision
+## Current visual system
 
-The poster references in the Concert poster project inform the new palettes: mineral teal, cyan-gray type, near-black photographic fields and offset composition. The white default is a neutral comparison surface. No simulated grain or ornamental shapes are added.
+The fixed visual system uses Instrument Sans for display and interface type, Source Serif 4 for reading text, and a white paper surface with mineral teal accents. No simulated grain or ornamental shapes are added.
 
-The Exp page independently switches four title/body pairings and four palettes. Preferences persist locally and apply to the journal and reading routes. Homepage filters isolate fragments, notes, and essays; All retains poetry.
+Homepage filters isolate fragments, notes, and essays; All retains poetry.
 
-Pairings: Instrument Sans / Source Serif 4; Source Serif 4 / IBM Plex Sans; Space Grotesk / Newsreader; Newsreader / Work Sans.
+## Unified journal archive
 
-Palettes: Ink on white, Mineral / Mist, Black / Silver, Mist / Mineral.
+The site uses one browsing surface rather than separate Journal and Index destinations. All is the chronological journal; Essays, Notes, Poems, and Fragments filter that same rich reading view. Concepts remain visible as metadata and can become interactive when the archive is large enough to justify another navigation layer.
+
+Folder tabs provide the institutional control layer while the records retain one fixed geometry: record count, view label, Date, and Title / filing. All uses a neutral sheet and expands each record to expose the writing—an essay excerpt or the full short form. Form tabs use their assigned paper stock and compact records to support scanning. Color therefore belongs to the filing system rather than the reading surface. The site canvas and article pages remain neutral. Years and dedicated concept filters should be introduced only when the content gives them useful distinctions to reveal.
+
+Every record uses the same metadata row: form, Filed under, and concepts. Concepts are typographic links rather than buttons. Selecting one filters the Journal in place and can stack with the active form; a small Concept / value row exposes that state and provides a clear action. This preserves linkable archive exploration without creating separate tag pages for a small collection.
+
+About and Now are supporting documents within the archive. About is a collection statement pairing a small metadata block with serif prose. Now is a dated status record whose subjects appear as compact system labels beside human responses. The footer identifies the archive quietly and does not describe the site as a prototype.
