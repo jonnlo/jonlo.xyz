@@ -17,7 +17,7 @@ A personal journal where a passing observation has the same standing as a finish
 - Fragments display their full text without requiring a title. Their timestamp is a permalink.
 - New timestamped records retain ISO 8601 seconds and timezone. Display the recorded time explicitly in UTC+08:00; do not silently reinterpret it in the visitor's timezone.
 - Historical records with dates only remain date-only. Never imply unknown recording precision.
-- Existing concept/form archives, About, Now, and sample RSS remain available.
+- Existing concept/format archives, About, Now, and sample RSS remain available.
 
 ## Prototype boundary
 
@@ -26,16 +26,16 @@ All writing is illustrative. This is a local reading prototype, not an authoring
 
 ## Current visual system
 
-The fixed visual system uses Instrument Sans for display and interface type, Source Serif 4 for reading text, and a white paper surface with mineral teal accents. No simulated grain or ornamental shapes are added.
+The fixed visual system uses Instrument Sans for display and interface type, Source Serif 4 for reading text, and low-chroma institutional paper stocks: grey canvas, neutral All sheet, celadon essays, buff notes, and dusty salmon fragments. No simulated grain or ornamental shapes are added.
 
-Homepage filters isolate fragments, notes, and essays; All retains poetry.
+Homepage filters isolate fragments, notes, and essays.
 
 ## Unified journal archive
 
-The site uses one browsing surface rather than separate Journal and Index destinations. All is the chronological journal; Essays, Notes, Poems, and Fragments filter that same rich reading view. Concepts remain visible as metadata and can become interactive when the archive is large enough to justify another navigation layer.
+The site uses one browsing surface rather than separate Journal and Index destinations. All is the chronological journal; Essays, Notes, and Fragments filter that same rich reading view. Concepts remain visible as metadata and can become interactive when the archive is large enough to justify another navigation layer.
 
-Folder tabs provide the institutional control layer while the records retain one fixed geometry: record count, view label, Date, and Title / filing. All uses a neutral sheet and expands each record to expose the writing—an essay excerpt or the full short form. Form tabs use their assigned paper stock and compact records to support scanning. Color therefore belongs to the filing system rather than the reading surface. The site canvas and article pages remain neutral. Years and dedicated concept filters should be introduced only when the content gives them useful distinctions to reveal.
+Folder tabs provide the institutional control layer while the records retain a stable catalogue geometry without an explicit column-heading row. All aligns date, title and filing, and format as columns, while filtered format tabs omit the redundant format column. All expands each record to expose the writing—an essay excerpt or the full short format. Format tabs use their assigned paper stock and compact records to support scanning. Color therefore belongs to the filing system rather than the reading surface. The site canvas and article pages remain neutral. Years and dedicated concept filters should be introduced only when the content gives them useful distinctions to reveal.
 
-Every record uses the same metadata row: form, Filed under, and concepts. Concepts are typographic links rather than buttons. Selecting one filters the Journal in place and can stack with the active form; a small Concept / value row exposes that state and provides a clear action. This preserves linkable archive exploration without creating separate tag pages for a small collection.
+Every record presents concepts as an unlabeled typographic line beneath the title. In All, Format occupies a dedicated catalogue column; filtered tabs communicate the selected format at panel level. Concepts are links rather than buttons. Selecting one filters the Journal in place and can stack with the active format; a small Concept / value row exposes that state and provides a clear action. This preserves linkable archive exploration without creating separate tag pages for a small collection.
 
 About and Now are supporting documents within the archive. About is a collection statement pairing a small metadata block with serif prose. Now is a dated status record whose subjects appear as compact system labels beside human responses. The footer identifies the archive quietly and does not describe the site as a prototype.
