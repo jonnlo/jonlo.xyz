@@ -1,12 +1,25 @@
 :root {
-  --canvas: #fafaf8;
+  --canvas: oklch(94.08% 0.0032 197.1);
+  --sheet: oklch(97% 0.0082 91.5);
+  --paper-all: oklch(95.47% 0.0095 93.6);
+  --paper-essay: oklch(90.38% 0.0224 123.7);
+  --paper-note: oklch(91.69% 0.0454 90.4);
+  --paper-fragment: oklch(91.16% 0.0231 52.7);
+  --paper-poem: oklch(91.01% 0.0103 325.7);
   --ink: #242522;
-  --muted: #686a65;
-  --rule: #dedfd9;
-  --accent: #743e39;
-  --serif: "STIX Two Text", Georgia, serif;
-  --sans: "Public Sans", Arial, sans-serif;
-  --page-padding: 56px
+  --muted: #6f716b;
+  --rule: #cbc9c0;
+  --accent: #456d6b;
+  --hover-essay: #4f6648;
+  --hover-note: #80601f;
+  --hover-fragment: #8a5146;
+  --title-font: "Public Sans", Arial, sans-serif;
+  --body-font: "STIX Two Text", Georgia, serif;
+  --ui-font: "Public Sans", Arial, sans-serif;
+  --title-weight: 600;
+  --ui-weight: 400;
+  --meta-size: .8125rem;
+  --page-padding: 48px
 }
 
 *,
@@ -24,7 +37,7 @@ body {
   margin: 0;
   background: var(--canvas);
   color: var(--ink);
-  font-family: var(--sans);
+  font-family: var(--ui-font);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility
 }
@@ -81,7 +94,7 @@ button:focus-visible,
 
 .identity {
   flex: 0 0 auto;
-  font: 400 1.3125rem/1.2 var(--serif);
+  font: 400 1.3125rem/1.2 var(--body-font);
   letter-spacing: normal
 }
 
@@ -137,7 +150,7 @@ h3 {
 .eyebrow,
 .entry-kind,
 .stream-header {
-  font-family: var(--sans);
+  font-family: var(--ui-font);
   font-size: 0.75rem;
   font-weight: 400;
   line-height: 1.4;
@@ -151,14 +164,14 @@ h3 {
 }
 
 .journal-intro h1 {
-  font: 400 3.625rem/1.12 var(--serif);
+  font: 400 3.625rem/1.12 var(--body-font);
   letter-spacing: normal
 }
 
 .journal-intro>p:last-child {
   max-width: 540px;
   margin-top: 24px;
-  font: 400 1.125rem/1.6 var(--serif);
+  font: 400 1.125rem/1.6 var(--body-font);
   color: var(--muted)
 }
 
@@ -225,12 +238,12 @@ h3 {
 .essay-entry .entry-title,
 .essay-entry .entry-content>h2 {
   margin-bottom: 13px;
-  font: 400 2.0rem/1.2 var(--serif);
+  font: 400 2.0rem/1.2 var(--body-font);
   letter-spacing: normal
 }
 
 .essay-entry .entry-content>p:last-child {
-  font: 400 1.125rem/1.65 var(--serif);
+  font: 400 1.125rem/1.65 var(--body-font);
   color: var(--muted)
 }
 
@@ -238,7 +251,7 @@ h3 {
 .fragment-entry .entry-text,
 .fragment-entry .fragment,
 .fragment-entry .entry-content>p:not(.entry-kind) {
-  font: 400 1.4375rem/1.55 var(--serif);
+  font: 400 1.4375rem/1.55 var(--body-font);
   letter-spacing: normal
 }
 
@@ -498,7 +511,7 @@ h3 {
 
 .article-heading h1 {
   margin-bottom: 23px;
-  font: 400 clamp(2.25rem, 4.5vw, 3.0rem)/1.15 var(--serif);
+  font: 400 clamp(2.25rem, 4.5vw, 3.0rem)/1.15 var(--body-font);
   letter-spacing: normal
 }
 
@@ -518,7 +531,7 @@ h3 {
 .prose {
   grid-column: 3/11;
   max-width: 65ch;
-  font: 400 1.3125rem/1.75 var(--serif)
+  font: 400 1.3125rem/1.75 var(--body-font)
 }
 
 .prose p {
@@ -580,7 +593,7 @@ h3 {
 .related a {
   display: block;
   margin-bottom: 6px;
-  font: 400 1.375rem/1.6 var(--serif)
+  font: 400 1.375rem/1.6 var(--body-font)
 }
 
 .poem {
@@ -598,7 +611,7 @@ h3 {
 .small-note {
   margin-top: 40px !important;
   color: var(--muted);
-  font: 400 0.75rem/1.8 var(--sans)
+  font: 400 0.75rem/1.8 var(--ui-font)
 }
 
 footer {
@@ -890,28 +903,6 @@ footer span:first-child {
 }
 
 /* Poster-led type and colour system */
-:root {
-  --canvas: #e2e5e6;
-  --sheet: #f7f5ef;
-  --paper-all: #f2f0e9;
-  --paper-essay: #dce2d2;
-  --paper-note: #efe3c2;
-  --paper-fragment: #efded4;
-  --paper-poem: #e5dfe5;
-  --ink: #242522;
-  --muted: #6f716b;
-  --rule: #cbc9c0;
-  --accent: #456d6b;
-  --title-font: "Public Sans", Arial, sans-serif;
-  --body-font: "STIX Two Text", Georgia, serif;
-  --ui-font: "Public Sans", Arial, sans-serif;
-  --title-weight: 600;
-  --body-weight: 400;
-  --ui-weight: 400;
-  --serif: var(--body-font);
-  --sans: var(--ui-font);
-  --page-padding: 48px
-}
 
 html,
 body {
@@ -1117,7 +1108,7 @@ footer {
 }
 
 .poem-entry .entry-content>p:not(.entry-kind) {
-  font: 400 1.4375rem/1.55 var(--serif);
+  font: 400 1.4375rem/1.55 var(--body-font);
   letter-spacing: normal
 }
 
@@ -1231,15 +1222,24 @@ footer {
 
 /* Journal orientation: each archive state gets a quiet local description. */
 .journal .catalogue-summary {
-  padding-bottom: 16px;
+  align-items: flex-end;
+  padding-bottom: 9px;
   text-transform: uppercase
 }
 
 .journal .catalogue-blurb {
   max-width: 670px;
-  margin: 8px 0 8px;
+  margin: 0;
   color: var(--ink);
-  font: var(--ui-weight) var(--meta-size)/1.5 var(--ui-font)
+  font: var(--ui-weight) var(--meta-size)/1.5 var(--ui-font);
+  text-transform: none
+}
+
+.journal .catalogue-status {
+  flex: 0 0 auto;
+  margin-left: auto;
+  text-align: right;
+  white-space: nowrap
 }
 
 .catalogue-filtered .record-columns,
@@ -1257,12 +1257,12 @@ footer {
 
 @media(max-width:650px) {
   .journal .catalogue-summary {
-    padding-bottom: 14px
+    flex-wrap: wrap;
+    padding-bottom: 9px
   }
 
   .journal .catalogue-blurb {
     max-width: none;
-    margin: 6px 0 8px;
     font-size: var(--meta-size);
     line-height: 1.5
   }
@@ -1361,9 +1361,6 @@ footer {
 }
 
 /* Shared metadata scale */
-:root {
-  --meta-size: .8125rem
-}
 
 .page .archive-line,
 .page .catalogue-summary,
@@ -1425,12 +1422,6 @@ footer {
 }
 
 /* Richer form hues for linked record titles. */
-:root {
-  --hover-essay: #4f6648;
-  --hover-note: #80601f;
-  --hover-fragment: #8a5146
-}
-
 .record-essay .record-body h2 a:hover,
 .record-essay .record-body h2 a:focus-visible {
   color: var(--hover-essay);
@@ -2261,4 +2252,60 @@ time,
 
 .journal-tabs a:nth-child(4)[aria-current=page] {
   background: var(--paper-fragment)
+}
+
+/* Detached journal tabs: the active paper color keeps the connection subtle. */
+.journal-tabs {
+  gap: 6px;
+  margin-bottom: 8px;
+  border-bottom: 0
+}
+
+.journal-tabs a {
+  top: 0;
+  min-width: 96px;
+  padding: 10px 12px 9px
+}
+
+.journal-tabs a[aria-current=page] {
+  top: 0;
+  padding-top: 11px;
+  border-bottom-color: var(--sheet-paper)
+}
+
+.journal-tabs a[aria-current=page]::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -9px;
+  left: 0;
+  height: 9px;
+  background: var(--sheet-paper);
+  border-right: 1px solid var(--rule);
+  border-left: 1px solid var(--rule)
+}
+
+@media(max-width:650px) {
+  .journal-tabs {
+    gap: 4px
+  }
+
+  .journal-tabs a {
+    min-width: 0;
+    padding: 11px 5px 10px
+  }
+
+  .journal-tabs a[aria-current=page] {
+    padding-top: 14px
+  }
+}
+
+/* The panel and controls rely on spacing and paper color, not outlines. */
+.catalogue-sheet,
+.journal-tabs a {
+  border: 0
+}
+
+.journal-tabs a[aria-current=page]::after {
+  border: 0
 }
