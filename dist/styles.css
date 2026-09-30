@@ -2,6 +2,7 @@
   --canvas: oklch(94.08% 0.0032 197.1);
   --sheet: oklch(97% 0.0082 91.5);
   --paper-all: oklch(95.47% 0.0095 93.6);
+  --paper-document: oklch(98% 0.0035 91.5);
   --paper-essay: oklch(90.38% 0.0224 123.7);
   --paper-note: oklch(91.69% 0.0454 90.4);
   --paper-fragment: oklch(91.16% 0.0231 52.7);
@@ -494,7 +495,7 @@ h3 {
 }
 
 .reading {
-  padding-top: 64px
+  padding-top: 12px
 }
 
 .back {
@@ -531,7 +532,7 @@ h3 {
 .prose {
   grid-column: 3/11;
   max-width: 65ch;
-  font: 400 1.3125rem/1.75 var(--body-font)
+  font: 400 1.3125rem/1.65 var(--body-font)
 }
 
 .prose p {
@@ -619,9 +620,7 @@ footer {
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  margin-top: 90px;
   padding: 25px 0 36px;
-  border-top: 1px solid var(--rule);
   color: var(--muted);
   font-size: 0.75rem
 }
@@ -690,7 +689,8 @@ footer span:first-child {
 
 @media(max-width:650px) {
   :root {
-    --page-padding: 24px
+    --page-padding: 24px;
+    --meta-size: .75rem
   }
 
   .header {
@@ -810,11 +810,6 @@ footer span:first-child {
     display: none
   }
 
-  .reading,
-  .simple {
-    padding-top: 38px
-  }
-
   .back {
     grid-column: 1/-1;
     padding: 0 0 12px
@@ -837,7 +832,7 @@ footer span:first-child {
 
   .prose {
     font-size: 1.25rem;
-    line-height: 1.75
+    line-height: 1.6
   }
 
   .margin-note {
@@ -1018,7 +1013,7 @@ footer {
 
 @media(max-width:650px) {
   :root {
-    --page-padding: 20px
+    --page-padding: 16px
   }
 
   .journal-intro {
@@ -1298,7 +1293,7 @@ footer {
 
 .about-page .support-heading h1 {
   max-width: 30ch;
-  font: var(--title-weight) clamp(2.625rem, 4.2vw, 3rem)/1.3 var(--title-font);
+  font: var(--title-weight) clamp(2.6rem, 4vw, 2.5rem)/1.3 var(--title-font);
   letter-spacing: -.03em
 }
 
@@ -1344,7 +1339,7 @@ footer {
 
   .about-page .support-heading h1 {
     max-width: 24ch;
-    font-size: clamp(2.25rem, 10vw, 2.625rem);
+    font-size: clamp(2rem, 4vw, 2.625rem);
     line-height: 1.3
   }
 
@@ -1424,20 +1419,20 @@ footer {
 /* Richer form hues for linked record titles. */
 .record-essay .record-body h2 a:hover,
 .record-essay .record-body h2 a:focus-visible {
-  color: var(--hover-essay);
-  text-decoration-color: var(--hover-essay)
+  color: var(--accent);
+  text-decoration-color: var(--accent)
 }
 
 .record-note .record-body h2 a:hover,
 .record-note .record-body h2 a:focus-visible {
-  color: var(--hover-note);
-  text-decoration-color: var(--hover-note)
+  color: var(--accent);
+  text-decoration-color: var(--accent)
 }
 
 .record-fragment .record-body h2 a:hover,
 .record-fragment .record-body h2 a:focus-visible {
-  color: var(--hover-fragment);
-  text-decoration-color: var(--hover-fragment)
+  color: var(--accent);
+  text-decoration-color: var(--accent)
 }
 
 .record-concepts {
@@ -1445,19 +1440,19 @@ footer {
 }
 
 .reading {
-  --article-paper: var(--sheet)
+  --article-paper: var(--paper-document)
 }
 
 .reading-essay {
-  --article-paper: color-mix(in srgb, var(--paper-essay) 62%, var(--sheet))
+  --article-paper: var(--paper-document)
 }
 
 .reading-note {
-  --article-paper: color-mix(in srgb, var(--paper-note) 62%, var(--sheet))
+  --article-paper: var(--paper-document)
 }
 
 .reading-fragment {
-  --article-paper: color-mix(in srgb, var(--paper-fragment) 62%, var(--sheet))
+  --article-paper: var(--paper-document)
 }
 
 .article-content-sheet {
@@ -1467,7 +1462,6 @@ footer {
   gap: 24px;
   margin-top: -4px;
   padding: 36px;
-  border: 1px solid var(--rule);
   background: var(--article-paper)
 }
 
@@ -1507,7 +1501,7 @@ footer {
   align-items: center;
   margin-top: 12px;
   color: var(--muted);
-  font: var(--ui-weight) 0.6875rem/1.4 var(--ui-font);
+  font: var(--ui-weight) 0.6875rem/1.7 var(--ui-font);
   font-variant-numeric: tabular-nums;
   letter-spacing: normal
 }
@@ -1597,15 +1591,15 @@ footer {
 }
 
 .related-essay b {
-  color: var(--hover-essay)
+  color: var(--muted)
 }
 
 .related-note b {
-  color: var(--hover-note)
+  color: var(--muted)
 }
 
 .related-fragment b {
-  color: var(--hover-fragment)
+  color: var(--muted)
 }
 
 .related-record:hover>span {
@@ -1637,6 +1631,10 @@ footer {
     padding: 24px 20px
   }
 
+  .article-content-sheet .article-heading {
+    padding-bottom: 24px
+  }
+
   .article-content-sheet .margin-note {
     margin-top: 24px
   }
@@ -1665,15 +1663,15 @@ footer {
 }
 
 .record-essay .record-form-cell {
-  color: var(--hover-essay)
+  color: var(--muted)
 }
 
 .record-note .record-form-cell {
-  color: var(--hover-note)
+  color: var(--muted)
 }
 
 .record-fragment .record-form-cell {
-  color: var(--hover-fragment)
+  color: var(--muted)
 }
 
 .record-essay .record-preview {
@@ -1777,7 +1775,8 @@ footer {
 @media(max-width:650px) {
   .journal-tabs {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(4, max-content);
+    overflow: visible;
     gap: 4px
   }
 
@@ -1807,12 +1806,11 @@ footer {
 
 /* Supporting documents */
 .support-page {
-  padding-top: 58px
+  padding-top: 38px
 }
 
 .support-heading {
-  padding-bottom: 38px;
-  border-bottom: 1px solid var(--rule)
+  padding-bottom: 34px
 }
 
 .support-heading .eyebrow {
@@ -1906,15 +1904,7 @@ footer {
 
 @media(max-width:650px) {
   .support-page {
-    padding-top: 38px
-  }
-
-  .support-heading {
-    padding-bottom: 28px
-  }
-
-  .support-heading h1 {
-    font-size: 2.375rem
+    padding-top: 24px
   }
 
   .support-document {
@@ -1925,10 +1915,6 @@ footer {
 
   .about-copy {
     font-size: 1.25rem
-  }
-
-  .now-page .support-heading h1 {
-    font-size: 3.0rem
   }
 
   .status-log div {
@@ -2165,23 +2151,21 @@ footer {
   padding-top: 0
 }
 
-.journal-intro,
-.support-page {
-  padding-top: 58px
+.journal-intro {
+  padding-top: 38px
 }
 
 .journal-intro {
   padding-bottom: 38px
 }
 
-.journal-intro .eyebrow,
-.support-heading .eyebrow {
+.journal-intro .eyebrow {
   margin-bottom: 18px
 }
 
 .journal-intro h1 {
   max-width: 14ch;
-  font: var(--title-weight) 2.75rem/1.3 var(--title-font);
+  font: var(--title-weight) 1.75rem/1.3 var(--title-font);
   letter-spacing: normal
 }
 
@@ -2201,15 +2185,10 @@ footer {
   font-size: 2.75rem
 }
 
-.support-heading {
-  padding-bottom: 34px
-}
-
 @media(max-width:650px) {
 
-  .journal-intro,
-  .support-page {
-    padding-top: 42px
+  .journal-intro {
+    padding-top: 24px
   }
 
   .journal-intro h1,
@@ -2287,12 +2266,12 @@ time,
 
 @media(max-width:650px) {
   .journal-tabs {
-    gap: 4px
+    gap: 8px
   }
 
   .journal-tabs a {
     min-width: 0;
-    padding: 11px 5px 10px
+    padding: 11px 8px 10px
   }
 
   .journal-tabs a[aria-current=page] {
@@ -2308,4 +2287,147 @@ time,
 
 .journal-tabs a[aria-current=page]::after {
   border: 0
+}
+
+/* Keep the selected folder legible without outlining it. */
+.journal-tabs a[aria-current=page] {
+  color: var(--ink);
+  font-weight: 600
+}
+
+/* Folder colors stay on the tabs in every archive state; only documents are neutral. */
+.journal-tabs .tab-all,
+.journal-tabs .tab-all[aria-current=page] {
+  background: var(--paper-all)
+}
+
+.journal-tabs .tab-essay,
+.journal-tabs .tab-essay[aria-current=page] {
+  background: var(--paper-essay)
+}
+
+.journal-tabs .tab-note,
+.journal-tabs .tab-note[aria-current=page] {
+  background: var(--paper-note)
+}
+
+.journal-tabs .tab-fragment,
+.journal-tabs .tab-fragment[aria-current=page] {
+  background: var(--paper-fragment)
+}
+
+/* Keep article transitions clear without competing with the body text. */
+.article-back {
+  display: inline-block;
+  width: fit-content;
+  padding: 2px 0;
+  color: var(--muted);
+  font: var(--ui-weight) var(--meta-size)/1.4 var(--ui-font);
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: .3em
+}
+
+.article-back:hover,
+.article-back:focus-visible {
+  color: var(--ink)
+}
+
+/* Let in-article section headings guide the reading rhythm rather than interrupt it. */
+.article-content-sheet .prose h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.35
+}
+
+/* Concepts are links; a light dotted underline makes that discoverable at rest. */
+.record-concepts a,
+.article-concept {
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: color-mix(in srgb, var(--muted) 55%, transparent);
+  text-underline-offset: .28em;
+  transition: color 160ms ease, text-decoration-color 160ms ease
+}
+
+.record-concepts a:hover,
+.record-concepts a:focus-visible,
+.article-concept:hover,
+.article-concept:focus-visible {
+  color: var(--ink);
+  text-decoration-color: currentColor
+}
+
+/* The archive opens directly on its filing controls; the site identity already names it. */
+.header {
+  border-bottom: 0
+}
+
+/* Now follows the collection statement as the changing half of About. */
+.now-section {
+  display: grid;
+  grid-template-columns: minmax(0, 32%) minmax(0, 58%);
+  column-gap: 10%;
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+  scroll-margin-top: 32px
+}
+
+.now-heading h2 {
+  font: var(--title-weight) 1.25rem/1.25 var(--title-font);
+  letter-spacing: -.03em
+}
+
+.now-heading .archive-line {
+  margin: 8px 0 0;
+  font-size: var(--meta-size)
+}
+
+.now-section .status-log {
+  padding-top: 0
+}
+
+.now-section .status-log div {
+  grid-template-columns: 118px minmax(0, 1fr);
+  gap: 20px;
+  padding: 16px 0
+}
+
+.now-section .status-log div:first-child {
+  padding-top: 0;
+  border-top: 0
+}
+
+.now-section .status-log dt {
+  padding-top: 3px;
+  font-size: var(--meta-size)
+}
+
+.now-section .status-log dd {
+  font-size: 1.1875rem;
+  line-height: 1.6
+}
+
+@media(max-width:650px) {
+  .now-section {
+    grid-template-columns: 1fr;
+    row-gap: 24px;
+    margin-top: 42px;
+    padding-top: 24px
+  }
+
+  .now-heading h2 {
+    font-size: 1.25rem
+  }
+
+  .now-section .status-log div {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 16px 0
+  }
+
+  .now-section .status-log dd {
+    font-size: 1.125rem
+  }
 }
