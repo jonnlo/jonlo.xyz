@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "ABC Areal";
+  src: url("fonts/ABCArealVariable.ttf") format("truetype");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap
+}
+
 :root {
   --canvas: oklch(94.08% 0.0032 197.1);
   --sheet: oklch(97% 0.0082 91.5);
@@ -14,9 +22,9 @@
   --hover-essay: #4f6648;
   --hover-note: #80601f;
   --hover-fragment: #8a5146;
-  --title-font: "Public Sans", Arial, sans-serif;
+  --title-font: "ABC Areal", Arial, sans-serif;
   --body-font: "STIX Two Text", Georgia, serif;
-  --ui-font: "Public Sans", Arial, sans-serif;
+  --ui-font: "ABC Areal", Arial, sans-serif;
   --title-weight: 600;
   --ui-weight: 400;
   --meta-size: .8125rem;
@@ -104,7 +112,7 @@ button:focus-visible,
   flex-wrap: wrap;
   justify-content: flex-end;
   gap: 10px 28px;
-  font-size: 0.8125rem;
+  font-size: .875rem;
   line-height: 1.4
 }
 
@@ -164,10 +172,6 @@ h3 {
   margin-bottom: 21px
 }
 
-.journal-intro h1 {
-  font: 400 3.625rem/1.12 var(--body-font);
-  letter-spacing: normal
-}
 
 .journal-intro>p:last-child {
   max-width: 540px;
@@ -205,7 +209,7 @@ h3 {
   color: var(--muted);
   font-size: 0.75rem;
   line-height: 1.35;
-  font-variant-numeric: tabular-nums
+  font-variant-numeric: proportional-nums
 }
 
 .entry-stamp>a {
@@ -360,9 +364,6 @@ h3 {
   background: var(--paper-note)
 }
 
-.archive-tabs a:nth-child(4) {
-  background: var(--paper-fragment)
-}
 
 .archive-tabs a:hover {
   color: var(--ink);
@@ -443,7 +444,7 @@ h3 {
   font: var(--ui-weight) 0.6875rem/1.4 var(--ui-font);
   letter-spacing: normal;
   text-transform: uppercase;
-  font-variant-numeric: tabular-nums
+  font-variant-numeric: proportional-nums
 }
 
 .entry .entry-title {
@@ -498,12 +499,6 @@ h3 {
   padding-top: 12px
 }
 
-.back {
-  grid-column: 1/3;
-  padding-top: 11px;
-  color: var(--muted);
-  font-size: 0.8125rem
-}
 
 .article-heading {
   grid-column: 3/11;
@@ -526,7 +521,7 @@ h3 {
 }
 
 .article-meta time {
-  font-variant-numeric: tabular-nums
+  font-variant-numeric: proportional-nums
 }
 
 .prose {
@@ -703,8 +698,7 @@ footer span:first-child {
   }
 
   .header nav {
-    gap: 8px 16px;
-    font-size: 0.75rem
+    gap: 8px 16px
   }
 
   .journal-intro {
@@ -715,10 +709,6 @@ footer span:first-child {
     margin-bottom: 16px
   }
 
-  .journal-intro h1 {
-    font-size: 2.625rem;
-    line-height: 1.12
-  }
 
   .journal-intro>p:last-child {
     margin-top: 20px;
@@ -810,10 +800,6 @@ footer span:first-child {
     display: none
   }
 
-  .back {
-    grid-column: 1/-1;
-    padding: 0 0 12px
-  }
 
   .article-heading,
   .prose,
@@ -866,20 +852,6 @@ footer span:first-child {
 
   footer a {
     margin-left: auto
-  }
-}
-
-@media(max-width:390px) {
-  .header {
-    align-items: flex-start;
-    flex-direction: column;
-    justify-content: center;
-    gap: 4px;
-    padding: 18px 0
-  }
-
-  .header nav {
-    justify-content: flex-start
   }
 }
 
@@ -947,11 +919,6 @@ footer {
   padding: 56px 0 42px
 }
 
-.journal-intro h1 {
-  max-width: 12ch;
-  font: var(--title-weight) clamp(3.125rem, 6.5vw, 4.75rem)/1.02 var(--title-font);
-  letter-spacing: normal
-}
 
 .journal-intro>p:last-child {
   font-family: var(--body-font)
@@ -999,7 +966,7 @@ footer {
 }
 
 .article-heading h1 {
-  max-width: 17ch;
+  max-width: none;
   font: var(--title-weight) clamp(2.625rem, 5vw, 3.625rem)/1.08 var(--title-font);
   letter-spacing: normal
 }
@@ -1020,9 +987,6 @@ footer {
     padding: 42px 0 34px
   }
 
-  .journal-intro h1 {
-    font-size: 3.25rem
-  }
 
   .journal-filters {
     gap: 8px 18px;
@@ -1107,9 +1071,6 @@ footer {
   letter-spacing: normal
 }
 
-.journal-intro h1 {
-  font-size: clamp(3.0rem, 6vw, 4.375rem)
-}
 
 .article-heading h1 {
   font-size: clamp(2.5rem, 4.7vw, 3.4375rem);
@@ -1128,9 +1089,6 @@ footer {
     padding: 32px 12px
   }
 
-  .journal-intro h1 {
-    font-size: 3.0rem
-  }
 
   .article-heading h1 {
     font-size: 2.8125rem
@@ -1155,25 +1113,10 @@ footer {
   padding-left: 0
 }
 
-.journal-tabs a[aria-current=page] {
-  border-bottom-color: var(--rule)
-}
 
-.journal-tabs a:nth-child(1)[aria-current=page] {
-  background: var(--paper-all)
-}
 
-.journal-tabs a:nth-child(2)[aria-current=page] {
-  background: var(--paper-essay)
-}
 
-.journal-tabs a:nth-child(3)[aria-current=page] {
-  background: var(--paper-note)
-}
 
-.journal-tabs a:nth-child(4)[aria-current=page] {
-  background: var(--paper-fragment)
-}
 
 /* Quiet active states for navigation and concept links. */
 .identity {
@@ -1292,9 +1235,9 @@ footer {
 }
 
 .about-page .support-heading h1 {
-  max-width: 30ch;
+  max-width: none;
   font: var(--title-weight) clamp(2.6rem, 4vw, 2.5rem)/1.3 var(--title-font);
-  letter-spacing: -.03em
+  letter-spacing: -.01em
 }
 
 .about-page .support-document {
@@ -1338,7 +1281,7 @@ footer {
   }
 
   .about-page .support-heading h1 {
-    max-width: 24ch;
+    max-width: none;
     font-size: clamp(2rem, 4vw, 2.625rem);
     line-height: 1.3
   }
@@ -1390,13 +1333,13 @@ footer {
 .page .entry-title,
 .page .record-body h2,
 .page .related-record>span {
-  letter-spacing: -.03em
+  letter-spacing: -.01em
 }
 
 .page .journal-intro h1,
 .page .support-heading h1,
 .page .now-page .support-heading h1 {
-  letter-spacing: -.03em
+  letter-spacing: -.01em
 }
 
 .page .archive-line {
@@ -1458,27 +1401,35 @@ footer {
 .article-content-sheet {
   grid-column: 1/-1;
   display: grid;
-  grid-template-columns: repeat(10, minmax(0, 1fr));
-  gap: 24px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 70ch) minmax(0, 1fr);
+  column-gap: 0;
+  row-gap: 24px;
+  font-size: 1.125rem;
   margin-top: -4px;
   padding: 36px;
   background: var(--article-paper)
 }
 
-.reading>.back {
-  grid-column: 1/-1;
-  padding: 0;
-  margin-bottom: -6px;
-  font: var(--ui-weight) var(--meta-size)/1.4 var(--ui-font);
-  letter-spacing: normal
+@media(min-width:651px) {
+  .reading>.related {
+    grid-column: 1/-1
+  }
 }
 
-.article-content-sheet .article-heading,
+
 .article-content-sheet .prose {
-  grid-column: 1/9
+  grid-column: 2;
+  width: 100%;
+  max-width: 70ch;
+  justify-self: center
 }
 
 .article-content-sheet .article-heading {
+  grid-column: 2;
+  width: 100%;
+  max-width: 70ch;
+  justify-self: center;
+  font-size: 1.125rem;
   padding-bottom: 4px
 }
 
@@ -1487,7 +1438,20 @@ footer {
 }
 
 .article-content-sheet .margin-note {
-  grid-column: 9/11
+  grid-column: 2
+}
+
+/* Leave enough canvas for a 180px annotation plus the gap and viewport inset. */
+@media(min-width:1460px) {
+  .article-content-sheet .margin-note {
+    grid-column: 3;
+    grid-row: 2;
+    position: relative;
+    left: calc(100% + 60px);
+    width: 180px;
+    align-self: start;
+    padding-left: 0
+  }
 }
 
 .article-content-sheet .article-heading h1 {
@@ -1502,7 +1466,7 @@ footer {
   margin-top: 12px;
   color: var(--muted);
   font: var(--ui-weight) 0.6875rem/1.7 var(--ui-font);
-  font-variant-numeric: tabular-nums;
+  font-variant-numeric: proportional-nums;
   letter-spacing: normal
 }
 
@@ -1513,8 +1477,7 @@ footer {
   align-items: center
 }
 
-.article-meta-line>.article-concepts::before,
-.article-meta-line>.article-datetime::before {
+.article-meta-line>.article-form::before {
   content: "/";
   display: inline-block;
   margin: 0 9px;
@@ -1543,6 +1506,12 @@ footer {
 .article-concept {
   font-size: 0.75rem;
   color: var(--muted)
+}
+
+.article-tags {
+  grid-column: 2;
+  color: var(--muted);
+  font: var(--ui-weight) var(--meta-size)/1.7 var(--ui-font)
 }
 
 .reading-essay .article-form {
@@ -1620,10 +1589,6 @@ footer {
 }
 
 @media(max-width:650px) {
-  .reading>.back {
-    grid-column: 1/-1;
-    margin-bottom: -8px
-  }
 
   .article-content-sheet {
     grid-column: 1/-1;
@@ -1680,17 +1645,29 @@ footer {
   color: color-mix(in srgb, var(--muted) 90%, var(--ink))
 }
 
+.record-read {
+  display: inline-block;
+  margin-top: 10px;
+  color: color-mix(in srgb, var(--ink) 75%, var(--muted));
+  font: var(--ui-weight) .8125rem/1.4 var(--ui-font);
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: currentColor;
+  text-underline-offset: .3em
+}
+
+.record-read:hover,
+.record-read:focus-visible {
+  color: var(--ink)
+}
+
+.catalogue-all .record-essay .record-preview,
 .catalogue-all .record-note .record-preview {
-  margin-top: 14px
+  margin-top: 12px
 }
 
 .catalogue-all .record-fragment .record-preview {
   margin-top: 0
-}
-
-.catalogue-all .record-note .record-filing,
-.catalogue-all .record-fragment .record-filing {
-  margin-top: 12px
 }
 
 .record-date-link {
@@ -1818,7 +1795,7 @@ footer {
 }
 
 .support-heading h1 {
-  max-width: 18ch;
+  max-width: none;
   font: 400 clamp(2.375rem, 5vw, 3.625rem)/1.3 var(--body-font);
   letter-spacing: normal
 }
@@ -1830,7 +1807,7 @@ footer {
   font: var(--ui-weight) 0.6875rem/1.4 var(--ui-font);
   letter-spacing: normal;
   text-transform: uppercase;
-  font-variant-numeric: tabular-nums
+  font-variant-numeric: proportional-nums
 }
 
 .support-document {
@@ -1933,14 +1910,6 @@ footer {
 }
 
 /* Shared archival record geometry: All expands the writing; form tabs remain compact. */
-.journal-tabs a {
-  padding-top: 11px;
-  padding-bottom: 10px
-}
-
-.journal-tabs a[aria-current=page] {
-  padding-top: 13px
-}
 
 .record-sheet {
   padding-top: 22px
@@ -1982,7 +1951,7 @@ footer {
   font: var(--ui-weight) 0.6875rem/1.4 var(--ui-font);
   letter-spacing: normal;
   text-transform: uppercase;
-  font-variant-numeric: tabular-nums
+  font-variant-numeric: proportional-nums
 }
 
 .record-body h2 {
@@ -2021,7 +1990,7 @@ footer {
 }
 
 .record-expanded {
-  padding: 17px 0 29px
+  padding: 20px 0
 }
 
 .record-compact {
@@ -2068,7 +2037,7 @@ footer {
   }
 
   .record-expanded {
-    padding: 15px 0 24px
+    padding: 16px 0 20px
   }
 
   .record-compact {
@@ -2152,10 +2121,7 @@ footer {
 }
 
 .journal-intro {
-  padding-top: 38px
-}
-
-.journal-intro {
+  padding-top: 38px;
   padding-bottom: 38px
 }
 
@@ -2164,7 +2130,7 @@ footer {
 }
 
 .journal-intro h1 {
-  max-width: 14ch;
+  max-width: none;
   font: var(--title-weight) 1.75rem/1.3 var(--title-font);
   letter-spacing: normal
 }
@@ -2225,13 +2191,7 @@ time,
 }
 
 /* Current form paper stocks: essay / note / fragment. */
-.archive-tabs a:nth-child(4) {
-  background: var(--paper-fragment)
-}
 
-.journal-tabs a:nth-child(4)[aria-current=page] {
-  background: var(--paper-fragment)
-}
 
 /* Detached journal tabs: the active paper color keeps the connection subtle. */
 .journal-tabs {
@@ -2260,8 +2220,7 @@ time,
   left: 0;
   height: 9px;
   background: var(--sheet-paper);
-  border-right: 1px solid var(--rule);
-  border-left: 1px solid var(--rule)
+  border: 0
 }
 
 @media(max-width:650px) {
@@ -2285,9 +2244,6 @@ time,
   border: 0
 }
 
-.journal-tabs a[aria-current=page]::after {
-  border: 0
-}
 
 /* Keep the selected folder legible without outlining it. */
 .journal-tabs a[aria-current=page] {
@@ -2316,22 +2272,9 @@ time,
   background: var(--paper-fragment)
 }
 
-/* Keep article transitions clear without competing with the body text. */
-.article-back {
-  display: inline-block;
-  width: fit-content;
-  padding: 2px 0;
-  color: var(--muted);
-  font: var(--ui-weight) var(--meta-size)/1.4 var(--ui-font);
-  text-decoration-line: underline;
-  text-decoration-style: dotted;
-  text-underline-offset: .3em
-}
 
-.article-back:hover,
-.article-back:focus-visible {
-  color: var(--ink)
-}
+
+
 
 /* Let in-article section headings guide the reading rhythm rather than interrupt it. */
 .article-content-sheet .prose h2 {
@@ -2376,7 +2319,7 @@ time,
 
 .now-heading h2 {
   font: var(--title-weight) 1.25rem/1.25 var(--title-font);
-  letter-spacing: -.03em
+  letter-spacing: -.01em
 }
 
 .now-heading .archive-line {
