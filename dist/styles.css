@@ -1618,7 +1618,7 @@ footer {
   justify-self: end;
   padding-top: 4px;
   color: var(--muted);
-  font: var(--ui-weight) 0.6875rem/1.4 var(--ui-font);
+  font: 400 0.6875rem/1.4 var(--ui-font);
   letter-spacing: normal;
   text-transform: uppercase
 }
@@ -1708,10 +1708,6 @@ footer {
 .record-date-link:focus-visible+.record-date-arrow {
   opacity: 1;
   transform: translateX(0)
-}
-
-.record-fragment .record-form-cell {
-  font-weight: 500
 }
 
 .page .record-form-cell {
@@ -2093,8 +2089,6 @@ footer {
   justify-content: space-between;
   gap: 20px;
   padding: 11px 22px;
-  border-right: 1px solid var(--rule);
-  border-left: 1px solid var(--rule);
   background: var(--sheet-paper);
   font: var(--ui-weight) 0.6875rem/1.3 var(--ui-font);
   letter-spacing: normal;
