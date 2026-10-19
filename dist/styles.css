@@ -6,6 +6,14 @@
   font-display: swap
 }
 
+@font-face {
+  font-family: "ABC Areal Mono";
+  src: url("fonts/ABCArealMonoVariable.ttf") format("truetype");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap
+}
+
 :root {
   --canvas: oklch(94.08% 0.0032 197.1);
   --sheet: oklch(97% 0.0082 91.5);
@@ -25,6 +33,7 @@
   --title-font: "ABC Areal", Arial, sans-serif;
   --body-font: "STIX Two Text", Georgia, serif;
   --ui-font: "ABC Areal", Arial, sans-serif;
+  --date-font: "ABC Areal Mono", monospace;
   --title-weight: 600;
   --ui-weight: 400;
   --meta-size: .8125rem;
@@ -1220,41 +1229,37 @@ footer {
   }
 }
 
-/* About: a compact collection statement that sits inside the archive system. */
+/* About shares the article reading column. */
 .about-page {
-  padding-top: 48px
+  width: 100%;
+  max-width: 70ch;
+  margin-inline: auto;
+  padding-top: 48px;
+  font-size: 1.125rem
 }
 
 .about-page .support-heading {
-  padding-bottom: 26px
-}
-
-.about-page .support-heading .eyebrow {
-  margin-bottom: 12px;
-  font-size: var(--meta-size)
+  padding-bottom: 20px
 }
 
 .about-page .support-heading h1 {
   max-width: none;
-  font: var(--title-weight) clamp(2.6rem, 4vw, 2.5rem)/1.3 var(--title-font);
+  font: var(--title-weight) 2.5rem/1.15 var(--title-font);
   letter-spacing: -.01em
 }
 
 .about-page .support-document {
-  grid-template-columns: minmax(0, 32%) minmax(0, 58%);
-  column-gap: 10%;
-  row-gap: 0;
-  padding-top: 18px
+  display: block;
+  padding-top: 0
 }
 
-.about-page .document-meta {
-  font-size: var(--meta-size);
-  line-height: 1.4
-}
-
-.about-page .document-meta div {
-  grid-template-columns: 90px minmax(0, 1fr);
-  padding: 6px 0
+.about-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  margin-bottom: 28px;
+  color: var(--muted);
+  font: var(--ui-weight) var(--meta-size)/1.6 var(--ui-font)
 }
 
 .about-page .about-copy {
@@ -1272,29 +1277,12 @@ footer {
     padding-top: 38px
   }
 
-  .about-page .support-heading {
-    padding-bottom: 20px
-  }
-
-  .about-page .support-heading .eyebrow {
-    margin-bottom: 10px
-  }
-
   .about-page .support-heading h1 {
-    max-width: none;
-    font-size: clamp(2rem, 4vw, 2.625rem);
-    line-height: 1.3
-  }
-
-  .about-page .support-document {
-    grid-template-columns: 1fr;
-    row-gap: 22px;
-    padding-top: 16px
+    font-size: 2rem
   }
 
   .about-page .about-copy {
-    font-size: 1.125rem;
-    line-height: 1.6
+    font-size: 1.125rem
   }
 }
 
@@ -1503,6 +1491,14 @@ footer {
   text-transform: uppercase
 }
 
+.article-form:hover,
+.article-form:focus-visible {
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: currentColor;
+  text-underline-offset: .3em
+}
+
 .article-concept {
   font-size: 0.75rem;
   color: var(--muted)
@@ -1640,8 +1636,6 @@ footer {
 }
 
 .record-essay .record-preview {
-  font-size: 1rem;
-  line-height: 1.55;
   color: color-mix(in srgb, var(--muted) 90%, var(--ink))
 }
 
@@ -1649,16 +1643,31 @@ footer {
   display: inline-block;
   margin-top: 10px;
   color: color-mix(in srgb, var(--ink) 75%, var(--muted));
-  font: var(--ui-weight) .8125rem/1.4 var(--ui-font);
+  font: 500 .8125rem/1.4 var(--ui-font);
+  text-decoration: none
+}
+
+.record-read:hover,
+.record-read:focus-visible {
+  color: var(--ink)
+}
+
+.record-read:hover .record-read-label,
+.record-read:focus-visible .record-read-label {
   text-decoration-line: underline;
   text-decoration-style: dotted;
   text-decoration-color: currentColor;
   text-underline-offset: .3em
 }
 
-.record-read:hover,
-.record-read:focus-visible {
-  color: var(--ink)
+.record-read-arrow {
+  display: inline-block;
+  transition: transform 160ms ease
+}
+
+.record-read:hover .record-read-arrow,
+.record-read:focus-visible .record-read-arrow {
+  transform: translateX(3px)
 }
 
 .catalogue-all .record-essay .record-preview,
@@ -1699,14 +1708,6 @@ footer {
 .record-date-link:focus-visible+.record-date-arrow {
   opacity: 1;
   transform: translateX(0)
-}
-
-.record-note .record-body h2 {
-  font-weight: 500
-}
-
-.catalogue-all .record-essay .record-body h2 {
-  font-weight: 700
 }
 
 .record-fragment .record-form-cell {
@@ -2309,8 +2310,8 @@ time,
 /* Now follows the collection statement as the changing half of About. */
 .now-section {
   display: grid;
-  grid-template-columns: minmax(0, 32%) minmax(0, 58%);
-  column-gap: 10%;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 24px;
   margin-top: 48px;
   padding-top: 24px;
   border-top: 1px solid var(--rule);
@@ -2373,4 +2374,10 @@ time,
   .now-section .status-log dd {
     font-size: 1.125rem
   }
+}
+
+/* Dates and timestamps share the mono companion to the interface face. */
+.page time,
+.article-datetime {
+  font-family: var(--date-font)
 }
