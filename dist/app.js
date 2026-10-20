@@ -41,9 +41,20 @@ function expandedRecord(t,form){
  return `<li class="record record-expanded record-${esc(t.form)}">${recordDateLink(t)}<article class="record-body">${content}</article><span class="record-form-cell">${esc(formLabel(t.form))}</span></li>`;
 }
 function compactRecord(t,form){return `<li class="record record-compact record-${esc(t.form)}">${recordDateLink(t)}<div class="record-body"><h2><a href="#/thought/${encodeURIComponent(t.slug)}">${esc(t.title)}</a></h2>${recordFiling(t,form)}</div></li>`}
+function yearHeader(year,count){
+ return `${year?`<h2 class="year-caption"><time datetime="${esc(year)}">${esc(year)}</time></h2>`:''}<span class="catalogue-status">${String(count).padStart(2,'0')} ${count===1?'record':'records'}</span>`;
+}
+function journalRecords(records,form){
+ const yearCounts=records.reduce((counts,t)=>{const year=t.date.slice(0,4);counts[year]=(counts[year]||0)+1;return counts},{});
+ return records.map((t,index)=>{
+  const year=t.date.slice(0,4);
+  const startsYear=index>0&&year!==records[index-1].date.slice(0,4);
+  const divider=startsYear?`<li class="record-year">${yearHeader(year,yearCounts[year])}</li>`:'';
+  return divider+(form==='all'?expandedRecord(t,form):compactRecord(t,form));
+ }).join('');
+}
 function journal(filter='all',requestedConcept=''){
  const filters=[['all','All'],['essay','Essays'],['note','Notes'],['fragment','Lines']];
- const blurbs={all:'Everything, in order of appearance.',essay:'Longer pieces where a thought has room to develop.',note:'Short reflections with a little movement or argument.',fragment:'Observations, lines and unfinished thoughts worth keeping.'};
  const active=filters.some(([id])=>id===filter)?filter:'all';
  const allConcepts=new Set(thoughts.flatMap(t=>t.concepts));
  const concept=allConcepts.has(requestedConcept)?requestedConcept:'';
@@ -51,13 +62,10 @@ function journal(filter='all',requestedConcept=''){
  const updated=[...thoughts].sort((a,b)=>sortKey(b).localeCompare(sortKey(a)))[0]?.date||'';
  const tabHref=id=>concept?conceptHref(id,concept):(id==='all'?'#/':`#/journal/${id}`);
  const clearHref=active==='all'?'#/':`#/journal/${active}`;
- const summaryParts=[];
- if(active!=='all')summaryParts.push(esc(formLabel(active)));
- if(concept)summaryParts.push(esc(concept));
- summaryParts.push(`${ordered.length.toString().padStart(2,'0')} records`);
- const summaryLabel=`<span class="catalogue-status">${summaryParts.join(' / ')}</span>`;
+ const firstYear=ordered[0]?.date.slice(0,4);
+ const summaryLabel=yearHeader(firstYear,ordered.filter(t=>t.date.slice(0,4)===firstYear).length);
  const filteredClass=active==='all'?'':' catalogue-filtered';
- main.innerHTML=`<div class="journal catalogue catalogue-${active}${filteredClass}"><nav class="archive-tabs journal-tabs" aria-label="Filter journal by format">${filters.map(([id,label])=>`<a class="tab-${id}" href="${tabHref(id)}" ${id===active?'aria-current="page"':''}>${label}<sup>${id==='all'?thoughts.length:thoughts.filter(t=>t.form===id).length}</sup></a>`).join('')}</nav>${concept?`<div class="concept-filter"><span>${esc(concept)}</span><a href="${clearHref}">Clear ×</a></div>`:''}<section class="catalogue-sheet record-sheet"><div class="catalogue-summary"><p class="catalogue-blurb">${blurbs[active]}</p>${summaryLabel}</div><ol class="records">${ordered.map(t=>active==='all'?expandedRecord(t,active):compactRecord(t,active)).join('')}</ol></section></div>`;
+ main.innerHTML=`<div class="journal catalogue catalogue-${active}${filteredClass}"><nav class="archive-tabs journal-tabs" aria-label="Filter journal by format">${filters.map(([id,label])=>`<a class="tab-${id}" href="${tabHref(id)}" ${id===active?'aria-current="page"':''}>${label}<sup>${id==='all'?thoughts.length:thoughts.filter(t=>t.form===id).length}</sup></a>`).join('')}</nav>${concept?`<div class="concept-filter"><span>${esc(concept)}</span><a href="${clearHref}">Clear ×</a></div>`:''}<section class="catalogue-sheet record-sheet"><div class="catalogue-summary">${summaryLabel}</div><ol class="records">${journalRecords(ordered,active)}</ol></section></div>`;
 }
 function article(slug){const t=thoughts.find(t=>t.slug===slug);if(!t){main.innerHTML='<div class="simple"><h1>Thought not found</h1><p><a href="#/">Return to the journal</a></p></div>';return}document.title=`${t.title} — a home for thoughts`;const related=thoughts.filter(x=>x!==t&&x.concepts.some(c=>t.concepts.includes(c))).slice(0,3);if(!related.length)related.push(thoughts[0]);main.innerHTML=`<article class="reading reading-${esc(t.form)} grid"><div class="article-content-sheet${t.note?' has-margin-note':''}"><header class="article-heading"><h1>${esc(t.title)}</h1><div class="article-meta-line"><span class="article-datetime"><time datetime="${esc(t.timestamp||t.date)}">${articleDateLabel(t.date)}</time>${t.timestamp?`<span>${timeLabel(t.timestamp)}</span>`:''}</span><a class="article-form" href="#/journal/${encodeURIComponent(t.form)}">${esc(formLabel(t.form))}</a></div></header><div class="prose ${t.form==='poem'?'poem':''}">${t.body.map(p=>`<p>${esc(p)}</p>`).join('')}</div>${t.note?`<aside class="margin-note"><span>01 / In the margin</span>${esc(t.note)}</aside>`:''}${t.more?`<div class="prose"><h2>${esc(t.heading)}</h2>${t.more.map(p=>`<p>${esc(p)}</p>`).join('')}</div>`:''}<div class="article-tags" aria-label="Concepts"><span class="article-concepts">${t.concepts.map(c=>`<a class="article-concept" href="${conceptHref('all',c)}">${esc(c)}</a>`).join('')}</span></div></div><section class="related"><h2>Related thoughts</h2>${related.map(x=>`<a class="related-record related-${esc(x.form)}" href="#/thought/${encodeURIComponent(x.slug)}"><time datetime="${esc(x.date)}">${indexDateLabel(x.date)}</time><span>${esc(x.title)}</span><b>${esc(formLabel(x.form))}</b></a>`).join('')}</section></article>`}
 function simple(){
