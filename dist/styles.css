@@ -15,26 +15,27 @@
 }
 
 :root {
-  --canvas: oklch(94.08% 0.0032 197.1);
+  --canvas: oklch(93% 0 197.1);
   --sheet: oklch(97% 0.0082 91.5);
-  --paper-all: oklch(95.47% 0.0095 93.6);
-  --paper-document: oklch(98% 0.0035 91.5);
-  --paper-essay: oklch(90.38% 0.0224 123.7);
-  --paper-note: oklch(91.69% 0.0454 90.4);
-  --paper-fragment: oklch(91.16% 0.0231 52.7);
+  --paper-all: oklch(95.5% 0.0105 95.8);
+  --paper-document: oklch(97% 0.004 90);
+  --paper-essay: oklch(91% 0.028 123.7);
+  --paper-note: oklch(91% 0.0454 90.4);
+  --paper-fragment: oklch(91% 0.025 52.7);
   --paper-poem: oklch(91.01% 0.0103 325.7);
   --ink: #242522;
   --muted: #6f716b;
   --rule: #cbc9c0;
   --accent: #456d6b;
-  --hover-essay: #4f6648;
-  --hover-note: #80601f;
-  --hover-fragment: #8a5146;
+  --hover-essay: oklch(42% 0.1 123.7);
+  --hover-note: oklch(42% 0.1 95);
+  --hover-fragment: oklch(42% 0.1 35);
   --title-font: "ABC Areal", Arial, sans-serif;
-  --body-font: "STIX Two Text", Georgia, serif;
+  --body-font: "Crimson Text", Georgia, serif;
   --ui-font: "ABC Areal", Arial, sans-serif;
   --date-font: "ABC Areal Mono", monospace;
   --title-weight: 600;
+  --page-title-size: 2rem;
   --ui-weight: 400;
   --meta-size: .8125rem;
   --page-padding: 48px
@@ -85,13 +86,19 @@ button {
 
 a:focus-visible,
 button:focus-visible,
-[tabindex]:focus-visible {
+[tabindex]:not([tabindex="-1"]):focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 4px
 }
 
+/* Navigation focuses the content landmark without outlining the whole page. */
+#main:focus {
+  outline: none
+}
+
 ::selection {
-  background: #eadfdb
+  background: #285653;
+  color: #faf9f5
 }
 
 .page {
@@ -585,14 +592,7 @@ h3 {
 .related {
   grid-column: 3/11;
   margin-top: 38px;
-  padding-top: 23px;
-  border-top: 1px solid var(--rule)
-}
-
-.related h2 {
-  margin-bottom: 18px;
-  color: var(--muted);
-  font-size: 0.75rem
+  padding-top: 24px
 }
 
 .related a {
@@ -693,6 +693,7 @@ footer span:first-child {
 
 @media(max-width:650px) {
   :root {
+    --page-title-size: 1.75rem;
     --page-padding: 24px;
     --meta-size: .75rem
   }
@@ -1137,11 +1138,14 @@ footer {
 }
 
 .header nav a:hover,
-.header nav a[aria-current=page] {
+.header nav a[aria-current=page],
+.record-read:hover .record-read-label,
+.record-read:focus-visible .record-read-label {
   color: var(--ink);
   text-decoration-line: underline;
   text-decoration-color: currentColor;
   text-decoration-style: dotted;
+  text-decoration-thickness: 1px;
   text-underline-offset: .3em
 }
 
@@ -1235,7 +1239,7 @@ footer {
 
 .about-page .support-heading h1 {
   max-width: none;
-  font: var(--title-weight) 2.5rem/1.15 var(--title-font);
+  font: var(--title-weight) var(--page-title-size)/1.15 var(--title-font);
   letter-spacing: -.01em
 }
 
@@ -1244,14 +1248,7 @@ footer {
   padding-top: 0
 }
 
-.about-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 8px;
-  margin-bottom: 28px;
-  color: var(--muted);
-  font: var(--ui-weight) var(--meta-size)/1.6 var(--ui-font)
-}
+
 
 .about-page .about-copy {
   max-width: none;
@@ -1267,10 +1264,6 @@ footer {
   .support-page.about-page {
     display: block;
     padding: 24px 20px
-  }
-
-  .about-page .support-heading h1 {
-    font-size: 2rem
   }
 
   .about-page .about-copy {
@@ -1339,24 +1332,8 @@ footer {
   border-top-width: 1px
 }
 
-/* Richer form hues for linked record titles. */
-.record-essay .record-body h2 a:hover,
-.record-essay .record-body h2 a:focus-visible {
-  color: var(--accent);
-  text-decoration-color: var(--accent)
-}
 
-.record-note .record-body h2 a:hover,
-.record-note .record-body h2 a:focus-visible {
-  color: var(--accent);
-  text-decoration-color: var(--accent)
-}
 
-.record-fragment .record-body h2 a:hover,
-.record-fragment .record-body h2 a:focus-visible {
-  color: var(--accent);
-  text-decoration-color: var(--accent)
-}
 
 .record-concepts {
   font-size: 0.75rem
@@ -1364,6 +1341,32 @@ footer {
 
 .reading {
   --article-paper: var(--paper-document)
+}
+
+.article-view {
+  --sheet-paper: var(--paper-document);
+  --format-paper: var(--paper-all)
+}
+
+.article-view-essay {
+  --format-paper: var(--paper-essay)
+}
+
+.article-view-note {
+  --format-paper: var(--paper-note)
+}
+
+.article-view-fragment {
+  --format-paper: var(--paper-fragment)
+}
+
+.article-view .reading {
+  padding-top: 0
+}
+
+.article-view .article-content-sheet {
+  margin-top: 0;
+  border-top: 9px solid var(--format-paper)
 }
 
 .reading-essay {
@@ -1384,7 +1387,7 @@ footer {
   grid-template-columns: minmax(0, 1fr) minmax(0, 70ch) minmax(0, 1fr);
   column-gap: 0;
   row-gap: 24px;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   margin-top: -4px;
   padding: 36px;
   background: var(--article-paper)
@@ -1409,16 +1412,31 @@ footer {
   width: 100%;
   max-width: 70ch;
   justify-self: center;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   padding-bottom: 4px
 }
 
 .article-content-sheet .prose {
-  font-size: 1.125rem
+  font-size: 1.25rem
+}
+
+.article-content-sheet .prose p {
+  margin-bottom: .9em
+}
+
+.article-content-sheet .prose p:last-child {
+  margin-bottom: 0
 }
 
 .article-content-sheet .margin-note {
   grid-column: 2
+}
+
+@media(max-width:1459px) {
+  .article-content-sheet .margin-note {
+    padding: 4px 0 4px 16px;
+    border-left: 1px solid var(--rule)
+  }
 }
 
 /* Leave enough canvas for a 180px annotation plus the gap and viewport inset. */
@@ -1436,7 +1454,7 @@ footer {
 
 .article-content-sheet .article-heading h1 {
   margin-bottom: 0;
-  font-size: clamp(2.0rem, 3vw, 2.5rem)
+  font-size: var(--page-title-size)
 }
 
 .article-meta-line {
@@ -1515,7 +1533,13 @@ footer {
 }
 
 .related h2 {
-  margin-bottom: 14px
+  margin-bottom: 0;
+  padding-bottom: 9px;
+  border-bottom: 1px solid var(--ink);
+  color: var(--ink);
+  font: var(--ui-weight) var(--meta-size)/1.3 var(--date-font);
+  text-transform: uppercase;
+  letter-spacing: normal
 }
 
 .related .related-record {
@@ -1527,6 +1551,10 @@ footer {
   padding: 14px 0;
   border-top: 1px solid var(--rule);
   text-decoration: none
+}
+
+.related .related-record:first-of-type {
+  border-top: 0
 }
 
 .related-record time,
@@ -1541,29 +1569,24 @@ footer {
   font: var(--title-weight) 1.25rem/1.25 var(--title-font)
 }
 
-.related-record b {
+.related .related-record b {
   justify-self: end;
-  font-weight: var(--ui-weight);
+  font: 400 .6875rem/1.4 var(--date-font);
   letter-spacing: normal
 }
 
 .related-essay b {
-  color: var(--muted)
+  color: var(--hover-essay)
 }
 
 .related-note b {
-  color: var(--muted)
+  color: var(--hover-note)
 }
 
 .related-fragment b {
-  color: var(--muted)
+  color: var(--hover-fragment)
 }
 
-.related-record:hover>span {
-  text-decoration: underline;
-  text-decoration-style: dotted;
-  text-underline-offset: .3em
-}
 
 @media(max-width:650px) {
   .related .related-record {
@@ -1642,14 +1665,6 @@ footer {
 .record-read:hover,
 .record-read:focus-visible {
   color: var(--ink)
-}
-
-.record-read:hover .record-read-label,
-.record-read:focus-visible .record-read-label {
-  text-decoration-line: underline;
-  text-decoration-style: dotted;
-  text-decoration-color: currentColor;
-  text-underline-offset: .3em
 }
 
 .record-read-arrow {
@@ -1969,17 +1984,12 @@ footer {
 }
 
 .record-body h2 {
-  font: var(--title-weight) clamp(1.25rem, 2.1vw, 1.5rem)/1.15 var(--title-font);
+  font: 500 clamp(1.2rem, 2.016vw, 1.44rem)/1.15 var(--title-font);
   letter-spacing: normal
 }
 
-.record-essay .record-body h2,
-.record-note .record-body h2 {
-  font-weight: 500;
-  font-size: clamp(1.2rem, 2.016vw, 1.44rem)
-}
-
-.record-body h2 a {
+.record-body h2 a,
+.related-record>span {
   display: inline;
   text-decoration-line: underline;
   text-decoration-style: dotted;
@@ -1990,23 +2000,33 @@ footer {
 }
 
 .record-essay .record-body h2 a:hover,
-.record-essay .record-body h2 a:focus-visible {
-  text-decoration-color: #746548
+.record-essay .record-body h2 a:focus-visible,
+.related-essay:hover>span,
+.related-essay:focus-visible>span {
+  color: var(--hover-essay);
+  text-decoration-color: var(--hover-essay)
 }
 
 .record-note .record-body h2 a:hover,
-.record-note .record-body h2 a:focus-visible {
-  text-decoration-color: #79642f
+.record-note .record-body h2 a:focus-visible,
+.related-note:hover>span,
+.related-note:focus-visible>span {
+  color: var(--hover-note);
+  text-decoration-color: var(--hover-note)
 }
 
 .record-poem .record-body h2 a:hover,
 .record-poem .record-body h2 a:focus-visible {
+  color: #705870;
   text-decoration-color: #705870
 }
 
 .record-fragment .record-body h2 a:hover,
-.record-fragment .record-body h2 a:focus-visible {
-  text-decoration-color: #496b69
+.record-fragment .record-body h2 a:focus-visible,
+.related-fragment:hover>span,
+.related-fragment:focus-visible>span {
+  color: var(--hover-fragment);
+  text-decoration-color: var(--hover-fragment)
 }
 
 .record-expanded {
@@ -2065,11 +2085,6 @@ footer {
   }
 
   .record-body h2 {
-    font-size: 1.375rem
-  }
-
-  .record-essay .record-body h2,
-  .record-note .record-body h2 {
     font-size: 1.32rem
   }
 
@@ -2231,7 +2246,7 @@ time,
 
 .journal-tabs a[aria-current=page] {
   top: 0;
-  padding-top: 11px;
+  padding-top: 10px;
   border-bottom-color: var(--sheet-paper)
 }
 
@@ -2257,7 +2272,11 @@ time,
   }
 
   .journal-tabs a[aria-current=page] {
-    padding-top: 14px
+    padding-top: 11px
+  }
+
+  .article-view .article-content-sheet {
+    border-top-width: 5px
   }
 }
 
@@ -2356,8 +2375,10 @@ time,
 
 .now-section .status-log div {
   grid-template-columns: 118px minmax(0, 1fr);
+  align-items: first baseline;
   gap: 20px;
-  padding: 16px 0
+  padding: 16px 0;
+  border-top: 2px dotted var(--rule)
 }
 
 .now-section .status-log div:first-child {
@@ -2366,8 +2387,11 @@ time,
 }
 
 .now-section .status-log dt {
-  padding-top: 3px;
-  font-size: var(--meta-size)
+  padding-top: 0;
+  font-family: var(--date-font);
+  font-weight: 400;
+  font-size: var(--meta-size);
+  text-transform: none
 }
 
 .now-section .status-log dd {
@@ -2407,8 +2431,11 @@ time,
 /* Mono marks the archive controls and metadata. */
 .journal-tabs,
 .article-meta-line,
-.about-meta,
 .journal .catalogue-summary,
 .record-form-cell {
   font-family: var(--date-font)
+}
+
+.article-view .journal-tabs a[aria-current=page]::after {
+  background: var(--format-paper)
 }
