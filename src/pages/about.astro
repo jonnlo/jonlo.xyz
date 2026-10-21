@@ -13,7 +13,7 @@ const latest = (await publishedNowUpdates())[0];
     {latest && <section class="now-section" id="now" aria-labelledby="now-heading">
       <header class="now-heading"><h2 id="now-heading">Now</h2><p class="archive-line"><time datetime={latest.data.date}>{articleDate(latest.data.date)}</time></p></header>
       <NowItems items={latest.data.items} />
-      <p class="now-history-link"><a href="/now/">Past updates ↗</a></p>
+      <p class="now-history-link"><a class="nav-link" href="/now/">Past updates<span aria-hidden="true"> →</span></a></p>
     </section>}
   </section>
 </Base>

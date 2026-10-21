@@ -11,6 +11,22 @@ export default defineConfig({
   // Keystatic's local API requests omit trailing slashes. Public links still
   // consistently use them, while dev accepts either form.
   trailingSlash: 'ignore',
-  integrations: [markdoc(), ...(localEditor ? [react(), keystatic()] : [])],
+  integrations: [markdoc(), ...(localEditor ? [react(), keystatic(), {
+    name: 'local-tag-suggestions',
+    hooks: {
+      'astro:config:setup': ({ injectRoute }) => {
+        injectRoute({ pattern: '/api/tag-options', entrypoint: './src/editor/tag-options.ts', prerender: false });
+      },
+    },
+  }] : [])],
+  vite: {
+    resolve: { dedupe: ['react', 'react-dom', '@keystar/ui', 'yjs'] },
+    optimizeDeps: {
+      include: localEditor ? [
+        '@keystatic/core', '@keystatic/core/ui', '@keystatic/core/content-components',
+        '@keystar/ui/core', '@keystar/ui/button', 'yjs',
+      ] : [],
+    },
+  },
   devToolbar: { enabled: false },
 });

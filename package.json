@@ -16,6 +16,7 @@
     "@astrojs/rss": "^4.0.19",
     "@keystatic/astro": "^6.0.0",
     "@keystatic/core": "^0.6.9",
+    "@markdoc/markdoc": "^0.5.10",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "astro": "^7.4.1",

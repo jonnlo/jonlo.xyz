@@ -15,7 +15,7 @@ Now updates are separate JSON records in `src/content/now/`.
 | `date` | Required calendar date, stored as a quoted `YYYY-MM-DD` string |
 | `timestamp` | Optional ISO timestamp with the recorded timezone offset |
 | `form` | `essay`, `note`, or `fragment` (displayed as “line”) |
-| `concepts` | List of concept labels; spelling and case are preserved |
+| `concepts` | Tags selected from the shared list; spelling and case are preserved. Stored key retained for compatibility. |
 | `summary` | Optional journal excerpt; migrated essays use their first paragraph |
 | `status` | `draft` or `published`; new entries default to draft |
 | `sample` | Marks illustrative prototype content; new entries default to false |
@@ -30,6 +30,20 @@ render the editorial `name` as the public URL. A display fallback can use
 Date-only entries retain date precision. No timestamp was fabricated during
 migration; the two known timestamps keep their exact `+08:00` offset and seconds.
 An empty timestamp saved by Keystatic is equivalent to an omitted timestamp.
+
+## Tags
+
+The entry editor offers a searchable chip picker. Select an existing tag or
+type a new one and press Enter (or choose Create). Remove a chip with its ×.
+New tags are saved with the entry; other entries can then suggest them,
+including tags saved on drafts. An unsaved new tag is not added globally.
+
+Suggestions combine tags on saved entries with the optional seed vocabulary
+under **Tag list** (`src/content/tags.json`). That list is no longer required
+to create tags. Removing a seed does not rewrite entry assignments. Existing
+`concepts` data and archive URLs remain compatible; duplicate names differing
+only in case are avoided when selecting or creating a tag.
+The suggestion API is registered only for local editing, never production.
 
 ## Marginalia
 
@@ -60,6 +74,9 @@ record changes that snapshot. Git remains the backup for corrections/deletions.
 
 Each JSON snapshot has `name`, `date`, `status`, and
 `items: { label: string, text: string }[]`. New records default to Draft.
+Activity descriptions use a small rich-text editor: links, bold, italics,
+paragraphs, and ordered/bullet lists. They are stored as inline Markdoc strings
+in the same JSON `text` field, so earlier plain-text updates remain compatible.
 About displays the newest published snapshot. `/now/` lists every published
 snapshot, newest first, with stable links such as `/now/#update-2026-09-10`.
 Drafts stay out of both views. Same-date records sort by record ID descending;

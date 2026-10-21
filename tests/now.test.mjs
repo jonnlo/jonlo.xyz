@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { renderNowText } from '../src/lib/now-rich-text.mjs';
 
 const root = resolve(import.meta.dirname, '..');
 const directory = resolve(root, 'src/content/now');
@@ -13,7 +14,7 @@ const published = updates.filter(update => update.status === 'published')
   .sort((a, b) => b.date.localeCompare(a.date) || b.id.localeCompare(a.id));
 const about = readFileSync(resolve(root, 'dist/about/index.html'), 'utf8');
 const history = readFileSync(resolve(root, 'dist/now/index.html'), 'utf8');
-const escape = value => value.replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&#34;', "'": '&#39;' })[char]);
+const escape = renderNowText;
 
 test('About shows only the latest published Now update and links to its history', () => {
   const now = about.match(/<section\b[^>]*id="now"[\s\S]*?<\/section>/)?.[0] || '';

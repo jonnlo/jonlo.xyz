@@ -132,9 +132,11 @@ button:focus-visible,
   line-height: 1.4
 }
 
-.header nav a {
+.header nav a,
+.nav-link {
   padding: 10px 0;
-  color: var(--muted)
+  color: var(--muted);
+  font: 400 .875rem/1.4 var(--ui-font)
 }
 
 .header nav a:hover,
@@ -1133,12 +1135,14 @@ footer {
   text-decoration-line: none
 }
 
-.header nav a {
+.header nav a,
+.nav-link {
   text-decoration-line: none
 }
 
 .header nav a:hover,
 .header nav a[aria-current=page],
+.nav-link:hover,
 .record-read:hover .record-read-label,
 .record-read:focus-visible .record-read-label {
   color: var(--ink);
@@ -1862,7 +1866,7 @@ footer {
   padding-top: 18px
 }
 
-.status-log div {
+.status-log > div {
   display: grid;
   grid-template-columns: 180px minmax(0, 650px);
   gap: 30px;
@@ -1898,7 +1902,7 @@ footer {
     font-size: 1.25rem
   }
 
-  .status-log div {
+  .status-log > div {
     grid-template-columns: 1fr;
     gap: 8px;
     padding: 20px 0
@@ -2373,7 +2377,7 @@ time,
   padding-top: 0
 }
 
-.now-section .status-log div {
+.now-section .status-log > div {
   grid-template-columns: 118px minmax(0, 1fr);
   align-items: first baseline;
   gap: 20px;
@@ -2381,7 +2385,7 @@ time,
   border-top: 2px dotted var(--rule)
 }
 
-.now-section .status-log div:first-child {
+.now-section .status-log > div:first-child {
   padding-top: 0;
   border-top: 0
 }
@@ -2399,6 +2403,28 @@ time,
   line-height: 1.6
 }
 
+.now-rich-text p + p,
+.now-rich-text ul,
+.now-rich-text ol {
+  margin-top: .75em
+}
+
+.now-rich-text ul,
+.now-rich-text ol {
+  margin-bottom: 0;
+  padding-left: 1.3em
+}
+
+.now-rich-text li + li {
+  margin-top: .25em
+}
+
+.now-rich-text a {
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: var(--muted)
+}
+
 @media(max-width:650px) {
   .now-section {
     grid-template-columns: 1fr;
@@ -2411,7 +2437,7 @@ time,
     font-size: 1.25rem
   }
 
-  .now-section .status-log div {
+  .now-section .status-log > div {
     grid-template-columns: 1fr;
     gap: 6px;
     padding: 16px 0
@@ -2458,16 +2484,29 @@ time,
   font: 400 1.2rem/1.6 var(--body-font)
 }
 
-.now-history-link {
-  color: var(--muted);
-  font: 400 var(--meta-size)/1.7 var(--ui-font)
+.now-history-link .nav-link {
+  display: inline-block
 }
 
-.now-history-link a,
-.now-history-record .now-heading a {
+.now-history-record .now-heading .now-history-date {
+  margin: 0;
+  color: var(--muted);
+  font: var(--ui-weight) var(--meta-size)/1.4 var(--ui-font);
+  letter-spacing: normal
+}
+
+.now-history-date a {
+  text-decoration-line: none
+}
+
+.now-history-date a:hover,
+.now-history-date a:focus-visible {
   text-decoration-line: underline;
-  text-decoration-style: dotted;
-  text-decoration-color: var(--muted)
+  text-decoration-style: dotted
+}
+
+.now-back-link {
+  margin-top: 14px
 }
 
 /* Markdoc keeps an annotation beside the passage it belongs to. */
