@@ -14,6 +14,6 @@ const { Content } = expanded && data.form !== 'essay' ? await render(entry) : { 
     {data.form !== 'fragment' && <h2><a href={entryHref(entry)}>{entryTitle(entry)}</a></h2>}
     <div class="record-preview">{data.form === 'essay' ? <p>{data.summary}</p> : Content && <Content />}</div>
     {data.form === 'essay' && <a class="record-read" href={entryHref(entry)} aria-label={`Read ${entryTitle(entry)}`}><span class="record-read-label">Read</span> <span class="record-read-arrow" aria-hidden="true">→</span></a>}
-  </article> : <div class="record-body"><h2><a href={entryHref(entry)}>{entryTitle(entry)}</a></h2><Concepts concepts={data.concepts} form={active} /></div>}
+  </article> : <div class="record-body"><h2><a href={entryHref(entry)}>{entryTitle(entry)}</a></h2><Concepts tags={entry.tags} form={active} /></div>}
   {expanded && <span class="record-form-cell">{formLabel(data.form)}</span>}
 </li>

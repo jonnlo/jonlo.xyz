@@ -17,8 +17,10 @@ npm run dev
 
 Open <http://127.0.0.1:4321/>. The Keystatic editor is at
 <http://127.0.0.1:4321/keystatic/> while the development server is running.
-It edits the local files in this checkout. The static production build does
-not include the editor or an admin route.
+It edits the local files in this checkout, including shared labels in the
+**Tags** collection. Entry tag assignments store stable IDs, so editing a tag
+name updates its public labels without changing archive URLs. The static
+production build does not include the editor or an admin route.
 
 For Now, choose **Now updates → Add** to save a new dated snapshot. The newest
 published update appears on About; **Past updates** opens the saved history.

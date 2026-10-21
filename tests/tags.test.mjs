@@ -2,17 +2,21 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { addTag, matchingTagOptions, tagValues } from '../src/editor/tag-values.mjs';
 
-test('Tags support inline creation without a fixed vocabulary, preserving stored names', () => {
-  assert.deepEqual(addTag(['standards'], 'new thought', []), ['standards', 'new thought']);
-  assert.deepEqual(addTag([], 'ai', ['AI', 'attention']), ['AI']);
-  assert.deepEqual(addTag(['AI'], 'ai', []), ['AI']);
-  assert.deepEqual(tagValues(['ordinary life', 'Buddhism']), ['ordinary life', 'Buddhism']);
-});
-
-test('Tag suggestions search saved names and omit assigned tags', () => {
-  assert.deepEqual(matchingTagOptions(['AI', 'attention', 'perception', 'new thought'], ['AI'], 'tion'), ['attention', 'perception']);
-  assert.deepEqual(matchingTagOptions(['attention', 'Attention'], [], ''), ['attention']);
-  assert.deepEqual(tagValues(['  care  ', '', 'Care']), ['care']);
+test('tag values are stable ID strings and preserve existing IDs', () => {
+  assert.deepEqual(tagValues(['ai', 'ordinary-life', 'ai']), ['ai', 'ordinary-life']);
+  assert.deepEqual(addTag(['ai', 'ordinary-life'], 'new-thought'), ['ai', 'ordinary-life', 'new-thought']);
+  assert.deepEqual(addTag(['ai'], 'ai'), ['ai']);
   assert.throws(() => tagValues('not an array'));
   assert.throws(() => tagValues([3]));
+});
+
+test('tag suggestions match renamed labels and omit selected stable IDs', () => {
+  const options = [
+    { id: 'ai', name: 'Artificial Intelligence' },
+    { id: 'ordinary-life', name: 'Everyday Life' },
+    { id: 'attention', name: 'Attention' },
+  ];
+  assert.deepEqual(matchingTagOptions(options, ['ai'], 'artificial'), []);
+  assert.deepEqual(matchingTagOptions(options, ['ai'], 'everyday'), [{ id: 'ordinary-life', name: 'Everyday Life' }]);
+  assert.deepEqual(matchingTagOptions(options, ['ai', 'ordinary-life'], 'life'), []);
 });

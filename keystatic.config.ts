@@ -1,6 +1,9 @@
+import { createElement } from 'react';
 import { collection, config, fields, singleton } from '@keystatic/core';
-import { wrapper } from '@keystatic/core/content-components';
+import { mark, wrapper } from '@keystatic/core/content-components';
 import { tagsField } from './src/editor/TagsField';
+import { timestampField } from './src/editor/TimestampField';
+import { lastEditedField } from './src/editor/LastEditedField';
 
 export default config({
   storage: { kind: 'local' },
@@ -9,7 +12,7 @@ export default config({
       label: 'Entries',
       path: 'src/content/entries/*',
       slugField: 'name',
-      columns: ['title', 'form', 'date', 'status'],
+      columns: ['title', 'form', 'date', 'lastEdited', 'status'],
       format: { contentField: 'body' },
       entryLayout: 'content',
       schema: {
@@ -21,11 +24,9 @@ export default config({
           label: 'Title',
           description: 'Optional for a line. The internal name identifies untitled entries in the editor.',
         }),
-        date: fields.date({ label: 'Date', validation: { isRequired: true } }),
-        timestamp: fields.text({
-          label: 'Precise timestamp (optional)',
-          description: 'Only if known: for example 2026-09-14T17:42:08+08:00. Keep the original timezone offset.',
-        }),
+        date: fields.date({ label: 'Entry date', validation: { isRequired: true } }),
+        lastEdited: lastEditedField(),
+        timestamp: timestampField(),
         form: fields.select({
           label: 'Format',
           options: [
@@ -49,8 +50,22 @@ export default config({
         body: fields.markdoc({
           label: 'Body',
           components: {
-            marginNote: wrapper({ label: 'In the margin', schema: {} }),
+            marginNote: wrapper({ label: 'In the margin', schema: { title: fields.text({ label: 'Margin heading' }) } }),
+            smallText: mark({ label: 'Small text', icon: createElement('span', null, 'Aa'), tag: 'small', schema: {} }),
           },
+        }),
+      },
+    }),
+    tags: collection({
+      label: 'Tags',
+      path: 'src/content/tags/*',
+      slugField: 'name',
+      columns: ['name'],
+      format: { data: 'json' },
+      schema: {
+        name: fields.slug({
+          name: { label: 'Tag name', validation: { isRequired: true, length: { max: 100 } } },
+          slug: { label: 'Tag ID', description: 'Used in links and entry references. Rename the tag using Tag name; keep this ID unchanged.' },
         }),
       },
     }),
@@ -87,27 +102,16 @@ export default config({
     }),
   },
   singletons: {
-    tags: singleton({
-      label: 'Tag list',
-      path: 'src/content/tags',
-      format: { data: 'json' },
-      schema: {
-        tags: fields.array(fields.text({ label: 'Tag', validation: { isRequired: true } }), {
-          label: 'Available tags',
-          description: 'Add a tag here, save, then select it on entries. Before removing or renaming a tag, update the entries that use it.',
-          itemLabel: props => props.value,
-        }),
-      },
-    }),
     about: singleton({
       label: 'About',
       path: 'src/content/about',
-      format: { data: 'json' },
+      format: { contentField: 'body' },
+      entryLayout: 'content',
       schema: {
-        heading: fields.text({ label: 'Heading', validation: { isRequired: true } }),
-        paragraphs: fields.array(fields.text({ label: 'Paragraph', multiline: true }), {
-          label: 'About paragraphs',
-          itemLabel: (props) => props.value,
+        heading: fields.text({ label: 'Heading', multiline: true, validation: { isRequired: true } }),
+        body: fields.markdoc({
+          label: 'Body',
+          components: { smallText: wrapper({ label: 'Small text', schema: {} }) },
         }),
       },
     }),

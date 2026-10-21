@@ -14,7 +14,7 @@ export async function GET(context: APIContext) {
       description: entry.data.summary || entryTitle(entry),
       // A date-only record has no known publication instant. Do not invent one.
       ...(entry.data.timestamp ? { pubDate: new Date(entry.data.timestamp) } : {}),
-      categories: entry.data.concepts,
+      categories: entry.tags.map(tag => tag.name),
     })),
   });
 }

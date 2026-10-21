@@ -1,0 +1,144 @@
+---
+name: A walk through the type
+title: A walk through the type
+date: 2026-10-21
+form: essay
+concepts:
+  - attention
+summary: >-
+  A sample entry for checking every text style, from a quiet paragraph to a
+  table of small observations.
+status: published
+sample: true
+lastEdited: "2026-10-21T16:34:17.978Z"
+---
+This is a sample entry for checking the journal’s typography. Read it on a small screen, then a larger one: the same words should have enough room to breathe in both places.
+
+## Paying attention
+
+An ordinary paragraph can carry **a strong emphasis**, *a quieter emphasis*, or ***both at once***. Sometimes we ~~reach for a conclusion~~ stay with a question. A [link to About](/about/) should feel at home in the sentence; an [external link](https://example.com/) should be equally readable.
+
+A short line ends here.\
+The next begins without starting a new paragraph.
+
+{% marginNote title="a margin title?" %}
+This margin note belongs beside the writing on wide screens and returns to the reading flow on smaller ones. It can include **emphasis** and a [link](/about/).
+{% /marginNote %}
+
+### Things noticed on the walk
+
+- A patch of light moving across the wall.
+- A familiar sound heard differently.
+  - A passing bicycle.
+  - A cup set down on a table.
+- A thought that did not need finishing.
+
+### A small practice
+
+1. Stop for a moment.
+1. Name one thing you can see.
+   1. Notice its shape.
+   1. Notice what surrounds it.
+1. Continue without trying to keep the moment.
+
+> Attention is sometimes less a matter of looking harder than of allowing something to remain unfamiliar.
+>
+> A second paragraph lets us check the space within a quotation.
+
+## Notes from the desk
+
+Inline code such as `const attention = "here"` should remain distinct inside a paragraph. A longer example needs its own space:
+
+```javascript
+function notice(detail) {
+  return `Today I noticed ${detail}.`;
+}
+
+console.log(notice("the afternoon light"));
+```
+
+---
+
+The divider above marks a pause between sections.
+
+## A table of observations
+
+{% table %}
+- Moment
+- Observation
+- What followed
+---
+- Morning
+- Light on the wall
+- A slower start
+---
+- Afternoon
+- Rain against the window
+- A short break
+---
+- Evening
+- The street becoming quiet
+- Time to write
+{% /table %}
+
+## A wider table
+
+This table has seven columns. On a narrow screen, swipe sideways within it to read each one.
+
+{% table %}
+- Day
+- Morning
+- Midday
+- Afternoon
+- Evening
+- Weather
+- Note
+---
+- Monday
+- Open the window
+- Walk to the market
+- Read for a while
+- Make dinner
+- Bright
+- Take the long way home
+---
+- Tuesday
+- Water the plants
+- Answer a letter
+- Sit by the window
+- Call a friend
+- Overcast
+- Leave room in the day
+{% /table %}
+
+## An image in the flow
+
+The journal’s existing mark serves as a small image sample, with descriptive alternative text.
+
+![The journal’s lowercase j mark](/favicon.svg "Journal mark")
+
+# A first-level heading inside the writing
+
+This intentionally repeats the first heading level to make its body styling easy to compare with the entry title.
+
+## A second-level heading
+
+This is the normal section heading used throughout an entry.
+
+### A third-level heading
+
+A smaller section within the same line of thought.
+
+#### A fourth-level heading
+
+A brief aside within that section.
+
+##### A fifth-level heading
+
+A finer division, included here for completeness.
+
+###### A sixth-level heading
+
+The smallest available heading level. The final paragraph brings us back to ordinary reading, with **bold**, *italic*, ~~strikethrough~~, `inline code`, and a [return to all entries](/).
+
+{% smallText %}This is the small text style, useful for quiet asides or supporting details.{% /smallText %}

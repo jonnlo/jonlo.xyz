@@ -4,15 +4,16 @@ import Record from './Record.astro';
 import { archiveHref, type Entry, type Filter } from '../lib/entries';
 interface Props { entries: Entry[]; active?: Filter; concept?: string; }
 const { entries, active = 'all', concept = '' } = Astro.props;
+const conceptName = entries.flatMap(entry => entry.tags).find(tag => tag.id === concept)?.name || concept;
 const records = entries.filter(({ data }) => (active === 'all' || data.form === active) && (!concept || data.concepts.includes(concept)));
 const firstYear = records[0]?.data.date.slice(0, 4);
 const yearCount = (year: string | undefined) => records.filter(entry => entry.data.date.startsWith(year || '!')).length;
 const countLabel = (count: number) => `${String(count).padStart(2, '0')} ${count === 1 ? 'record' : 'records'}`;
 ---
 <div class:list={['journal catalogue', `catalogue-${active}`, { 'catalogue-filtered': active !== 'all' }]}>
-  <h1 class="sr-only">{concept ? `${concept} — ` : ''}{active === 'all' ? 'All entries' : active === 'fragment' ? 'Lines' : `${active}s`}</h1>
+  <h1 class="sr-only">{concept ? `${conceptName} — ` : ''}{active === 'all' ? 'All entries' : active === 'fragment' ? 'Lines' : `${active}s`}</h1>
   <FormatTabs active={active} concept={concept} entries={entries} />
-  {concept && <div class="concept-filter"><span>{concept}</span><a href={archiveHref(active)}>Clear ×</a></div>}
+  {concept && <div class="concept-filter"><span>{conceptName}</span><a href={archiveHref(active)}>Clear ×</a></div>}
   <section class="catalogue-sheet record-sheet" aria-label="Entries">
     <div class="catalogue-summary">{firstYear && <h2 class="year-caption"><time datetime={firstYear}>{firstYear}</time></h2>}<span class="catalogue-status">{countLabel(yearCount(firstYear))}</span></div>
     <ol class="records">{records.map((entry, index) => {

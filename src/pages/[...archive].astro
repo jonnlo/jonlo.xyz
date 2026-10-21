@@ -13,5 +13,6 @@ export async function getStaticPaths() {
   })));
 }
 const { entries, active, concept } = Astro.props;
+const conceptName = entries.flatMap(entry => entry.tags).find(tag => tag.id === concept)?.name || concept;
 ---
-<Base title={`${concept} — ${active === 'all' ? 'Entries' : active === 'fragment' ? 'Lines' : `${active}s`}`} noindex><Journal entries={entries} active={active} concept={concept} /></Base>
+<Base title={`${conceptName} — ${active === 'all' ? 'Entries' : active === 'fragment' ? 'Lines' : `${active}s`}`} noindex><Journal entries={entries} active={active} concept={concept} /></Base>

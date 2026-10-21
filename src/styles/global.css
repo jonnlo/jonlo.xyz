@@ -19,7 +19,7 @@
   --sheet: oklch(97% 0.0082 91.5);
   --paper-all: oklch(95.5% 0.0105 95.8);
   --paper-document: oklch(97% 0.004 90);
-  --paper-essay: oklch(91% 0.028 123.7);
+  --paper-essay: oklch(90% 0.028 123.7);
   --paper-note: oklch(91% 0.0454 90.4);
   --paper-fragment: oklch(91% 0.025 52.7);
   --paper-poem: oklch(91.01% 0.0103 325.7);
@@ -38,7 +38,8 @@
   --page-title-size: 2rem;
   --ui-weight: 400;
   --meta-size: .8125rem;
-  --page-padding: 48px
+  --page-padding: 48px;
+  --page-max-width: 1080px
 }
 
 *,
@@ -103,7 +104,7 @@ button:focus-visible,
 
 .page {
   width: 100%;
-  max-width: 1080px;
+  max-width: var(--page-max-width);
   margin: 0 auto;
   padding: 0 var(--page-padding)
 }
@@ -545,7 +546,7 @@ h3 {
 .prose {
   grid-column: 3/11;
   max-width: 65ch;
-  font: 400 1.3125rem/1.65 var(--body-font)
+  font: 400 1.3125rem/1.5 var(--body-font)
 }
 
 .prose p {
@@ -567,9 +568,21 @@ h3 {
   font-style: italic
 }
 
-.prose a {
-  color: var(--accent);
-  text-decoration-color: currentColor
+.prose a,
+.about-rich-text a {
+  color: inherit;
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .3em
+}
+
+.prose a:hover,
+.prose a:focus-visible,
+.about-rich-text a:hover,
+.about-rich-text a:focus-visible {
+  color: var(--muted)
 }
 
 .margin-note {
@@ -583,7 +596,7 @@ h3 {
 .margin-note span {
   display: block;
   margin-bottom: 9px;
-  color: var(--accent)
+  color: inherit
 }
 
 .margin-note a {
@@ -711,6 +724,10 @@ footer span:first-child {
 
   .header nav {
     gap: 8px 16px
+  }
+
+  .header nav a {
+    font-size: .85rem
   }
 
   .journal-intro {
@@ -1536,6 +1553,11 @@ footer {
   color: var(--muted)
 }
 
+.reading .article-form:hover,
+.reading .article-form:focus-visible {
+  color: var(--ink)
+}
+
 .related h2 {
   margin-bottom: 0;
   padding-bottom: 9px;
@@ -1655,7 +1677,7 @@ footer {
 }
 
 .record-essay .record-preview {
-  color: color-mix(in srgb, var(--muted) 90%, var(--ink))
+  color: color-mix(in srgb, var(--muted) 85%, var(--paper-all))
 }
 
 .record-read {
@@ -1693,7 +1715,7 @@ footer {
 .record-date-link {
   display: inline-flex;
   align-items: baseline;
-  color: inherit;
+  color: var(--muted);
   text-decoration: none
 }
 
@@ -1951,13 +1973,13 @@ footer {
   justify-content: space-between;
   gap: 20px;
   padding: 24px 0 9px;
-  border-bottom: 1px solid var(--ink);
+  border-bottom: 1px solid color-mix(in srgb, var(--muted) 64%, var(--sheet));
   font: var(--ui-weight) var(--meta-size)/1.3 var(--date-font);
   text-transform: uppercase
 }
 
 .journal .year-caption {
-  color: var(--ink);
+  color: var(--muted);
   font: var(--ui-weight) var(--meta-size)/1.3 var(--date-font);
   letter-spacing: normal
 }
@@ -1975,7 +1997,7 @@ footer {
 }
 
 .record:first-child {
-  border-top: 2px solid var(--ink)
+  border-top: 1px solid color-mix(in srgb, var(--muted) 64%, var(--sheet))
 }
 
 .record>time {
@@ -2038,7 +2060,7 @@ footer {
 }
 
 .record-compact {
-  padding: 17px 0 18px
+  padding: 20px 0 18px
 }
 
 .record-filing {
@@ -2085,7 +2107,7 @@ footer {
   }
 
   .record-compact {
-    padding: 15px 0 16px
+    padding: 16px 0 16px
   }
 
   .record-body h2 {
@@ -2094,7 +2116,8 @@ footer {
 
   .record-preview {
     margin-top: 15px;
-    font-size: 1.125rem
+    font-size: 1.0625rem;
+    line-height: 1.5
   }
 
   .record-filing {
@@ -2120,7 +2143,7 @@ footer {
 }
 
 .record-concepts a {
-  color: color-mix(in srgb, var(--muted) 78%, var(--sheet));
+  color: var(--muted);
   text-decoration-color: transparent
 }
 
@@ -2405,17 +2428,23 @@ time,
 
 .now-rich-text p + p,
 .now-rich-text ul,
-.now-rich-text ol {
+.now-rich-text ol,
+.about-rich-text p + p,
+.about-rich-text ul,
+.about-rich-text ol {
   margin-top: .75em
 }
 
 .now-rich-text ul,
-.now-rich-text ol {
+.now-rich-text ol,
+.about-rich-text ul,
+.about-rich-text ol {
   margin-bottom: 0;
   padding-left: 1.3em
 }
 
-.now-rich-text li + li {
+.now-rich-text li + li,
+.about-rich-text li + li {
   margin-top: .25em
 }
 
@@ -2501,6 +2530,7 @@ time,
 
 .now-history-date a:hover,
 .now-history-date a:focus-visible {
+  color: var(--ink);
   text-decoration-line: underline;
   text-decoration-style: dotted
 }
@@ -2516,7 +2546,7 @@ time,
 
 .article-content-sheet .prose .margin-note {
   margin: 24px 0;
-  font: 400 .75rem/1.8 var(--ui-font)
+  font: 400 13px/1.8 var(--ui-font)
 }
 
 .article-content-sheet .prose .margin-note p {
@@ -2527,8 +2557,188 @@ time,
   .article-content-sheet .prose .margin-note {
     position: absolute;
     top: 0;
-    left: calc(100% + 96px);
+    /* The prose and sheet share a centre. Place the note beyond the sheet's
+       outer edge, rather than a fixed distance beyond the text column. */
+    left: calc(50% + min(50vw, var(--page-max-width) / 2) - var(--page-padding) + 24px);
     margin: 0;
     width: 180px
+  }
+}
+
+/* Archive year and count headings share a type size. */
+.page .journal .catalogue-summary,
+.page .journal .record-year,
+.page .journal .year-caption {
+  font-size: .75rem
+}
+
+@media(max-width:650px) {
+  .page .journal .catalogue-summary,
+  .page .journal .record-year,
+  .page .journal .year-caption {
+    font-size: .6875rem
+  }
+}
+
+@media(max-width:650px) {
+  .page .record > time {
+    font-size: .6875rem
+  }
+}
+
+@media(max-width:650px) {
+  .record {
+    border-top-width: 1.5px
+  }
+}
+
+.article-content-sheet .article-heading h1,
+.article-content-sheet .prose h1 {
+  font-size: 1.875rem
+}
+
+.article-content-sheet .prose h2 {
+  font-size: 1.375rem
+}
+
+@media(max-width:650px) {
+  .article-content-sheet .article-heading h1,
+  .article-content-sheet .prose h1 {
+    font-size: 1.6rem
+  }
+
+  .article-content-sheet .prose h2 {
+    font-size: 1.3rem
+  }
+}
+
+
+/* Reading typography refinements. */
+.article-content-sheet .prose h1,
+.article-content-sheet .prose h2,
+.article-content-sheet .prose h3,
+.article-content-sheet .prose h4,
+.article-content-sheet .prose h5,
+.article-content-sheet .prose h6 {
+  font-family: var(--title-font);
+  font-weight: var(--title-weight);
+  line-height: 1.25
+}
+
+.article-content-sheet .prose h1 { font-size: 1.875rem }
+.article-content-sheet .prose h2 { font-size: 1.375rem }
+.article-content-sheet .prose h3 { font-size: 1.25rem }
+.article-content-sheet .prose h4 { font-size: 1.125rem }
+.article-content-sheet .prose h5 { font-size: 1.0625rem }
+.article-content-sheet .prose h6 { font-size: 1rem }
+
+.article-content-sheet .prose :not(pre) > code {
+  font-size: .72em
+}
+
+.article-content-sheet .prose blockquote {
+  border-left-color: color-mix(in srgb, var(--muted) 65%, var(--paper-document));
+  color: var(--muted)
+}
+
+.article-content-sheet .prose .small-text {
+  color: var(--muted);
+  font-size: .82em
+}
+
+@media(max-width:650px) {
+  .article-content-sheet .prose h1 { font-size: 1.6rem }
+  .article-content-sheet .prose h2 { font-size: 1.3rem }
+  .article-content-sheet .prose h3 { font-size: 1.2rem }
+  .article-content-sheet .prose h4 { font-size: 1.1rem }
+  .article-content-sheet .prose h5 { font-size: 1.05rem }
+  .article-content-sheet .prose h6 { font-size: 1rem }
+}
+
+.article-content-sheet .prose strong,
+.article-content-sheet .prose b {
+  font-weight: 600
+}
+
+.article-content-sheet .prose pre {
+  font-size: .72em;
+  line-height: 1.5;
+  overflow-x: auto
+}
+
+.article-content-sheet .prose pre code {
+  font-size: inherit
+}
+
+.article-content-sheet .prose pre {
+  padding: 1rem 1.125rem;
+  border: 1px solid color-mix(in srgb, var(--muted) 22%, var(--paper-document));
+  background: color-mix(in srgb, var(--muted) 8%, var(--paper-document))
+}
+
+.article-content-sheet .prose table {
+  width: 100%;
+  margin: 1.5em 0;
+  border-collapse: collapse;
+  font-size: .9em
+}
+
+.article-content-sheet .prose th,
+.article-content-sheet .prose td {
+  padding: .45em .6em;
+  border: 1px solid color-mix(in srgb, var(--muted) 35%, var(--paper-document));
+  text-align: left;
+  vertical-align: top
+}
+
+.article-content-sheet .prose th {
+  background: color-mix(in srgb, var(--muted) 8%, var(--paper-document));
+  font-weight: 600
+}
+
+.article-content-sheet .prose table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain
+}
+
+.article-content-sheet .prose th,
+.article-content-sheet .prose td {
+  min-width: 8rem
+}
+
+.article-content-sheet .prose ul li::marker {
+  font-size: .7em
+}
+.article-content-sheet .prose s,
+.article-content-sheet .prose del {
+  text-decoration-thickness: .06em
+}
+@media(max-width:650px) {
+  .article-content-sheet .prose {
+    line-height: 1.5
+  }
+}
+@media(max-width:650px) {
+  .article-content-sheet .prose {
+    font-size: 1.125rem
+  }
+}
+@media(max-width:650px) {
+  .article-content-sheet .prose,
+  .record-preview {
+    font-size: 1.1875rem;
+    line-height: 1.35
+  }
+}
+@media(max-width:650px) {
+  .article-content-sheet .prose p {
+    margin-bottom: 1.15em
+  }
+
+  .article-content-sheet .article-tags {
+    margin-top: 1.5rem
   }
 }
