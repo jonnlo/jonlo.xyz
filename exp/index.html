@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paper & ink — OKLCH experiment</title>
+<link rel="stylesheet" href="tuner.css">
+<script src="tuner.js" defer></script>
+<header><div><p>JON’S LOG / EXPERIMENT</p><h1>Paper & ink</h1></div><p>Tune the real site tokens. Changes stay in this browser.</p></header>
+<main>
+<aside>
+<p>Gray background, tab papers, darker type labels in All, and the paper shared by articles and About. Preview navigation remains interactive.</p>
+<div id="controls"></div>
+<div class="actions"><button id="reset" type="button">Reset all</button><button id="copy" type="button">Copy CSS</button><button id="download" type="button">Download CSS</button></div>
+<label for="css">Selected values · append to prototype/styles.css</label><textarea id="css" readonly spellcheck="false" rows="13"></textarea>
+<p id="status" role="status" aria-live="polite"></p>
+</aside>
+<section class="preview" aria-label="Live site preview">
+<nav aria-label="Preview pages"><button data-route="/">All</button><button data-route="/journal/essay">Essays</button><button data-route="/journal/note">Notes</button><button data-route="/journal/fragment">Fragments</button><button data-route="/thought/before-you-judge">Article</button><button data-route="/about">About</button><button id="width">Narrow preview</button></nav>
+<iframe title="Actual blog with experimental colors" src="../prototype/index.html#/"></iframe>
+</section>
+</main>
+</html>

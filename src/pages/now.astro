@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+import NowItems from '../components/NowItems.astro';
+import { publishedNowUpdates } from '../lib/now';
+import { articleDate } from '../lib/entries';
+const updates = await publishedNowUpdates();
+---
+<Base title="Now history" section="about">
+  <section class="support-page about-page">
+    <header class="support-heading"><h1>Now, over time.</h1></header>
+    <div class="support-document"><div class="about-copy"><p>A record of what I’ve been reading, thinking about, working on, and listening to. <a href="/about/#now">Back to Now ↗</a></p></div></div>
+    {updates.map((update, index) => <section class="now-section now-history-record" id={`update-${update.id}`} aria-labelledby={`heading-${update.id}`}>
+      <header class="now-heading"><h2 id={`heading-${update.id}`}><a href={`#update-${update.id}`}><time datetime={update.data.date}>{articleDate(update.data.date)}</time></a></h2>{index === 0 && <p class="archive-line">Current update</p>}</header>
+      <NowItems items={update.data.items} />
+    </section>)}
+    {updates.length === 0 && <div class="support-document"><p>No updates published yet.</p></div>}
+  </section>
+</Base>

@@ -1,17 +1,57 @@
-# a home for thoughts
+# Jon’s Log
 
-A local, typography-led HTML blog prototype. See DESIGN.md for the art direction and content rules. Open `dist/index.html` directly, or serve `dist` with a static HTTP server. No build or dependencies are required. The two typefaces load from Google Fonts; system serif and sans-serif fallbacks work offline.
+A small journal built with Astro and Keystatic. The Astro site is the app; the
+standalone files in `prototype/` remain the visual reference for comparison.
+All current entry and About/Now writing is illustrative sample copy, not the
+author’s original work. See [the content model](docs/CONTENT-MODEL.md) before
+editing or replacing it.
 
-Includes a mixed journal of full fragments and essay excerpts, with exact recorded timestamps on new sample fragments, plus concept and format views of one archive; article layouts with marginalia; About and Now pages. URLs use hashes so the prototype works from a file or static server. The RSS file is a clearly labeled sample, not a production feed.
+## Run locally
 
-All article bodies, About and Now text are illustrative prototype copy, not the author's original writing. Titles and concepts draw on the supplied brief.
+Install dependencies and start Astro from the repository root:
 
-## Later Astro + Keystatic port
+```sh
+npm install
+npm run dev
+```
 
-- `dist/styles.css`: shared tokens, 12-column layout, fluid typography, 4-column mobile layout.
-- `dist/index.html`: shared document shell.
-- `dist/app.js`: example content records and view templates. Move records to Keystatic collections and templates to Astro components/routes.
-- Suggested content fields: slug, title, date, form, concepts, body, optional marginalia. Derive related entries from shared concepts.
-- Replace hash routes with real URLs and generate the feed from published content.
+Open <http://127.0.0.1:4321/>. The Keystatic editor is at
+<http://127.0.0.1:4321/keystatic/> while the development server is running.
+It edits the local files in this checkout. The static production build does
+not include the editor or an admin route.
 
-The UI deliberately has no cards, hero, engagement metadata, shadows, or decorative animation. On smaller screens, dates stack with titles and margin notes move into the reading flow.
+For Now, choose **Now updates → Add** to save a new dated snapshot. The newest
+published update appears on About; **Past updates** opens the saved history.
+Editing an existing snapshot corrects that record, so add a new one for each
+update you want to preserve separately.
+
+Useful project commands:
+
+```sh
+npm run check
+npm run build
+npm test
+```
+
+Set `SITE_URL` to the real canonical domain when preparing a production build;
+the current site has not been deployed. Without it, Astro uses its local URL.
+The generated `dist/` directory is disposable build output.
+
+## Visual reference and experiment
+
+The visual authority is `prototype/`, an independently served static version
+of the journal. From the repository root, start its local server:
+
+```sh
+python3 -m http.server 8000 --bind 127.0.0.1
+```
+
+Then open
+<http://127.0.0.1:8000/prototype/>. It uses the bundled ABC Areal and ABC Areal
+Mono fonts with Crimson Text for reading. Preserve this prototype when checking
+the Astro implementation visually.
+
+The paper and ink tuner in `exp/` is served by the same local HTTP server at
+<http://127.0.0.1:8000/exp/> and loads the prototype independently. Keep
+`prototype/` as a repository-level reference; do not copy it into the public
+asset directory for deployment.

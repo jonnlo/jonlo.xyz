@@ -1,0 +1,7 @@
+---
+import Base from '../layouts/Base.astro';
+import Journal from '../components/Journal.astro';
+import { publishedEntries } from '../lib/entries';
+const entries = await publishedEntries();
+---
+<Base><Journal entries={entries} /></Base>

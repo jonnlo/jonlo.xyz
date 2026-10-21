@@ -1,0 +1,19 @@
+---
+import { render } from 'astro:content';
+import Concepts from './Concepts.astro';
+import { entryHref, entryTitle, indexDate, formLabel, type Entry, type Filter } from '../lib/entries';
+interface Props { entry: Entry; active: Filter; }
+const { entry, active } = Astro.props;
+const { data } = entry;
+const expanded = active === 'all';
+const { Content } = expanded && data.form !== 'essay' ? await render(entry) : { Content: undefined };
+---
+<li class:list={['record', expanded ? 'record-expanded' : 'record-compact', `record-${data.form}`]}>
+  <time datetime={data.timestamp || data.date}><a class="record-date-link" href={entryHref(entry)}>{indexDate(data.date)}</a><span class="record-date-arrow" aria-hidden="true">↗</span></time>
+  {expanded ? <article class="record-body">
+    {data.form !== 'fragment' && <h2><a href={entryHref(entry)}>{entryTitle(entry)}</a></h2>}
+    <div class="record-preview">{data.form === 'essay' ? <p>{data.summary}</p> : Content && <Content />}</div>
+    {data.form === 'essay' && <a class="record-read" href={entryHref(entry)} aria-label={`Read ${entryTitle(entry)}`}><span class="record-read-label">Read</span> <span class="record-read-arrow" aria-hidden="true">→</span></a>}
+  </article> : <div class="record-body"><h2><a href={entryHref(entry)}>{entryTitle(entry)}</a></h2><Concepts concepts={data.concepts} form={active} /></div>}
+  {expanded && <span class="record-form-cell">{formLabel(data.form)}</span>}
+</li>

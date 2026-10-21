@@ -1,0 +1,11 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Journal from '../../../components/Journal.astro';
+import { publishedEntries, formats } from '../../../lib/entries';
+export async function getStaticPaths() {
+  const entries = await publishedEntries();
+  return formats.filter(([form]) => form !== 'all').map(([active, label]) => ({ params: { form: active }, props: { entries, active, label } }));
+}
+const { entries, active, label } = Astro.props;
+---
+<Base title={label}><Journal entries={entries} active={active} /></Base>

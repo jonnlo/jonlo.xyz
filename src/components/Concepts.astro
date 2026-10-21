@@ -1,0 +1,6 @@
+---
+import { archiveHref, type Filter } from '../lib/entries';
+interface Props { concepts: string[]; form?: Filter; }
+const { concepts, form = 'all' } = Astro.props;
+---
+<div class="record-filing"><span class="record-concepts">{concepts.map((concept, index) => <>{index > 0 && <i aria-hidden="true">·</i>}<a href={archiveHref(form, concept)}>{concept}</a></>)}</span></div>
