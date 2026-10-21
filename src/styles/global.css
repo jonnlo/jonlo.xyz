@@ -19,7 +19,7 @@
   --sheet: oklch(97% 0.0082 91.5);
   --paper-all: oklch(95.5% 0.0105 95.8);
   --paper-document: oklch(97% 0.004 90);
-  --paper-essay: oklch(90% 0.028 123.7);
+  --paper-essay: oklch(89.5% 0.028 123.7);
   --paper-note: oklch(91% 0.0454 90.4);
   --paper-fragment: oklch(91% 0.025 52.7);
   --paper-poem: oklch(91.01% 0.0103 325.7);
@@ -1387,7 +1387,7 @@ footer {
 
 .article-view .article-content-sheet {
   margin-top: 0;
-  border-top: 9px solid var(--format-paper)
+  border-top: 7px solid var(--format-paper)
 }
 
 .reading-essay {
@@ -1630,7 +1630,7 @@ footer {
   .article-content-sheet {
     grid-column: 1/-1;
     display: block;
-    padding: 24px 20px
+    padding: 24px 16px
   }
 
   .article-content-sheet .article-heading {
@@ -1789,14 +1789,15 @@ footer {
 
   .journal-tabs a {
     min-width: 0;
-    padding-right: 5px;
-    padding-left: 5px;
+    padding-right: 12px;
+    padding-left: 12px;
     font-size: 0.6875rem;
     white-space: nowrap
   }
 
   .journal-tabs sup {
-    margin-left: 4px
+    margin-left: 4px;
+    font-size: .625rem
   }
 }
 
@@ -2295,7 +2296,7 @@ time,
 
   .journal-tabs a {
     min-width: 0;
-    padding: 11px 8px 10px
+    padding: 11px 12px 10px
   }
 
   .journal-tabs a[aria-current=page] {
@@ -2740,5 +2741,12 @@ time,
 
   .article-content-sheet .article-tags {
     margin-top: 1.5rem
+  }
+}
+
+
+@media(max-width:650px) {
+  .page .journal-tabs sup {
+    font-size: .625rem
   }
 }
