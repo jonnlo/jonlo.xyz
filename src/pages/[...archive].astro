@@ -7,12 +7,15 @@ export async function getStaticPaths() {
   const concepts = [...new Set(entries.flatMap(entry => entry.data.concepts))];
   // Every combination exists, including empty selections, so switching formats
   // always keeps the chosen concept and remains usable without client JS.
-  return formats.flatMap(([active]) => concepts.map(concept => ({
-    params: { archive: decodeURIComponent(archiveHref(active, concept).slice(1, -1)) },
-    props: { entries, active, concept },
-  })));
+  return formats.flatMap(([active]) => concepts.map(concept => {
+    const path = archiveHref(active, concept);
+    return {
+      params: { archive: decodeURIComponent(path.slice(1, -1)) },
+      props: { entries, active, concept },
+    };
+  }));
 }
 const { entries, active, concept } = Astro.props;
 const conceptName = entries.flatMap(entry => entry.tags).find(tag => tag.id === concept)?.name || concept;
 ---
-<Base title={`${conceptName} — ${active === 'all' ? 'Entries' : active === 'fragment' ? 'Lines' : `${active}s`}`} noindex><Journal entries={entries} active={active} concept={concept} /></Base>
+<Base title={`${conceptName} — ${active === 'all' ? 'Entries' : active === 'crumb' ? 'Crumbs' : `${active}s`}`} noindex><Journal entries={entries} active={active} concept={concept} /></Base>

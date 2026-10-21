@@ -20,13 +20,13 @@ Values persist in this browser under `jons-log-oklch-v1`. Each Reset token butto
 | All tab and archive paper | `--paper-all` |
 | Essays tab and archive paper | `--paper-essay` |
 | Notes tab and archive paper | `--paper-note` |
-| Fragments tab and archive paper | `--paper-fragment` |
+| Crumbs tab and archive paper | `--paper-crumb` |
 | Essay label in All + essay title hover | `--hover-essay` |
 | Note label in All + note title hover | `--hover-note` |
-| Line label in All + fragment title hover | `--hover-fragment` |
+| Crumb label in All + crumb title hover | `--hover-crumb` |
 | Article and About sheet | `--paper-document` |
 
-“Dark versions” here means the darker type labels, not a dark mode. All is an aggregate filter with no corresponding All type label. Fragment records are labeled “line” by the existing app. The three label colors begin as hexadecimal colors in the source; the tuner converts them to OKLCH. No unused poem token or separate dark theme is introduced.
+“Dark versions” here means the darker type labels, not a dark mode. All is an aggregate filter with no corresponding All type label. The three label colors begin as hexadecimal colors in the source; the tuner converts them to OKLCH. No unused poem token or separate dark theme is introduced.
 
 ## Apply to the site
 

@@ -22,7 +22,7 @@ export default config({
         }),
         title: fields.text({
           label: 'Title',
-          description: 'Optional for a line. The internal name identifies untitled entries in the editor.',
+          description: 'Optional for a crumb. The internal name identifies untitled entries in the editor.',
         }),
         date: fields.date({ label: 'Entry date', validation: { isRequired: true } }),
         lastEdited: lastEditedField(),
@@ -32,7 +32,7 @@ export default config({
           options: [
             { label: 'Essay', value: 'essay' },
             { label: 'Note', value: 'note' },
-            { label: 'Line', value: 'fragment' },
+            { label: 'Crumb', value: 'crumb' },
           ],
           defaultValue: 'note',
         }),

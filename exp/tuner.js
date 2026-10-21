@@ -6,9 +6,9 @@ const storageKey = 'jons-log-oklch-v1';
 const definitions = [
   ['canvas', 'Gray background / canvas'],
   ['paper-all', 'All / paper'], ['paper-essay', 'Essays / paper'],
-  ['paper-note', 'Notes / paper'], ['paper-fragment', 'Fragments / paper'],
+  ['paper-note', 'Notes / paper'], ['paper-crumb', 'Crumbs / paper'],
   ['hover-essay', 'Essay / darker type label'], ['hover-note', 'Note / darker type label'],
-  ['hover-fragment', 'Line / darker type label'], ['paper-document', 'Article + About / paper']
+  ['hover-crumb', 'Crumb / darker type label'], ['paper-document', 'Article + About / paper']
 ];
 let defaults, values;
 const format = v => `oklch(${v[0]}% ${v[1]} ${v[2]})`;

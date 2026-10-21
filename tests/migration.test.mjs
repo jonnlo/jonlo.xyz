@@ -11,7 +11,7 @@ const declaration = prototype.match(/const thoughts = \[([\s\S]*?)\n\];/);
 assert.ok(declaration, 'The preserved prototype must provide the migration reference');
 const entries = vm.runInNewContext(`${declaration[0]}\nJSON.stringify(thoughts)`, {}, { timeout: 1000 });
 const originals = JSON.parse(entries);
-const formats = ['all', 'essay', 'note', 'fragment'];
+const formats = ['all', 'essay', 'note', 'crumb'];
 const concepts = [...new Set(originals.flatMap(entry => entry.concepts))];
 const text = html => html.replace(/<[^>]*>/g, ' ').replace(/&#(?:x([\da-f]+)|(\d+));/gi, (_, hex, decimal) => String.fromCodePoint(parseInt(hex || decimal, hex ? 16 : 10))).replace(/&(amp|lt|gt|quot|apos|nbsp);/g, (_, entity) => ({ amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ' })[entity]).replace(/\s+/g, ' ').trim();
 const htmlFor = path => readFileSync(resolve(output, `.${decodeURIComponent(path)}`, 'index.html'), 'utf8');

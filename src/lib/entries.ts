@@ -5,10 +5,10 @@ import { resolveTagReferences } from './tag-references.mjs';
 export type Entry = CollectionEntry<'entries'> & { tags: Tag[] };
 export type Form = Entry['data']['form'];
 export type Filter = Form | 'all';
-export const formats = [['all', 'All'], ['essay', 'Essays'], ['note', 'Notes'], ['fragment', 'Lines']] as const;
+export const formats = [['all', 'All'], ['essay', 'Essays'], ['note', 'Notes'], ['crumb', 'Crumbs']] as const;
 export const entryTitle = (entry: Entry) => entry.data.title || entry.data.name;
 export const entryHref = (entry: Entry) => `/thought/${encodeURIComponent(entry.id)}/`;
-export const formLabel = (form: Form) => form === 'fragment' ? 'line' : form;
+export const formLabel = (form: Form) => form;
 export function archiveHref(form: Filter = 'all', concept = '') {
   const base = form === 'all' ? '/' : `/journal/${form}/`;
   return concept ? `${base}concept/${encodeURIComponent(concept)}/` : base;

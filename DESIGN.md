@@ -14,7 +14,7 @@ spacing, responsive layout and interaction details are defined in
 `prototype/styles.css`. `src/styles/global.css` is the Astro implementation.
 Preserve their shared visual direction unless a redesign is requested.
 
-The archive is a single chronological surface with All, Essays, Notes and Lines
+The archive is a single chronological surface with All, Essays, Notes and Crumbs
 filters. Concept links can combine with a format filter. Records remain
 typographic and compact, without cards, shadows or decorative animation.
 Articles retain their marginalia and place it in the reading flow on narrow
@@ -22,7 +22,7 @@ screens. About and Now are supporting pages within the same archive.
 
 ## Content rules
 
-- Essays may show a title and excerpt; lines may be untitled. A date or precise
+- Essays may show a title and excerpt; crumbs may be untitled. A date or precise
   timestamp must preserve the precision actually known.
 - Keep timestamp offsets and seconds intact. The current known recording times
   are shown explicitly in UTC+08:00.

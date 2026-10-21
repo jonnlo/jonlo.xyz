@@ -14,7 +14,7 @@ const entries = defineCollection({
     date: calendarDate,
     lastEdited: z.iso.datetime({ offset: true }).optional().or(z.literal('')),
     timestamp: z.iso.datetime({ offset: true }).optional().or(z.literal('')),
-    form: z.enum(['essay', 'note', 'fragment']),
+    form: z.enum(['essay', 'note', 'crumb']),
     concepts: z.array(z.string().min(1)),
     summary: z.string().optional(),
     status: z.enum(['draft', 'published']).default('draft'),

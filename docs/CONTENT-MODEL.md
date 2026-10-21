@@ -11,11 +11,11 @@ Now updates are separate JSON records in `src/content/now/`.
 | --- | --- |
 | Filename | Stable public URL slug, exposed to Astro as `entry.id` |
 | `name` | Required internal editorial name; Keystatic's slug field stores its name here and its URL in the filename |
-| `title` | Display title; optional so lines can remain untitled |
+| `title` | Display title; optional so crumbs can remain untitled |
 | `date` | Required calendar date, stored as a quoted `YYYY-MM-DD` string |
 | `lastEdited` | Automatic ISO timestamp set by a successful local editor save; displayed in Hong Kong time in the editor only |
 | `timestamp` | Optional ISO timestamp with the recorded timezone offset |
-| `form` | `essay`, `note`, or `fragment` (displayed as “line”) |
+| `form` | `essay`, `note`, or `crumb` |
 | `concepts` | Stable tag IDs assigned to the entry. The stored key is retained for compatibility; display names come from the Tags registry. |
 | `summary` | Optional journal excerpt; migrated essays use their first paragraph |
 | `status` | `draft` or `published`; new entries default to draft |

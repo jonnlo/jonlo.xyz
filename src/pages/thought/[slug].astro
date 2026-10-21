@@ -18,7 +18,7 @@ const related = entries.filter(other => other.id !== entry.id && other.data.conc
     <article class={`reading reading-${data.form} grid`}>
       <div class:list={['article-content-sheet', { 'has-margin-note': entry.body?.includes('{% marginNote') }]}>
         <header class="article-heading">
-          <h1 class:list={{ 'sr-only': data.form === 'fragment' }}>{entryTitle(entry)}</h1>
+          <h1 class:list={{ 'sr-only': data.form === 'crumb' }}>{entryTitle(entry)}</h1>
           <div class="article-meta-line"><span class="article-datetime"><time datetime={data.timestamp || data.date}>{articleDate(data.date)}</time>{data.timestamp && <span>{recordedTime(data.timestamp)}</span>}</span><a class="article-form" href={archiveHref(data.form)}>{formLabel(data.form)}</a></div>
         </header>
         <div class="prose"><Content /></div>

@@ -21,7 +21,7 @@
   --paper-document: oklch(97% 0.004 90);
   --paper-essay: oklch(89.5% 0.028 123.7);
   --paper-note: oklch(91% 0.0454 90.4);
-  --paper-fragment: oklch(91% 0.025 52.7);
+  --paper-crumb: oklch(91% 0.025 52.7);
   --paper-poem: oklch(91.01% 0.0103 325.7);
   --ink: #242522;
   --muted: #6f716b;
@@ -29,7 +29,7 @@
   --accent: #456d6b;
   --hover-essay: oklch(42% 0.1 123.7);
   --hover-note: oklch(42% 0.1 95);
-  --hover-fragment: oklch(42% 0.1 35);
+  --hover-crumb: oklch(42% 0.1 35);
   --title-font: "ABC Areal", Arial, sans-serif;
   --body-font: "Crimson Text", Georgia, serif;
   --ui-font: "ABC Areal", Arial, sans-serif;
@@ -272,9 +272,9 @@ h3 {
 }
 
 .note-entry .entry-content>p:not(.entry-kind),
-.fragment-entry .entry-text,
-.fragment-entry .fragment,
-.fragment-entry .entry-content>p:not(.entry-kind) {
+.crumb-entry .entry-text,
+.crumb-entry .crumb,
+.crumb-entry .entry-content>p:not(.entry-kind) {
   font: 400 1.4375rem/1.55 var(--body-font);
   letter-spacing: normal
 }
@@ -401,6 +401,7 @@ h3 {
 .archive-tabs sup {
   margin-left: 7px;
   font-size: 0.6875rem;
+  font-family: var(--date-font);
   color: inherit
 }
 
@@ -510,8 +511,8 @@ h3 {
   background: var(--paper-poem)
 }
 
-.form-fragment {
-  background: var(--paper-fragment)
+.form-crumb {
+  background: var(--paper-crumb)
 }
 
 .reading {
@@ -765,9 +766,9 @@ footer span:first-child {
   }
 
   .note-entry .entry-content>p:not(.entry-kind),
-  .fragment-entry .entry-text,
-  .fragment-entry .fragment,
-  .fragment-entry .entry-content>p:not(.entry-kind) {
+  .crumb-entry .entry-text,
+  .crumb-entry .crumb,
+  .crumb-entry .entry-content>p:not(.entry-kind) {
     font-size: 1.3125rem
   }
 
@@ -1055,8 +1056,8 @@ footer {
   --sheet-paper: var(--paper-poem)
 }
 
-.catalogue-fragment {
-  --sheet-paper: var(--paper-fragment)
+.catalogue-crumb {
+  --sheet-paper: var(--paper-crumb)
 }
 
 .catalogue .archive-tabs a[aria-current=page] {
@@ -1091,7 +1092,7 @@ footer {
   background: #eee9ee
 }
 
-.fragment-entry {
+.crumb-entry {
   background: #e8eeeb
 }
 
@@ -1377,8 +1378,8 @@ footer {
   --format-paper: var(--paper-note)
 }
 
-.article-view-fragment {
-  --format-paper: var(--paper-fragment)
+.article-view-crumb {
+  --format-paper: var(--paper-crumb)
 }
 
 .article-view .reading {
@@ -1398,7 +1399,7 @@ footer {
   --article-paper: var(--paper-document)
 }
 
-.reading-fragment {
+.reading-crumb {
   --article-paper: var(--paper-document)
 }
 
@@ -1517,6 +1518,7 @@ footer {
 }
 
 .article-form {
+  font-family: var(--date-font);
   font-size: 0.6875rem;
   letter-spacing: normal;
   text-transform: uppercase
@@ -1549,7 +1551,7 @@ footer {
   color: var(--muted)
 }
 
-.reading-fragment .article-form {
+.reading-crumb .article-form {
   color: var(--muted)
 }
 
@@ -1609,8 +1611,8 @@ footer {
   color: var(--hover-note)
 }
 
-.related-fragment b {
-  color: var(--hover-fragment)
+.related-crumb b {
+  color: var(--hover-crumb)
 }
 
 
@@ -1643,7 +1645,8 @@ footer {
 }
 
 .journal-tabs a {
-  text-align: center
+  text-align: center;
+  text-transform: uppercase
 }
 
 .catalogue-all .record-columns,
@@ -1656,10 +1659,10 @@ footer {
 }
 
 .record-form-cell {
+  align-self: baseline;
   justify-self: end;
-  padding-top: 4px;
   color: var(--muted);
-  font: 400 0.6875rem/1.4 var(--ui-font);
+  font: 400 0.75rem/1.4 var(--date-font);
   letter-spacing: normal;
   text-transform: uppercase
 }
@@ -1672,8 +1675,8 @@ footer {
   color: var(--hover-note)
 }
 
-.record-fragment .record-form-cell {
-  color: var(--hover-fragment)
+.record-crumb .record-form-cell {
+  color: var(--hover-crumb)
 }
 
 .record-essay .record-preview {
@@ -1708,7 +1711,7 @@ footer {
   margin-top: 12px
 }
 
-.catalogue-all .record-fragment .record-preview {
+.catalogue-all .record-crumb .record-preview {
   margin-top: 0
 }
 
@@ -1744,7 +1747,7 @@ footer {
 }
 
 .page .record-form-cell {
-  font-size: 11px
+  font-size: 0.75rem
 }
 
 /* Concept links stay plain on interaction; only their color changes. */
@@ -1775,7 +1778,8 @@ footer {
   .catalogue-all .record-form-cell {
     grid-column: 2;
     grid-row: 1;
-    padding-top: 5px
+    padding-top: 0;
+    font-size: 0.6875rem
   }
 }
 
@@ -1997,6 +2001,12 @@ footer {
   border-top: 2px dotted var(--rule)
 }
 
+.record>time,
+.record-body,
+.record-form-cell {
+  align-self: baseline
+}
+
 .record:first-child {
   border-top: 1px solid color-mix(in srgb, var(--muted) 64%, var(--sheet))
 }
@@ -2048,12 +2058,12 @@ footer {
   text-decoration-color: #705870
 }
 
-.record-fragment .record-body h2 a:hover,
-.record-fragment .record-body h2 a:focus-visible,
-.related-fragment:hover>span,
-.related-fragment:focus-visible>span {
-  color: var(--hover-fragment);
-  text-decoration-color: var(--hover-fragment)
+.record-crumb .record-body h2 a:hover,
+.record-crumb .record-body h2 a:focus-visible,
+.related-crumb:hover>span,
+.related-crumb:focus-visible>span {
+  color: var(--hover-crumb);
+  text-decoration-color: var(--hover-crumb)
 }
 
 .record-expanded {
@@ -2256,7 +2266,7 @@ time,
   font-variant-numeric: proportional-nums
 }
 
-/* Current form paper stocks: essay / note / fragment. */
+/* Current form paper stocks: essay / note / crumb. */
 
 
 /* Detached journal tabs: the active paper color keeps the connection subtle. */
@@ -2337,9 +2347,9 @@ time,
   background: var(--paper-note)
 }
 
-.journal-tabs .tab-fragment,
-.journal-tabs .tab-fragment[aria-current=page] {
-  background: var(--paper-fragment)
+.journal-tabs .tab-crumb,
+.journal-tabs .tab-crumb[aria-current=page] {
+  background: var(--paper-crumb)
 }
 
 
@@ -2484,11 +2494,13 @@ time,
   font-family: var(--date-font)
 }
 
-/* Mono marks the archive controls and metadata. */
-.journal-tabs,
-.article-meta-line,
+/* Archive and entry metadata use the mono face. */
 .journal .catalogue-summary,
-.record-form-cell {
+.article-meta-line {
+  font-family: var(--date-font)
+}
+
+.journal-tabs {
   font-family: var(--date-font)
 }
 
@@ -2737,6 +2749,10 @@ time,
 @media(max-width:650px) {
   .article-content-sheet .prose p {
     margin-bottom: 1.15em
+  }
+
+  .record-preview p+p {
+    margin-top: 1.15em
   }
 
   .article-content-sheet .article-tags {

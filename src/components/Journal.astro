@@ -11,7 +11,7 @@ const yearCount = (year: string | undefined) => records.filter(entry => entry.da
 const countLabel = (count: number) => `${String(count).padStart(2, '0')} ${count === 1 ? 'record' : 'records'}`;
 ---
 <div class:list={['journal catalogue', `catalogue-${active}`, { 'catalogue-filtered': active !== 'all' }]}>
-  <h1 class="sr-only">{concept ? `${conceptName} — ` : ''}{active === 'all' ? 'All entries' : active === 'fragment' ? 'Lines' : `${active}s`}</h1>
+  <h1 class="sr-only">{concept ? `${conceptName} — ` : ''}{active === 'all' ? 'All entries' : active === 'crumb' ? 'Crumbs' : `${active}s`}</h1>
   <FormatTabs active={active} concept={concept} entries={entries} />
   {concept && <div class="concept-filter"><span>{conceptName}</span><a href={archiveHref(active)}>Clear ×</a></div>}
   <section class="catalogue-sheet record-sheet" aria-label="Entries">
