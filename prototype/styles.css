@@ -32,7 +32,7 @@
   --hover-note: light-dark(oklch(42% 0.1 95), oklch(80% 0.13 95));
   --hover-crumb: light-dark(oklch(42% 0.1 308), oklch(79% 0.12 308));
   --hover-poem: light-dark(#705870, #c0a8c2);
-  --selection-bg: light-dark(#285653, #456d6b);
+  --selection-bg: light-dark(#454542, #555550);
   --selection-ink: #faf9f5;
   --title-font: "ABC Areal", Arial, sans-serif;
   --body-font: "Crimson Text", Georgia, serif;
