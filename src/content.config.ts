@@ -46,4 +46,12 @@ const about = defineCollection({
   schema: z.object({ heading: z.string().min(1) }),
 });
 
-export const collections = { entries, now, tags, about };
+const nowPage = defineCollection({
+  loader: glob({ pattern: 'now-page.json', base: './src/content' }),
+  schema: z.object({
+    heading: z.string().min(1),
+    description: z.string().min(1),
+  }),
+});
+
+export const collections = { entries, now, tags, about, nowPage };

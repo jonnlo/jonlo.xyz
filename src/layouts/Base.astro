@@ -71,6 +71,15 @@ const configuredSite = Astro.site && !['localhost', '127.0.0.1'].includes(Astro.
       systemTheme.addEventListener?.('change', updateThemeButton);
       updateThemeButton();
 
+      // Keep internal navigation in this tab; open off-site web links separately.
+      document.querySelectorAll<HTMLAnchorElement>('a[href]').forEach((link) => {
+        const url = new URL(link.href, window.location.href);
+        if ((url.protocol === 'http:' || url.protocol === 'https:') && url.origin !== window.location.origin) {
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+        }
+      });
+
       // Preserve links copied from the HTML prototype, including combined filters.
       if (location.hash.startsWith('#/')) {
         const parts = location.hash.slice(2).split('/');

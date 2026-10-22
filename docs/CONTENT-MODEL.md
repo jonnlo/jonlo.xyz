@@ -86,6 +86,12 @@ The wrapper supports ordinary rich text and preserves the order of the writing.
 
 ## About and Now
 
+The `/now/` history page heading and introductory description are editable in
+the **Now page** Keystatic singleton. Its JSON data is stored at
+`src/content/now-page.json`; Astro validates the same required fields before
+rendering the page. The dated updates remain in the separate **Now updates**
+collection.
+
 About has a separate `heading` and one rich-text `body` stored in
 `src/content/about.mdoc`. Its singleton uses the full document editor with the default formatting tools,
 including headings, links, lists, quotes, tables, images and code. The original paragraphs were joined

@@ -3,13 +3,16 @@ import Base from '../layouts/Base.astro';
 import NowItems from '../components/NowItems.astro';
 import { publishedNowUpdates } from '../lib/now';
 import { articleDate } from '../lib/entries';
+import { getEntry } from 'astro:content';
 const updates = await publishedNowUpdates();
+const nowPage = await getEntry('nowPage', 'now-page');
+if (!nowPage) throw new Error('Now page content is missing.');
 ---
-<Base title="Now history" section="about">
+<Base title={nowPage.data.heading} section="about">
   <section class="support-page about-page">
-    <header class="support-heading"><h1>Now, over time.</h1></header>
+    <header class="support-heading"><h1>{nowPage.data.heading}</h1></header>
     <div class="support-document">
-      <div class="about-copy"><p>A record of what I’ve been reading, thinking about, working on, and listening to.</p></div>
+      <div class="about-copy"><p>{nowPage.data.description}</p></div>
       <p class="now-history-link now-back-link"><a class="nav-link" href="/about/#now"><span aria-hidden="true">← </span>Back to Now</a></p>
     </div>
     {updates.map(update => <section class="now-section now-history-record" id={`update-${update.id}`} aria-labelledby={`heading-${update.id}`}>

@@ -18,7 +18,8 @@ test('The installed Entries list can hide slug header and cells while retaining 
   assert.ok(output.includes("direction: props.collection === 'entries' ? 'descending' : 'ascending'"));
   assert.ok(output.includes("getItemPath(props.basePath, props.collection, key.toString().slice('key:'.length))"));
   assert.ok(output.includes("item.data?.title || item.data?.name"));
-  assert.ok(output.includes("column_0 === 'form' && val === 'crumb') val = 'Crumb'"));
+  assert.ok(output.includes("column_0 === 'form') val = ({ essay: 'Essay', note: 'Note', crumb: 'Crumb' })[val] || val"));
+  assert.ok(output.includes("column_0 === 'status') val = ({ draft: 'Draft', published: 'Published' })[val] || val"));
   const checked = spawnSync(process.execPath, ['--input-type=module', '--check'], { input: output, encoding: 'utf8' });
   assert.equal(checked.status, 0, checked.stderr);
 });

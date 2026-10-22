@@ -97,11 +97,29 @@ export default config({
               divider: false, code: false, codeBlock: false, strikethrough: false,
             },
           }),
-        }), { label: 'Activities', itemLabel: (props) => props.fields.label.value }),
+        }), {
+          label: 'Activities',
+          description: 'Descriptions are shown in the list so you can review all activities together. Select a row to edit it.',
+          itemLabel: (props) => {
+            const label = props.fields.label.value;
+            const document = props.fields.text.value.doc;
+            const description = document.textBetween(0, document.content.size, ' ').trim();
+            return description ? `${label}: ${description}` : label;
+          },
+        }),
       },
     }),
   },
   singletons: {
+    nowPage: singleton({
+      label: 'Now page',
+      path: 'src/content/now-page',
+      format: { data: 'json' },
+      schema: {
+        heading: fields.text({ label: 'Heading', validation: { isRequired: true } }),
+        description: fields.text({ label: 'Description', multiline: true, validation: { isRequired: true } }),
+      },
+    }),
     about: singleton({
       label: 'About',
       path: 'src/content/about',
