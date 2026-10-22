@@ -30,8 +30,8 @@
   --accent: light-dark(#456d6b, #8abfba);
   --paper-shadow: 0 1px 14px light-dark(rgb(36 37 34 / 5%), rgb(0 0 0 / 18%));
   --hover-essay: light-dark(oklch(42% 0.06 145), oklch(78% 0.08 130));
-  --hover-note: light-dark(oklch(42% 0.1 95), oklch(80% 0.08 95));
-  --hover-crumb: light-dark(oklch(42% 0.1 308), oklch(79% 0.08 308));
+  --hover-note: light-dark(oklch(42% 0.06 95), oklch(80% 0.08 95));
+  --hover-crumb: light-dark(oklch(42% 0.06 308), oklch(79% 0.08 308));
   --hover-poem: light-dark(#705870, #c0a8c2);
   --selection-bg: light-dark(#454542, #555550);
   --selection-ink: #faf9f5;
