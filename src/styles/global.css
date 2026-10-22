@@ -2268,6 +2268,22 @@ footer {
   color: color-mix(in oklch, var(--ink) 82%, var(--hover-poem))
 }
 
+.catalogue-filtered .record-essay .record-body h2 a:not(:hover):not(:focus-visible) {
+  color: color-mix(in oklch, var(--ink) 82%, var(--hover-essay))
+}
+
+.catalogue-filtered .record-note .record-body h2 a:not(:hover):not(:focus-visible) {
+  color: color-mix(in oklch, var(--ink) 82%, var(--hover-note))
+}
+
+.catalogue-filtered .record-crumb .record-body h2 a:not(:hover):not(:focus-visible) {
+  color: color-mix(in oklch, var(--ink) 82%, var(--hover-crumb))
+}
+
+.catalogue-filtered .record-poem .record-body h2 a:not(:hover):not(:focus-visible) {
+  color: color-mix(in oklch, var(--ink) 82%, var(--hover-poem))
+}
+
 .record-essay .record-preview {
   color: color-mix(in oklch, var(--ink) 82%, var(--hover-essay))
 }
