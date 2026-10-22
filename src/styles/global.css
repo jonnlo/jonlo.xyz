@@ -2593,6 +2593,10 @@ time,
   font-size: var(--meta-size)
 }
 
+.now-heading .archive-line time {
+  text-transform: uppercase
+}
+
 .now-section .status-log {
   padding-top: 0
 }
@@ -2615,7 +2619,7 @@ time,
   font-family: var(--date-font);
   font-weight: 400;
   font-size: var(--meta-size);
-  text-transform: none
+  text-transform: uppercase
 }
 
 .now-section .status-log dd {
@@ -2664,13 +2668,21 @@ time,
   }
 
   .now-section .status-log > div {
-    grid-template-columns: 1fr;
-    gap: 6px;
+    grid-template-columns: 72px minmax(0, 1fr);
+    align-items: first baseline;
+    gap: 12px;
     padding: 16px 0
   }
 
   .now-section .status-log dd {
     font-size: 1.125rem
+  }
+}
+
+@media(max-width:360px) {
+  .now-section .status-log > div {
+    grid-template-columns: 1fr;
+    gap: 6px
   }
 }
 
@@ -2719,8 +2731,9 @@ time,
 .now-history-record .now-heading .now-history-date {
   margin: 0;
   color: var(--muted);
-  font: var(--ui-weight) var(--meta-size)/1.4 var(--ui-font);
-  letter-spacing: normal
+  font: var(--ui-weight) var(--meta-size)/1.4 var(--date-font);
+  letter-spacing: normal;
+  text-transform: uppercase
 }
 
 .now-history-date a {
