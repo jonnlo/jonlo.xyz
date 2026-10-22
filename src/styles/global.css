@@ -28,7 +28,7 @@
   --muted: light-dark(#6f716b, #aaa99f);
   --rule: light-dark(#cbc9c0, #4a4942);
   --accent: light-dark(#456d6b, #8abfba);
-  --paper-shadow: 0 1px 14px light-dark(rgb(36 37 34 / 5%), rgb(0 0 0 / 18%));
+  --paper-shadow: 0 2px 20px light-dark(rgb(36 37 34 / 8%), rgb(0 0 0 / 22%));
   --hover-essay: light-dark(oklch(42% 0.1 145), oklch(80% 0.08 130));
   --hover-note: light-dark(oklch(42% 0.1 95), oklch(80% 0.08 95));
   --hover-crumb: light-dark(oklch(42% 0.1 308), oklch(80% 0.08 308));
@@ -2550,7 +2550,7 @@ time,
 .journal-tabs a[aria-current=page] {
   color: var(--ink);
   font-weight: 600;
-  box-shadow: var(--paper-shadow)
+  box-shadow: 0 -2px 12px light-dark(rgb(36 37 34 / 8%), rgb(0 0 0 / 22%))
 }
 
 /* Folder colors stay on the tabs in every archive state; only documents are neutral. */
