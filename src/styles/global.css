@@ -157,16 +157,18 @@ button:focus-visible,
 }
 
 .header nav .theme-toggle {
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 32px;
-  height: 32px;
+  height: auto;
   flex: 0 0 auto;
   margin: 0 0 0 -12px;
-  padding: 0;
+  padding: 10px 0;
   border: 0;
   background: transparent;
   color: var(--muted);
+  font: 400 .875rem/1.4 var(--ui-font);
   cursor: pointer;
   transition: color 160ms ease
 }
@@ -175,19 +177,10 @@ button:focus-visible,
   color: var(--ink)
 }
 
-.theme-icon {
-  width: 16px;
-  height: 16px;
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.5
+.header nav .theme-symbol {
+  font-size: .875rem;
+  line-height: inherit
 }
-
-.theme-icon-sun { display: none }
-.theme-toggle[data-next-theme="light"] .theme-icon-sun { display: block }
-.theme-toggle[data-next-theme="light"] .theme-icon-moon { display: none }
 
 .header nav span {
   font-size: 0.6875rem
