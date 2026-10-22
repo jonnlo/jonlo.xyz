@@ -5,3 +5,5 @@
 .swatch-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.swatch-pair span{display:block;margin-bottom:4px;color:#62645e;font-size:11px}
 
 .original-value{display:block;font:11px/1.5 monospace;overflow-wrap:anywhere;margin-bottom:7px}
+
+.mode-picker{display:flex;gap:6px;margin:0 0 16px}.mode-picker button[aria-pressed=true]{background:#456d6b;color:#fff;border-color:#456d6b}

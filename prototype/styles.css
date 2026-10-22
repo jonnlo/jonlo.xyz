@@ -15,21 +15,25 @@
 }
 
 :root {
-  --canvas: oklch(93% 0 197.1);
-  --sheet: oklch(97% 0.0082 91.5);
-  --paper-all: oklch(95.5% 0.0105 95.8);
-  --paper-document: oklch(97% 0.004 90);
-  --paper-essay: oklch(91% 0.028 123.7);
-  --paper-note: oklch(91% 0.0454 90.4);
-  --paper-crumb: oklch(91% 0.025 52.7);
-  --paper-poem: oklch(91.01% 0.0103 325.7);
-  --ink: #242522;
-  --muted: #6f716b;
-  --rule: #cbc9c0;
-  --accent: #456d6b;
-  --hover-essay: oklch(42% 0.1 123.7);
-  --hover-note: oklch(42% 0.1 95);
-  --hover-crumb: oklch(42% 0.1 35);
+  color-scheme: light dark;
+  --canvas: light-dark(oklch(93% 0 197.1), oklch(19% 0.012 90));
+  --sheet: light-dark(oklch(97% 0.0082 91.5), oklch(23% 0.012 90));
+  --paper-all: light-dark(oklch(95.5% 0.0105 95.8), oklch(26% 0.014 95));
+  --paper-document: light-dark(oklch(97% 0.004 90), oklch(22% 0.008 90));
+  --paper-essay: light-dark(oklch(89.5% 0.025 145), oklch(29% 0.028 135));
+  --paper-note: light-dark(oklch(91% 0.0454 90.4), oklch(29% 0.03 90));
+  --paper-crumb: light-dark(oklch(90.5% 0.025 308), oklch(29% 0.02 308));
+  --paper-poem: light-dark(oklch(91.01% 0.0103 325.7), oklch(29% 0.015 325));
+  --ink: light-dark(#242522, #eeece5);
+  --muted: light-dark(#6f716b, #aaa99f);
+  --rule: light-dark(#cbc9c0, #4a4942);
+  --accent: light-dark(#456d6b, #8abfba);
+  --hover-essay: light-dark(oklch(42% 0.06 145), oklch(78% 0.12 130));
+  --hover-note: light-dark(oklch(42% 0.1 95), oklch(80% 0.13 95));
+  --hover-crumb: light-dark(oklch(42% 0.1 308), oklch(79% 0.12 308));
+  --hover-poem: light-dark(#705870, #c0a8c2);
+  --selection-bg: light-dark(#285653, #456d6b);
+  --selection-ink: #faf9f5;
   --title-font: "ABC Areal", Arial, sans-serif;
   --body-font: "Crimson Text", Georgia, serif;
   --ui-font: "ABC Areal", Arial, sans-serif;
@@ -38,8 +42,12 @@
   --page-title-size: 2rem;
   --ui-weight: 400;
   --meta-size: .8125rem;
-  --page-padding: 48px
+  --page-padding: 48px;
+  --page-max-width: 1080px
 }
+
+:root[data-theme="light"] { color-scheme: light }
+:root[data-theme="dark"] { color-scheme: dark }
 
 *,
 *::before,
@@ -97,13 +105,13 @@ button:focus-visible,
 }
 
 ::selection {
-  background: #285653;
-  color: #faf9f5
+  background: var(--selection-bg);
+  color: var(--selection-ink)
 }
 
 .page {
   width: 100%;
-  max-width: 1080px;
+  max-width: var(--page-max-width);
   margin: 0 auto;
   padding: 0 var(--page-padding)
 }
@@ -132,9 +140,11 @@ button:focus-visible,
   line-height: 1.4
 }
 
-.header nav a {
+.header nav a,
+.nav-link {
   padding: 10px 0;
-  color: var(--muted)
+  color: var(--muted);
+  font: 400 .875rem/1.4 var(--ui-font)
 }
 
 .header nav a:hover,
@@ -145,6 +155,39 @@ button:focus-visible,
 .header nav a[aria-current=page] {
   text-decoration-color: currentColor
 }
+
+.header nav .theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  margin: 0 0 0 -12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 160ms ease
+}
+
+.header nav .theme-toggle:hover {
+  color: var(--ink)
+}
+
+.theme-icon {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.5
+}
+
+.theme-icon-sun { display: none }
+.theme-toggle[data-next-theme="light"] .theme-icon-sun { display: block }
+.theme-toggle[data-next-theme="light"] .theme-icon-moon { display: none }
 
 .header nav span {
   font-size: 0.6875rem
@@ -544,7 +587,7 @@ h3 {
 .prose {
   grid-column: 3/11;
   max-width: 65ch;
-  font: 400 1.3125rem/1.65 var(--body-font)
+  font: 400 1.3125rem/1.5 var(--body-font)
 }
 
 .prose p {
@@ -566,9 +609,21 @@ h3 {
   font-style: italic
 }
 
-.prose a {
-  color: var(--accent);
-  text-decoration-color: currentColor
+.prose a,
+.about-rich-text a {
+  color: inherit;
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .3em
+}
+
+.prose a:hover,
+.prose a:focus-visible,
+.about-rich-text a:hover,
+.about-rich-text a:focus-visible {
+  color: var(--muted)
 }
 
 .margin-note {
@@ -582,7 +637,7 @@ h3 {
 .margin-note span {
   display: block;
   margin-bottom: 9px;
-  color: var(--accent)
+  color: inherit
 }
 
 .margin-note a {
@@ -710,6 +765,10 @@ footer span:first-child {
 
   .header nav {
     gap: 8px 16px
+  }
+
+  .header nav a {
+    font-size: .85rem
   }
 
   .journal-intro {
@@ -1062,19 +1121,19 @@ footer {
 }
 
 .essay-entry {
-  background: #f4f2eb
+  background: var(--paper-essay)
 }
 
 .note-entry {
-  background: #eee9da
+  background: var(--paper-note)
 }
 
 .poem-entry {
-  background: #eee9ee
+  background: var(--paper-poem)
 }
 
 .crumb-entry {
-  background: #e8eeeb
+  background: var(--paper-crumb)
 }
 
 .poem-entry .entry-content>p:not(.entry-kind) {
@@ -1134,12 +1193,14 @@ footer {
   text-decoration-line: none
 }
 
-.header nav a {
+.header nav a,
+.nav-link {
   text-decoration-line: none
 }
 
 .header nav a:hover,
 .header nav a[aria-current=page],
+.nav-link:hover,
 .record-read:hover .record-read-label,
 .record-read:focus-visible .record-read-label {
   color: var(--ink);
@@ -1367,7 +1428,7 @@ footer {
 
 .article-view .article-content-sheet {
   margin-top: 0;
-  border-top: 9px solid var(--format-paper)
+  border-top: 7px solid var(--format-paper)
 }
 
 .reading-essay {
@@ -1534,6 +1595,11 @@ footer {
   color: var(--muted)
 }
 
+.reading .article-form:hover,
+.reading .article-form:focus-visible {
+  color: var(--ink)
+}
+
 .related h2 {
   margin-bottom: 0;
   padding-bottom: 9px;
@@ -1606,7 +1672,7 @@ footer {
   .article-content-sheet {
     grid-column: 1/-1;
     display: block;
-    padding: 24px 20px
+    padding: 24px 16px
   }
 
   .article-content-sheet .article-heading {
@@ -1654,7 +1720,7 @@ footer {
 }
 
 .record-essay .record-preview {
-  color: color-mix(in srgb, var(--muted) 90%, var(--ink))
+  color: color-mix(in srgb, var(--muted) 85%, var(--paper-all))
 }
 
 .record-read {
@@ -1692,7 +1758,7 @@ footer {
 .record-date-link {
   display: inline-flex;
   align-items: baseline;
-  color: inherit;
+  color: var(--muted);
   text-decoration: none
 }
 
@@ -1767,14 +1833,15 @@ footer {
 
   .journal-tabs a {
     min-width: 0;
-    padding-right: 5px;
-    padding-left: 5px;
+    padding-right: 12px;
+    padding-left: 12px;
     font-size: 0.6875rem;
     white-space: nowrap
   }
 
   .journal-tabs sup {
-    margin-left: 4px
+    margin-left: 4px;
+    font-size: .625rem
   }
 }
 
@@ -1866,7 +1933,7 @@ footer {
   padding-top: 18px
 }
 
-.status-log div {
+.status-log > div {
   display: grid;
   grid-template-columns: 180px minmax(0, 650px);
   gap: 30px;
@@ -1902,7 +1969,7 @@ footer {
     font-size: 1.25rem
   }
 
-  .status-log div {
+  .status-log > div {
     grid-template-columns: 1fr;
     gap: 8px;
     padding: 20px 0
@@ -1951,13 +2018,13 @@ footer {
   justify-content: space-between;
   gap: 20px;
   padding: 24px 0 9px;
-  border-bottom: 1px solid var(--ink);
+  border-bottom: 1px solid color-mix(in srgb, var(--muted) 64%, var(--sheet));
   font: var(--ui-weight) var(--meta-size)/1.3 var(--date-font);
   text-transform: uppercase
 }
 
 .journal .year-caption {
-  color: var(--ink);
+  color: var(--muted);
   font: var(--ui-weight) var(--meta-size)/1.3 var(--date-font);
   letter-spacing: normal
 }
@@ -1981,7 +2048,7 @@ footer {
 }
 
 .record:first-child {
-  border-top: 2px solid var(--ink)
+  border-top: 1px solid color-mix(in srgb, var(--muted) 64%, var(--sheet))
 }
 
 .record>time {
@@ -2027,8 +2094,8 @@ footer {
 
 .record-poem .record-body h2 a:hover,
 .record-poem .record-body h2 a:focus-visible {
-  color: #705870;
-  text-decoration-color: #705870
+  color: var(--hover-poem);
+  text-decoration-color: var(--hover-poem)
 }
 
 .record-crumb .record-body h2 a:hover,
@@ -2044,7 +2111,7 @@ footer {
 }
 
 .record-compact {
-  padding: 17px 0 18px
+  padding: 20px 0 18px
 }
 
 .record-filing {
@@ -2091,7 +2158,7 @@ footer {
   }
 
   .record-compact {
-    padding: 15px 0 16px
+    padding: 16px 0 16px
   }
 
   .record-body h2 {
@@ -2100,11 +2167,8 @@ footer {
 
   .record-preview {
     margin-top: 15px;
-    font-size: 1.125rem
-  }
-
-  .record-preview p+p {
-    margin-top: 1.15em
+    font-size: 1.0625rem;
+    line-height: 1.5
   }
 
   .record-filing {
@@ -2130,7 +2194,7 @@ footer {
 }
 
 .record-concepts a {
-  color: color-mix(in srgb, var(--muted) 78%, var(--sheet));
+  color: var(--muted);
   text-decoration-color: transparent
 }
 
@@ -2282,7 +2346,7 @@ time,
 
   .journal-tabs a {
     min-width: 0;
-    padding: 11px 8px 10px
+    padding: 11px 12px 10px
   }
 
   .journal-tabs a[aria-current=page] {
@@ -2387,7 +2451,7 @@ time,
   padding-top: 0
 }
 
-.now-section .status-log div {
+.now-section .status-log > div {
   grid-template-columns: 118px minmax(0, 1fr);
   align-items: first baseline;
   gap: 20px;
@@ -2395,7 +2459,7 @@ time,
   border-top: 2px dotted var(--rule)
 }
 
-.now-section .status-log div:first-child {
+.now-section .status-log > div:first-child {
   padding-top: 0;
   border-top: 0
 }
@@ -2413,6 +2477,34 @@ time,
   line-height: 1.6
 }
 
+.now-rich-text p + p,
+.now-rich-text ul,
+.now-rich-text ol,
+.about-rich-text p + p,
+.about-rich-text ul,
+.about-rich-text ol {
+  margin-top: .75em
+}
+
+.now-rich-text ul,
+.now-rich-text ol,
+.about-rich-text ul,
+.about-rich-text ol {
+  margin-bottom: 0;
+  padding-left: 1.3em
+}
+
+.now-rich-text li + li,
+.about-rich-text li + li {
+  margin-top: .25em
+}
+
+.now-rich-text a {
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: var(--muted)
+}
+
 @media(max-width:650px) {
   .now-section {
     grid-template-columns: 1fr;
@@ -2425,7 +2517,7 @@ time,
     font-size: 1.25rem
   }
 
-  .now-section .status-log div {
+  .now-section .status-log > div {
     grid-template-columns: 1fr;
     gap: 6px;
     padding: 16px 0
@@ -2454,4 +2546,263 @@ time,
 
 .article-view .journal-tabs a[aria-current=page]::after {
   background: var(--format-paper)
+}
+
+/* Semantic headings remain available without changing the prototype layout. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0
+}
+
+.empty-state {
+  padding: 24px 0;
+  font: 400 1.2rem/1.6 var(--body-font)
+}
+
+.now-history-link .nav-link {
+  display: inline-block
+}
+
+.now-history-record .now-heading .now-history-date {
+  margin: 0;
+  color: var(--muted);
+  font: var(--ui-weight) var(--meta-size)/1.4 var(--ui-font);
+  letter-spacing: normal
+}
+
+.now-history-date a {
+  text-decoration-line: none
+}
+
+.now-history-date a:hover,
+.now-history-date a:focus-visible {
+  color: var(--ink);
+  text-decoration-line: underline;
+  text-decoration-style: dotted
+}
+
+.now-back-link {
+  margin-top: 14px
+}
+
+/* Markdoc keeps an annotation beside the passage it belongs to. */
+.article-content-sheet .prose {
+  position: relative
+}
+
+.article-content-sheet .prose .margin-note {
+  margin: 24px 0;
+  font: 400 13px/1.8 var(--ui-font)
+}
+
+.article-content-sheet .prose .margin-note p {
+  margin-bottom: 0
+}
+
+@media(min-width:1460px) {
+  .article-content-sheet .prose .margin-note {
+    position: absolute;
+    top: 0;
+    /* The prose and sheet share a centre. Place the note beyond the sheet's
+       outer edge, rather than a fixed distance beyond the text column. */
+    left: calc(50% + min(50vw, var(--page-max-width) / 2) - var(--page-padding) + 24px);
+    margin: 0;
+    width: 180px
+  }
+}
+
+/* Archive year and count headings share a type size. */
+.page .journal .catalogue-summary,
+.page .journal .record-year,
+.page .journal .year-caption {
+  font-size: .75rem
+}
+
+@media(max-width:650px) {
+  .page .journal .catalogue-summary,
+  .page .journal .record-year,
+  .page .journal .year-caption {
+    font-size: .6875rem
+  }
+}
+
+@media(max-width:650px) {
+  .page .record > time {
+    font-size: .6875rem
+  }
+}
+
+@media(max-width:650px) {
+  .record {
+    border-top-width: 1.5px
+  }
+}
+
+.article-content-sheet .article-heading h1,
+.article-content-sheet .prose h1 {
+  font-size: 1.875rem
+}
+
+.article-content-sheet .prose h2 {
+  font-size: 1.375rem
+}
+
+@media(max-width:650px) {
+  .article-content-sheet .article-heading h1,
+  .article-content-sheet .prose h1 {
+    font-size: 1.6rem
+  }
+
+  .article-content-sheet .prose h2 {
+    font-size: 1.3rem
+  }
+}
+
+
+/* Reading typography refinements. */
+.article-content-sheet .prose h1,
+.article-content-sheet .prose h2,
+.article-content-sheet .prose h3,
+.article-content-sheet .prose h4,
+.article-content-sheet .prose h5,
+.article-content-sheet .prose h6 {
+  font-family: var(--title-font);
+  font-weight: var(--title-weight);
+  line-height: 1.25
+}
+
+.article-content-sheet .prose h1 { font-size: 1.875rem }
+.article-content-sheet .prose h2 { font-size: 1.375rem }
+.article-content-sheet .prose h3 { font-size: 1.25rem }
+.article-content-sheet .prose h4 { font-size: 1.125rem }
+.article-content-sheet .prose h5 { font-size: 1.0625rem }
+.article-content-sheet .prose h6 { font-size: 1rem }
+
+.article-content-sheet .prose :not(pre) > code {
+  font-size: .72em
+}
+
+.article-content-sheet .prose blockquote {
+  border-left-color: color-mix(in srgb, var(--muted) 65%, var(--paper-document));
+  color: var(--muted)
+}
+
+.article-content-sheet .prose .small-text {
+  color: var(--muted);
+  font-size: .82em
+}
+
+@media(max-width:650px) {
+  .article-content-sheet .prose h1 { font-size: 1.6rem }
+  .article-content-sheet .prose h2 { font-size: 1.3rem }
+  .article-content-sheet .prose h3 { font-size: 1.2rem }
+  .article-content-sheet .prose h4 { font-size: 1.1rem }
+  .article-content-sheet .prose h5 { font-size: 1.05rem }
+  .article-content-sheet .prose h6 { font-size: 1rem }
+}
+
+.article-content-sheet .prose strong,
+.article-content-sheet .prose b {
+  font-weight: 600
+}
+
+.article-content-sheet .prose pre {
+  font-size: .72em;
+  line-height: 1.5;
+  overflow-x: auto
+}
+
+.article-content-sheet .prose pre code {
+  font-size: inherit
+}
+
+.article-content-sheet .prose pre {
+  padding: 1rem 1.125rem;
+  border: 1px solid color-mix(in srgb, var(--muted) 22%, var(--paper-document));
+  background: color-mix(in srgb, var(--muted) 8%, var(--paper-document))
+}
+
+.article-content-sheet .prose table {
+  width: 100%;
+  margin: 1.5em 0;
+  border-collapse: collapse;
+  font-size: .9em
+}
+
+.article-content-sheet .prose th,
+.article-content-sheet .prose td {
+  padding: .45em .6em;
+  border: 1px solid color-mix(in srgb, var(--muted) 35%, var(--paper-document));
+  text-align: left;
+  vertical-align: top
+}
+
+.article-content-sheet .prose th {
+  background: color-mix(in srgb, var(--muted) 8%, var(--paper-document));
+  font-weight: 600
+}
+
+.article-content-sheet .prose table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain
+}
+
+.article-content-sheet .prose th,
+.article-content-sheet .prose td {
+  min-width: 8rem
+}
+
+.article-content-sheet .prose ul li::marker {
+  font-size: .7em
+}
+.article-content-sheet .prose s,
+.article-content-sheet .prose del {
+  text-decoration-thickness: .06em
+}
+@media(max-width:650px) {
+  .article-content-sheet .prose {
+    line-height: 1.5
+  }
+}
+@media(max-width:650px) {
+  .article-content-sheet .prose {
+    font-size: 1.125rem
+  }
+}
+@media(max-width:650px) {
+  .article-content-sheet .prose,
+  .record-preview {
+    font-size: 1.1875rem;
+    line-height: 1.35
+  }
+}
+@media(max-width:650px) {
+  .article-content-sheet .prose p {
+    margin-bottom: 1.15em
+  }
+
+  .record-preview p+p {
+    margin-top: 1.15em
+  }
+
+  .article-content-sheet .article-tags {
+    margin-top: 1.5rem
+  }
+}
+
+
+@media(max-width:650px) {
+  .page .journal-tabs sup {
+    font-size: .625rem
+  }
 }

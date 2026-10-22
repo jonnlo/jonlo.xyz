@@ -12,6 +12,35 @@ const thoughts = [
  {slug:'what-a-map-leaves-out',title:'What a map leaves out',date:'2025-11-02',form:'essay',concepts:['design','systems'],body:['Every useful map leaves something out. This is not a failure of the map. It is how the map becomes useful.','The difficulty begins when we forget the omission was a choice.','I want to remember to ask, of any system that makes the world legible: legible to whom, and for what journey?']}
 ];
 const main=document.querySelector('main');
+const themeButton=document.querySelector('.theme-toggle');
+const systemTheme=window.matchMedia('(prefers-color-scheme: dark)');
+const updateThemeButton=()=>{
+ if(!themeButton)return;
+ const explicitTheme=document.documentElement.dataset.theme;
+ const currentTheme=explicitTheme||(systemTheme.matches?'dark':'light');
+ const nextTheme=currentTheme==='dark'?'light':'dark';
+ const useSystem=Boolean(explicitTheme&&nextTheme===(systemTheme.matches?'dark':'light'));
+ const label=useSystem?`Use system appearance (${nextTheme})`:`Switch to ${nextTheme} appearance`;
+ themeButton.dataset.nextTheme=nextTheme;
+ themeButton.setAttribute('aria-label',label);
+ themeButton.title=label;
+};
+themeButton?.addEventListener('click',()=>{
+ const explicitTheme=document.documentElement.dataset.theme;
+ const currentTheme=explicitTheme||(systemTheme.matches?'dark':'light');
+ const nextTheme=currentTheme==='dark'?'light':'dark';
+ const systemValue=systemTheme.matches?'dark':'light';
+ if(explicitTheme&&nextTheme===systemValue){
+  delete document.documentElement.dataset.theme;
+  try{localStorage.removeItem('journal-theme')}catch{}
+ }else{
+  document.documentElement.dataset.theme=nextTheme;
+  try{localStorage.setItem('journal-theme',nextTheme)}catch{}
+ }
+ updateThemeButton();
+});
+systemTheme.addEventListener?.('change',updateThemeButton);
+updateThemeButton();
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const formLabel=form=>form==='crumb'?'crumb':form;
 const dateLabel=d=>d.replaceAll('-',' · ');

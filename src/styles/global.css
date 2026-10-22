@@ -15,21 +15,25 @@
 }
 
 :root {
-  --canvas: oklch(93% 0 197.1);
-  --sheet: oklch(97% 0.0082 91.5);
-  --paper-all: oklch(95.5% 0.0105 95.8);
-  --paper-document: oklch(97% 0.004 90);
-  --paper-essay: oklch(89.5% 0.028 123.7);
-  --paper-note: oklch(91% 0.0454 90.4);
-  --paper-crumb: oklch(91% 0.025 52.7);
-  --paper-poem: oklch(91.01% 0.0103 325.7);
-  --ink: #242522;
-  --muted: #6f716b;
-  --rule: #cbc9c0;
-  --accent: #456d6b;
-  --hover-essay: oklch(42% 0.1 123.7);
-  --hover-note: oklch(42% 0.1 95);
-  --hover-crumb: oklch(42% 0.1 35);
+  color-scheme: light dark;
+  --canvas: light-dark(oklch(93% 0 197.1), oklch(19% 0.012 90));
+  --sheet: light-dark(oklch(97% 0.0082 91.5), oklch(23% 0.012 90));
+  --paper-all: light-dark(oklch(95.5% 0.0105 95.8), oklch(26% 0.014 95));
+  --paper-document: light-dark(oklch(97% 0.004 90), oklch(22% 0.008 90));
+  --paper-essay: light-dark(oklch(89.5% 0.025 145), oklch(29% 0.028 135));
+  --paper-note: light-dark(oklch(91% 0.0454 90.4), oklch(29% 0.03 90));
+  --paper-crumb: light-dark(oklch(90.5% 0.025 308), oklch(29% 0.02 308));
+  --paper-poem: light-dark(oklch(91.01% 0.0103 325.7), oklch(29% 0.015 325));
+  --ink: light-dark(#242522, #eeece5);
+  --muted: light-dark(#6f716b, #aaa99f);
+  --rule: light-dark(#cbc9c0, #4a4942);
+  --accent: light-dark(#456d6b, #8abfba);
+  --hover-essay: light-dark(oklch(42% 0.06 145), oklch(78% 0.12 130));
+  --hover-note: light-dark(oklch(42% 0.1 95), oklch(80% 0.13 95));
+  --hover-crumb: light-dark(oklch(42% 0.1 308), oklch(79% 0.12 308));
+  --hover-poem: light-dark(#705870, #c0a8c2);
+  --selection-bg: light-dark(#285653, #456d6b);
+  --selection-ink: #faf9f5;
   --title-font: "ABC Areal", Arial, sans-serif;
   --body-font: "Crimson Text", Georgia, serif;
   --ui-font: "ABC Areal", Arial, sans-serif;
@@ -41,6 +45,9 @@
   --page-padding: 48px;
   --page-max-width: 1080px
 }
+
+:root[data-theme="light"] { color-scheme: light }
+:root[data-theme="dark"] { color-scheme: dark }
 
 *,
 *::before,
@@ -98,8 +105,8 @@ button:focus-visible,
 }
 
 ::selection {
-  background: #285653;
-  color: #faf9f5
+  background: var(--selection-bg);
+  color: var(--selection-ink)
 }
 
 .page {
@@ -148,6 +155,39 @@ button:focus-visible,
 .header nav a[aria-current=page] {
   text-decoration-color: currentColor
 }
+
+.header nav .theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  margin: 0 0 0 -12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 160ms ease
+}
+
+.header nav .theme-toggle:hover {
+  color: var(--ink)
+}
+
+.theme-icon {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.5
+}
+
+.theme-icon-sun { display: none }
+.theme-toggle[data-next-theme="light"] .theme-icon-sun { display: block }
+.theme-toggle[data-next-theme="light"] .theme-icon-moon { display: none }
 
 .header nav span {
   font-size: 0.6875rem
@@ -1081,19 +1121,19 @@ footer {
 }
 
 .essay-entry {
-  background: #f4f2eb
+  background: var(--paper-essay)
 }
 
 .note-entry {
-  background: #eee9da
+  background: var(--paper-note)
 }
 
 .poem-entry {
-  background: #eee9ee
+  background: var(--paper-poem)
 }
 
 .crumb-entry {
-  background: #e8eeeb
+  background: var(--paper-crumb)
 }
 
 .poem-entry .entry-content>p:not(.entry-kind) {
@@ -2054,8 +2094,8 @@ footer {
 
 .record-poem .record-body h2 a:hover,
 .record-poem .record-body h2 a:focus-visible {
-  color: #705870;
-  text-decoration-color: #705870
+  color: var(--hover-poem);
+  text-decoration-color: var(--hover-poem)
 }
 
 .record-crumb .record-body h2 a:hover,

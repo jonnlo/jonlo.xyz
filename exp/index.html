@@ -8,10 +8,11 @@
 <header><div><p>JON’S LOG / EXPERIMENT</p><h1>Paper & ink</h1></div><p>Tune the real site tokens. Changes stay in this browser.</p></header>
 <main>
 <aside>
-<p>Gray background, tab papers, darker type labels in All, and the paper shared by articles and About. Preview navigation remains interactive.</p>
+<p>Tune the actual light and dark theme colors. Choose a palette to edit and preview; the embedded site updates as you adjust values.</p>
+<div class="mode-picker" role="group" aria-label="Color palette"><button type="button" data-mode="dark" aria-pressed="true">Dark tokens</button><button type="button" data-mode="light" aria-pressed="false">Light tokens</button></div>
 <div id="controls"></div>
 <div class="actions"><button id="reset" type="button">Reset all</button><button id="copy" type="button">Copy CSS</button><button id="download" type="button">Download CSS</button></div>
-<label for="css">Selected values · append to prototype/styles.css</label><textarea id="css" readonly spellcheck="false" rows="13"></textarea>
+<label for="css">Selected palette · append to prototype/styles.css</label><textarea id="css" readonly spellcheck="false" rows="13"></textarea>
 <p id="status" role="status" aria-live="polite"></p>
 </aside>
 <section class="preview" aria-label="Live site preview">
