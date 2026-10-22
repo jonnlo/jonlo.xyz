@@ -1,23 +1,23 @@
 {
   "name": "2026-09-10",
   "date": "2026-09-10",
-  "status": "published",
+  "status": "draft",
   "items": [
     {
       "label": "Reading",
-      "text": "Returning to the notes in the margins of books I thought I had finished."
+      "text": "Returning to the notes in the margins of books I thought I had finished.\n"
     },
     {
       "label": "Thinking",
-      "text": "The difference between paying attention and trying to be attentive."
+      "text": "The difference between paying attention and trying to be attentive.\n"
     },
     {
       "label": "Working",
-      "text": "A home for these thoughts. Finding a structure that leaves room for things to change."
+      "text": "A home for these thoughts. Finding a structure that leaves room for things to change.\n"
     },
     {
       "label": "Listening",
-      "text": "The city with the window open."
+      "text": "The city with the window open.\n"
     }
   ]
 }
