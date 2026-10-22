@@ -29,9 +29,9 @@
   --rule: light-dark(#cbc9c0, #4a4942);
   --accent: light-dark(#456d6b, #8abfba);
   --paper-shadow: 0 1px 14px light-dark(rgb(36 37 34 / 5%), rgb(0 0 0 / 18%));
-  --hover-essay: light-dark(oklch(42% 0.06 145), oklch(78% 0.08 130));
-  --hover-note: light-dark(oklch(42% 0.06 95), oklch(80% 0.08 95));
-  --hover-crumb: light-dark(oklch(42% 0.06 308), oklch(79% 0.08 308));
+  --hover-essay: light-dark(oklch(42% 0.1 145), oklch(80% 0.08 130));
+  --hover-note: light-dark(oklch(42% 0.1 95), oklch(80% 0.08 95));
+  --hover-crumb: light-dark(oklch(42% 0.1 308), oklch(80% 0.08 308));
   --hover-poem: light-dark(#705870, #c0a8c2);
   --selection-bg: light-dark(#454542, #555550);
   --selection-ink: #faf9f5;
@@ -1117,8 +1117,8 @@ footer {
 
 .catalogue-crumb {
   --sheet-paper: var(--paper-crumb);
-  --archive-tone: color-mix(in oklch, var(--muted) 62%, var(--hover-crumb));
-  --archive-rule: color-mix(in oklch, var(--rule) 70%, var(--hover-crumb))
+  --archive-tone: color-mix(in oklab, var(--muted) 62%, var(--hover-crumb));
+  --archive-rule: color-mix(in oklab, var(--rule) 70%, var(--hover-crumb))
 }
 
 .catalogue .archive-tabs a[aria-current=page] {
@@ -2104,8 +2104,8 @@ footer {
 
 .record-crumb {
   --record-rule: color-mix(
-    in oklch,
-    color-mix(in oklch, var(--rule) 70%, var(--hover-crumb)) 55%,
+    in oklab,
+    color-mix(in oklab, var(--rule) 70%, var(--hover-crumb)) 55%,
     var(--sheet-paper)
   )
 }
@@ -2120,6 +2120,10 @@ footer {
 
 .catalogue-all .record {
   --record-rule: color-mix(in oklch, var(--archive-rule) 55%, var(--paper-all))
+}
+
+.catalogue-all .record-crumb {
+  --record-rule: color-mix(in oklab, var(--archive-rule) 55%, var(--paper-all))
 }
 
 .record>time,
@@ -2234,7 +2238,7 @@ footer {
 
 .record-crumb > time .record-date-link,
 .record-crumb .record-concepts a {
-  color: color-mix(in oklch, var(--muted) 62%, var(--hover-crumb))
+  color: color-mix(in oklab, var(--muted) 62%, var(--hover-crumb))
 }
 
 .record-poem > time .record-date-link,
@@ -2266,7 +2270,7 @@ footer {
 
 .catalogue-all .record-crumb .record-body h2 a:not(:hover):not(:focus-visible),
 .catalogue-all .record-crumb .record-read:not(:hover):not(:focus-visible) {
-  color: color-mix(in oklch, var(--ink) 82%, var(--hover-crumb))
+  color: color-mix(in oklab, var(--ink) 82%, var(--hover-crumb))
 }
 
 .catalogue-all .record-poem .record-body h2 a:not(:hover):not(:focus-visible),
@@ -2283,7 +2287,7 @@ footer {
 }
 
 .catalogue-filtered .record-crumb .record-body h2 a:not(:hover):not(:focus-visible) {
-  color: color-mix(in oklch, var(--ink) 82%, var(--hover-crumb))
+  color: color-mix(in oklab, var(--ink) 82%, var(--hover-crumb))
 }
 
 .catalogue-filtered .record-poem .record-body h2 a:not(:hover):not(:focus-visible) {
@@ -2299,7 +2303,7 @@ footer {
 }
 
 .record-crumb .record-preview {
-  color: color-mix(in oklch, var(--ink) 82%, var(--hover-crumb))
+  color: color-mix(in oklab, var(--ink) 82%, var(--hover-crumb))
 }
 
 .record-poem .record-preview {
