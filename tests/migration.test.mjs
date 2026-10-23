@@ -18,7 +18,7 @@ const formats = ['all', 'essay', 'note', 'crumb'];
 const concepts = [...new Set(publishedEntries.flatMap(entry => entry.concepts))];
 const text = html => html.replace(/<[^>]*>/g, ' ').replace(/&#(?:x([\da-f]+)|(\d+));/gi, (_, hex, decimal) => String.fromCodePoint(parseInt(hex || decimal, hex ? 16 : 10))).replace(/&(amp|lt|gt|quot|apos|nbsp);/g, (_, entity) => ({ amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ' })[entity]).replace(/\s+/g, ' ').trim();
 const htmlFor = path => readFileSync(resolve(output, `.${decodeURIComponent(path)}`, 'index.html'), 'utf8');
-const routeFor = (form, concept = '') => `${form === 'all' ? '/' : `/journal/${form}/`}${concept ? `concept/${encodeURIComponent(concept)}/` : ''}`;
+const routeFor = (form, concept = '') => `${form === 'all' ? '/' : `/formats/${form}/`}${concept ? `tags/${encodeURIComponent(concept)}/` : ''}`;
 const walk = path => readdirSync(path).flatMap(name => statSync(resolve(path, name)).isDirectory() ? walk(resolve(path, name)) : [resolve(path, name)]);
 const byPublicationOrder = (a, b) => {
   const dateOrder = b.date.localeCompare(a.date);
@@ -31,13 +31,13 @@ const fileFor = pathname => {
   const candidate = resolve(output, `.${decoded}`);
   return existsSync(candidate) && statSync(candidate).isDirectory() ? resolve(candidate, 'index.html') : candidate;
 };
-const recordSlugs = html => [...html.matchAll(/<li\b[^>]*class="[^"]*\brecord\s[^\"]*"[\s\S]*?<a\b[^>]*href="\/thought\/([^/]+)\/"/g)].map(match => decodeURIComponent(match[1]));
+const recordSlugs = html => [...html.matchAll(/<li\b[^>]*class="[^"]*\brecord\s[^\"]*"[\s\S]*?<a\b[^>]*href="\/entries\/([^/]+)\/"/g)].map(match => decodeURIComponent(match[1]));
 
 test('published entries have public routes, titles, and their recorded dates', () => {
-  const articlePaths = readdirSync(resolve(output, 'thought')).sort();
+  const articlePaths = readdirSync(resolve(output, 'entries')).sort();
   assert.deepEqual(articlePaths, publishedEntries.map(entry => entry.slug).sort());
   for (const entry of publishedEntries) {
-    const html = htmlFor(`/thought/${entry.slug}/`);
+    const html = htmlFor(`/entries/${entry.slug}/`);
     const article = html.match(/<article\b[\s\S]*?<\/article>/)?.[0];
     assert.ok(article, `${entry.slug}: reading article exists`);
     assert.ok(text(html).includes(entry.title || entry.name), `${entry.slug}: title is rendered`);
@@ -46,7 +46,7 @@ test('published entries have public routes, titles, and their recorded dates', (
   }
 });
 
-test('format and concept archives match the published entries in chronological order', () => {
+test('format and tag archives match the published entries in chronological order', () => {
   for (const form of formats) {
     for (const concept of ['', ...concepts]) {
       const route = routeFor(form, concept);
@@ -88,10 +88,10 @@ test('every generated local link and referenced asset resolves, including fragme
 test('RSS includes every published entry and only assigns recorded publication instants', () => {
   const feed = readFileSync(resolve(output, 'feed.xml'), 'utf8');
   const items = [...feed.matchAll(/<item>([\s\S]*?)<\/item>/g)].map(match => match[1]);
-  const feedSlugs = items.map(item => decodeURIComponent(item.match(/<link>[^<]*\/thought\/([^/]+)\//)?.[1] || ''));
+  const feedSlugs = items.map(item => decodeURIComponent(item.match(/<link>[^<]*\/entries\/([^/]+)\//)?.[1] || ''));
   assert.deepEqual(feedSlugs, publishedEntries.slice().sort(byPublicationOrder).map(entry => entry.slug));
   for (const entry of publishedEntries) {
-    const item = items.find(item => item.includes(`/thought/${entry.slug}/`));
+    const item = items.find(item => item.includes(`/entries/${entry.slug}/`));
     assert.ok(item, `RSS includes ${entry.slug}`);
     if (entry.timestamp) assert.equal(new Date(item.match(/<pubDate>(.*?)<\/pubDate>/)[1]).getTime(), new Date(entry.timestamp).getTime());
     else assert.ok(!item.includes('<pubDate>'), `${entry.slug}: RSS invents no instant for a date-only entry`);
@@ -101,7 +101,7 @@ test('RSS includes every published entry and only assigns recorded publication i
 test('sitemap uses a consistent absolute site origin and excludes filter duplicates', () => {
   const sitemap = readFileSync(resolve(output, 'sitemap.xml'), 'utf8');
   const locations = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => new URL(match[1]));
-  const expected = ['/', '/about/', '/now/', ...formats.filter(form => form !== 'all').map(form => routeFor(form)), ...publishedEntries.map(entry => `/thought/${entry.slug}/`)];
+  const expected = ['/', '/about/', '/now/', ...formats.filter(form => form !== 'all').map(form => routeFor(form)), ...publishedEntries.map(entry => `/entries/${entry.slug}/`)];
   assert.deepEqual(locations.map(url => url.pathname).sort(), expected.sort());
   const feed = readFileSync(resolve(output, 'feed.xml'), 'utf8');
   const feedOrigin = new URL(feed.match(/<channel>[\s\S]*?<link>(.*?)<\/link>/)?.[1] || '').origin;
@@ -128,7 +128,7 @@ test('unpublished content has no article route or feed item', () => {
     const frontmatter = source.match(/^---\n([\s\S]*?)\n---/)?.[1] || '';
     if (/^status:\s*["']?published["']?\s*$/m.test(frontmatter)) continue;
     const slug = relative(directory, file).replace(/\.mdoc$/, '');
-    assert.ok(!existsSync(resolve(output, 'thought', slug)), `${slug}: unpublished route excluded`);
-    assert.ok(!feed.includes(`/thought/${slug}/`), `${slug}: unpublished RSS item excluded`);
+    assert.ok(!existsSync(resolve(output, 'entries', slug)), `${slug}: unpublished route excluded`);
+    assert.ok(!feed.includes(`/entries/${slug}/`), `${slug}: unpublished RSS item excluded`);
   }
 });

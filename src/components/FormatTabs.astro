@@ -4,5 +4,5 @@ interface Props { active: Filter; concept?: string; entries: Entry[]; }
 const { active, concept = '', entries } = Astro.props;
 ---
 <nav class="archive-tabs journal-tabs" aria-label="Entry formats">
-  {formats.map(([form, label]) => <a class={`tab-${form}`} href={archiveHref(form, concept)} aria-current={form === active ? 'page' : undefined}>{label}<sup>{form === 'all' ? entries.length : entries.filter(entry => entry.data.form === form).length}</sup></a>)}
+  {formats.map(([form, label]) => <a class={`tab-${form}`} href={archiveHref(form, concept)} aria-current={form === active ? 'page' : undefined}>{label}<sup>{entries.filter(entry => (!concept || entry.data.concepts.includes(concept)) && (form === 'all' || entry.data.form === form)).length}</sup></a>)}
 </nav>

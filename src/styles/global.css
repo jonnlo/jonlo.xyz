@@ -2405,7 +2405,7 @@ footer {
 }
 
 .concept-filter+.record-sheet {
-  border-top: 1px solid var(--rule)
+  border-top: 1px solid var(--archive-rule)
 }
 
 @media(max-width:650px) {
@@ -2548,7 +2548,7 @@ time,
   border: 0
 }
 
-.catalogue-sheet,
+.catalogue-panel,
 .article-content-sheet,
 .support-page.about-page {
   box-shadow: var(--paper-shadow)

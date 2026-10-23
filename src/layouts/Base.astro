@@ -84,11 +84,11 @@ const configuredSite = Astro.site && !['localhost', '127.0.0.1'].includes(Astro.
       if (location.hash.startsWith('#/')) {
         const parts = location.hash.slice(2).split('/');
         let target = '/';
-        if (parts[0] === 'thought' && parts[1]) target = `/thought/${parts[1]}/`;
+        if (parts[0] === 'thought' && parts[1]) target = `/entries/${parts[1]}/`;
         else if (parts[0] === 'about' || parts[0] === 'now') target = '/about/' + (parts[0] === 'now' ? '#now' : '');
         else if (['journal', 'archive', 'form'].includes(parts[0])) {
-          target = parts[1] && parts[1] !== 'all' ? `/journal/${parts[1]}/` : '/';
-          if (parts[2]) target += `concept/${parts[2]}/`;
+          target = parts[1] && parts[1] !== 'all' ? `/formats/${parts[1]}/` : '/';
+          if (parts[2]) target += `tags/${parts[2]}/`;
         }
         location.replace(target);
       }

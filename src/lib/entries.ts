@@ -7,11 +7,11 @@ export type Form = Entry['data']['form'];
 export type Filter = Form | 'all';
 export const formats = [['all', 'All'], ['essay', 'Essays'], ['note', 'Notes'], ['crumb', 'Crumbs']] as const;
 export const entryTitle = (entry: Entry) => entry.data.title || entry.data.name;
-export const entryHref = (entry: Entry) => `/thought/${encodeURIComponent(entry.id)}/`;
+export const entryHref = (entry: Entry) => `/entries/${encodeURIComponent(entry.id)}/`;
 export const formLabel = (form: Form) => form;
 export function archiveHref(form: Filter = 'all', concept = '') {
-  const base = form === 'all' ? '/' : `/journal/${form}/`;
-  return concept ? `${base}concept/${encodeURIComponent(concept)}/` : base;
+  const base = form === 'all' ? '/' : `/formats/${form}/`;
+  return concept ? `${base}tags/${encodeURIComponent(concept)}/` : base;
 }
 export async function publishedEntries() {
   const tags = await tagRegistry();

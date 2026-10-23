@@ -13,14 +13,16 @@ const countLabel = (count: number) => `${String(count).padStart(2, '0')} ${count
 <div class:list={['journal catalogue', `catalogue-${active}`, { 'catalogue-filtered': active !== 'all' }]}>
   <h1 class="sr-only">{concept ? `${conceptName} — ` : ''}{active === 'all' ? 'All entries' : active === 'crumb' ? 'Crumbs' : `${active}s`}</h1>
   <FormatTabs active={active} concept={concept} entries={entries} />
-  {concept && <div class="concept-filter"><span>{conceptName}</span><a href={archiveHref(active)}>Clear ×</a></div>}
-  <section class="catalogue-sheet record-sheet" aria-label="Entries">
-    <div class="catalogue-summary">{firstYear && <h2 class="year-caption"><time datetime={firstYear}>{firstYear}</time></h2>}<span class="catalogue-status">{countLabel(yearCount(firstYear))}</span></div>
-    <ol class="records">{records.map((entry, index) => {
-      const year = entry.data.date.slice(0, 4);
-      const startsYear = index > 0 && year !== records[index - 1].data.date.slice(0, 4);
-      return <>{startsYear && <li class="record-year"><h2 class="year-caption"><time datetime={year}>{year}</time></h2><span class="catalogue-status">{countLabel(yearCount(year))}</span></li>}<Record entry={entry} active={active} /></>;
-    })}</ol>
-    {records.length === 0 && <p class="empty-state">No entries in this selection yet. <a href={archiveHref(active)}>Clear the concept filter</a>.</p>}
-  </section>
+  <div class="catalogue-panel">
+    {concept && <div class="concept-filter"><span>{conceptName}</span><a href={archiveHref(active)}>Clear ×</a></div>}
+    <section class="catalogue-sheet record-sheet" aria-label="Entries">
+      <div class="catalogue-summary">{firstYear && <h2 class="year-caption"><time datetime={firstYear}>{firstYear}</time></h2>}<span class="catalogue-status">{countLabel(yearCount(firstYear))}</span></div>
+      <ol class="records">{records.map((entry, index) => {
+        const year = entry.data.date.slice(0, 4);
+        const startsYear = index > 0 && year !== records[index - 1].data.date.slice(0, 4);
+        return <>{startsYear && <li class="record-year"><h2 class="year-caption"><time datetime={year}>{year}</time></h2><span class="catalogue-status">{countLabel(yearCount(year))}</span></li>}<Record entry={entry} active={active} /></>;
+      })}</ol>
+      {records.length === 0 && <p class="empty-state">No entries in this selection yet. <a href={archiveHref(active)}>Clear the tag filter</a>.</p>}
+    </section>
+  </div>
 </div>

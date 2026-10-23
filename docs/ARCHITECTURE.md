@@ -3,9 +3,9 @@
 Astro builds the site as static files. Page routes in `src/pages/` load
 published records through `src/lib/entries.ts`; reusable archive, article and
 document views live in `src/components/` and `src/layouts/`. The index is the
-All journal, format routes filter it, concept paths combine with those filters,
-and each published record receives a `/thought/<slug>/` page. Feed and sitemap
-routes are generated from the same published collection.
+All entries view, `/formats/<format>/` routes filter it, `/tags/<tag>/` paths
+combine with those filters, and each published record receives an `/entries/<slug>/`
+page. Feed and sitemap routes are generated from the same published collection.
 
 Entries are Markdoc files in `src/content/entries/`. Astro validates their
 frontmatter in `src/content.config.ts`; the local Keystatic editor writes those

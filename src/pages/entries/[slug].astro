@@ -24,7 +24,7 @@ const related = entries.filter(other => other.id !== entry.id && other.data.conc
         <div class="prose"><Content /></div>
         <div class="article-tags" aria-label="Tags"><span class="article-concepts">{entry.tags.map(tag => <a class="article-concept" href={archiveHref('all', tag.id)}>{tag.name}</a>)}</span></div>
       </div>
-      {related.length > 0 && <section class="related"><h2>Related thoughts</h2>{related.map(other => <a class={`related-record related-${other.data.form}`} href={entryHref(other)}><time datetime={other.data.date}>{indexDate(other.data.date)}</time><span>{entryTitle(other)}</span><b>{formLabel(other.data.form)}</b></a>)}</section>}
+      {related.length > 0 && <section class="related"><h2>Related entries</h2>{related.map(other => <a class={`related-record related-${other.data.form}`} href={entryHref(other)}><time datetime={other.data.date}>{indexDate(other.data.date)}</time><span>{entryTitle(other)}</span><b>{formLabel(other.data.form)}</b></a>)}</section>}
     </article>
   </div>
 </Base>
