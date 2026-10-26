@@ -23,7 +23,6 @@
   --paper-essay: light-dark(oklch(88% 0.035 145), oklch(29% 0.04 135));
   --paper-note: light-dark(oklch(88% 0.045 90.4), oklch(29% 0.04 90));
   --paper-crumb: light-dark(oklch(88% 0.025 308), oklch(29% 0.02 308));
-  --paper-poem: light-dark(oklch(91.01% 0.0103 325.7), oklch(29% 0.015 325));
   --ink: light-dark(#242522, #eeece5);
   --muted: light-dark(#6f716b, #aaa99f);
   --rule: light-dark(#cbc9c0, #4a4942);
@@ -32,7 +31,6 @@
   --hover-essay: light-dark(oklch(42% 0.1 145), oklch(80% 0.08 130));
   --hover-note: light-dark(oklch(42% 0.1 95), oklch(80% 0.08 95));
   --hover-crumb: light-dark(oklch(42% 0.1 308), oklch(80% 0.08 308));
-  --hover-poem: light-dark(#705870, #c0a8c2);
   --selection-bg: light-dark(#454542, #555550);
   --selection-ink: #faf9f5;
   --title-font: "ABC Areal", Arial, sans-serif;
@@ -550,9 +548,6 @@ h3 {
   background: var(--paper-note)
 }
 
-.form-poem {
-  background: var(--paper-poem)
-}
 
 .form-crumb {
   background: var(--paper-crumb)
@@ -668,9 +663,6 @@ h3 {
   font: 400 1.375rem/1.6 var(--body-font)
 }
 
-.poem {
-  white-space: pre-line
-}
 
 .simple {
   padding-top: 64px
@@ -1089,6 +1081,7 @@ footer {
 /* Form papers: the site canvas stays fixed while catalogue sheets and journal records vary by form. */
 .catalogue {
   --sheet-paper: var(--sheet);
+  --archive-ink: var(--ink);
   --archive-tone: color-mix(in oklch, var(--muted) 62%, var(--accent));
   --archive-rule: color-mix(in oklch, var(--rule) 70%, var(--accent))
 }
@@ -1108,24 +1101,22 @@ footer {
 
 .catalogue-essay {
   --sheet-paper: var(--paper-essay);
+  --archive-ink: color-mix(in oklch, var(--ink) 82%, var(--hover-essay));
   --archive-tone: color-mix(in oklch, var(--muted) 62%, var(--hover-essay));
   --archive-rule: color-mix(in oklch, var(--rule) 70%, var(--hover-essay))
 }
 
 .catalogue-note {
   --sheet-paper: var(--paper-note);
+  --archive-ink: color-mix(in oklch, var(--ink) 82%, var(--hover-note));
   --archive-tone: color-mix(in oklch, var(--muted) 62%, var(--hover-note));
   --archive-rule: color-mix(in oklch, var(--rule) 70%, var(--hover-note))
 }
 
-.catalogue-poem {
-  --sheet-paper: var(--paper-poem);
-  --archive-tone: color-mix(in oklch, var(--muted) 62%, var(--hover-poem));
-  --archive-rule: color-mix(in oklch, var(--rule) 70%, var(--hover-poem))
-}
 
 .catalogue-crumb {
   --sheet-paper: var(--paper-crumb);
+  --archive-ink: color-mix(in oklab, var(--ink) 82%, var(--hover-crumb));
   --archive-tone: color-mix(in oklab, var(--muted) 62%, var(--hover-crumb));
   --archive-rule: color-mix(in oklab, var(--rule) 70%, var(--hover-crumb))
 }
@@ -1137,6 +1128,16 @@ footer {
 
 .catalogue-sheet {
   background: var(--sheet-paper)
+}
+
+.catalogue .record-concepts a {
+  text-decoration-color: color-mix(in oklch, var(--archive-tone) 55%, transparent)
+}
+
+.catalogue .record-concepts a:hover,
+.catalogue .record-concepts a:focus-visible {
+  color: var(--archive-ink);
+  text-decoration-color: currentColor
 }
 
 .catalogue-filtered .catalogue-columns,
@@ -1158,18 +1159,11 @@ footer {
   background: var(--paper-note)
 }
 
-.poem-entry {
-  background: var(--paper-poem)
-}
 
 .crumb-entry {
   background: var(--paper-crumb)
 }
 
-.poem-entry .entry-content>p:not(.entry-kind) {
-  font: 400 1.4375rem/1.55 var(--body-font);
-  letter-spacing: normal
-}
 
 
 .article-heading h1 {
@@ -1194,9 +1188,6 @@ footer {
     font-size: 2.8125rem
   }
 
-  .poem-entry .entry-content>p:not(.entry-kind) {
-    font-size: 1.3125rem
-  }
 }
 
 /* One journal, with archival folder tabs as its single browsing control. */
@@ -2119,13 +2110,6 @@ footer {
   )
 }
 
-.record-poem {
-  --record-rule: color-mix(
-    in oklch,
-    color-mix(in oklch, var(--rule) 70%, var(--hover-poem)) 55%,
-    var(--sheet-paper)
-  )
-}
 
 .catalogue-all .record {
   --record-rule: color-mix(in oklch, var(--archive-rule) 55%, var(--paper-all))
@@ -2186,11 +2170,6 @@ footer {
   text-decoration-color: var(--hover-note)
 }
 
-.record-poem .record-body h2 a:hover,
-.record-poem .record-body h2 a:focus-visible {
-  color: var(--hover-poem);
-  text-decoration-color: var(--hover-poem)
-}
 
 .record-crumb .record-body h2 a:hover,
 .record-crumb .record-body h2 a:focus-visible,
@@ -2250,10 +2229,6 @@ footer {
   color: color-mix(in oklab, var(--muted) 62%, var(--hover-crumb))
 }
 
-.record-poem > time .record-date-link,
-.record-poem .record-concepts a {
-  color: color-mix(in oklch, var(--muted) 62%, var(--hover-poem))
-}
 
 .catalogue-all .record > time .record-date-link,
 .catalogue-all .record .record-concepts a {
@@ -2282,26 +2257,19 @@ footer {
   color: color-mix(in oklab, var(--ink) 82%, var(--hover-crumb))
 }
 
-.catalogue-all .record-poem .record-body h2 a:not(:hover):not(:focus-visible),
-.catalogue-all .record-poem .record-read:not(:hover):not(:focus-visible) {
-  color: color-mix(in oklch, var(--ink) 82%, var(--hover-poem))
-}
 
 .catalogue-filtered .record-essay .record-body h2 a:not(:hover):not(:focus-visible) {
-  color: color-mix(in oklch, var(--ink) 82%, var(--hover-essay))
+  color: var(--archive-ink)
 }
 
 .catalogue-filtered .record-note .record-body h2 a:not(:hover):not(:focus-visible) {
-  color: color-mix(in oklch, var(--ink) 82%, var(--hover-note))
+  color: var(--archive-ink)
 }
 
 .catalogue-filtered .record-crumb .record-body h2 a:not(:hover):not(:focus-visible) {
-  color: color-mix(in oklab, var(--ink) 82%, var(--hover-crumb))
+  color: var(--archive-ink)
 }
 
-.catalogue-filtered .record-poem .record-body h2 a:not(:hover):not(:focus-visible) {
-  color: color-mix(in oklch, var(--ink) 82%, var(--hover-poem))
-}
 
 .record-essay .record-preview {
   color: color-mix(in oklch, var(--ink) 82%, var(--hover-essay))
@@ -2315,9 +2283,6 @@ footer {
   color: color-mix(in oklab, var(--ink) 82%, var(--hover-crumb))
 }
 
-.record-poem .record-preview {
-  color: color-mix(in oklch, var(--ink) 82%, var(--hover-poem))
-}
 
 .catalogue-all .record .record-body h2 a:not(:hover):not(:focus-visible),
 .catalogue-all .record .record-preview,
@@ -2557,30 +2522,45 @@ time,
 
 /* Keep the selected folder legible without outlining it. */
 .journal-tabs a[aria-current=page] {
-  color: var(--ink);
+  --tab-label-base: var(--ink);
   font-weight: 600;
   box-shadow: var(--paper-shadow)
+}
+
+.journal-tabs a,
+.journal-tabs a[aria-current=page],
+.journal-tabs a:hover {
+  color: color-mix(in oklab, var(--tab-label-base, var(--muted)) 82%, var(--tab-tint))
+}
+
+.journal-tabs a:hover,
+.journal-tabs a:focus-visible {
+  --tab-label-base: var(--ink)
 }
 
 /* Folder colors stay on the tabs in every archive state; only documents are neutral. */
 .journal-tabs .tab-all,
 .journal-tabs .tab-all[aria-current=page] {
-  background: var(--paper-all)
+  background: var(--paper-all);
+  --tab-tint: var(--paper-all)
 }
 
 .journal-tabs .tab-essay,
 .journal-tabs .tab-essay[aria-current=page] {
-  background: var(--paper-essay)
+  background: var(--paper-essay);
+  --tab-tint: var(--hover-essay)
 }
 
 .journal-tabs .tab-note,
 .journal-tabs .tab-note[aria-current=page] {
-  background: var(--paper-note)
+  background: var(--paper-note);
+  --tab-tint: var(--hover-note)
 }
 
 .journal-tabs .tab-crumb,
 .journal-tabs .tab-crumb[aria-current=page] {
-  background: var(--paper-crumb)
+  background: var(--paper-crumb);
+  --tab-tint: var(--hover-crumb)
 }
 
 
