@@ -14,7 +14,7 @@ const definitions = [
   ['hover-crumb', 'Crumb label + hover'], ['hover-poem', 'Poem hover'],
   ['selection-bg', 'Text selection background'], ['selection-ink', 'Text selection color']
 ];
-let defaults, values, activeMode = 'dark';
+let defaults, values, activeMode = 'dark', previewMode = 'tuned';
 const format = v => `oklch(${v[0]}% ${v[1]} ${v[2]})`;
 
 function hexToOklch(hex) {
@@ -58,7 +58,8 @@ function update() {
   root.dataset.theme = activeMode;
   root.querySelector('.theme-toggle')?.setAttribute('hidden', '');
   for (const [key] of definitions) {
-    root.style.setProperty(`--${key}`, format(values[activeMode][key]));
+    const liveValue = previewMode === 'original' ? defaults[activeMode][key] : values[activeMode][key];
+    root.style.setProperty(`--${key}`, format(liveValue));
     const field = document.getElementById(`${activeMode}-${key}`);
     field.querySelector('.swatch-current').style.background = format(values[activeMode][key]);
     field.querySelector('output').textContent = format(values[activeMode][key]);
@@ -149,6 +150,17 @@ document.querySelectorAll('[data-mode]').forEach(button => button.addEventListen
   renderControls();
   if (frame.contentDocument?.readyState === 'complete') update();
   status.textContent = `Editing and previewing ${activeMode} theme tokens.`;
+}));
+document.querySelector('#toggle-controls').addEventListener('click', event => {
+  const focused = document.body.classList.toggle('preview-only');
+  event.currentTarget.setAttribute('aria-pressed', String(focused));
+  event.currentTarget.textContent = focused ? 'Show controls' : 'Focus preview';
+});
+document.querySelectorAll('[data-preview-mode]').forEach(button => button.addEventListener('click', () => {
+  previewMode = button.dataset.previewMode;
+  document.querySelectorAll('[data-preview-mode]').forEach(option => option.setAttribute('aria-pressed', String(option === button)));
+  if (frame.contentDocument?.readyState === 'complete') update();
+  status.textContent = `${previewMode === 'original' ? 'Original' : 'Tuned'} colors shown in the live preview; ${activeMode} tokens remain selected for editing.`;
 }));
 document.querySelectorAll('[data-route]').forEach(button => button.addEventListener('click', () => { frame.contentWindow.location.hash = `#${button.dataset.route}`; }));
 document.querySelector('#width').addEventListener('click', event => {

@@ -8,7 +8,7 @@ const conceptName = entries.flatMap(entry => entry.tags).find(tag => tag.id === 
 const records = entries.filter(({ data }) => (active === 'all' || data.form === active) && (!concept || data.concepts.includes(concept)));
 const firstYear = records[0]?.data.date.slice(0, 4);
 const yearCount = (year: string | undefined) => records.filter(entry => entry.data.date.startsWith(year || '!')).length;
-const countLabel = (count: number) => `${String(count).padStart(2, '0')} ${count === 1 ? 'record' : 'records'}`;
+const countLabel = (count: number) => `${String(count).padStart(2, '0')} ${count === 1 ? 'entry' : 'entries'}`;
 ---
 <div class:list={['journal catalogue', `catalogue-${active}`, { 'catalogue-filtered': active !== 'all' }]}>
   <h1 class="sr-only">{concept ? `${conceptName} — ` : ''}{active === 'all' ? 'All entries' : active === 'crumb' ? 'Crumbs' : `${active}s`}</h1>

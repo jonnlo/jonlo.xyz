@@ -20,9 +20,9 @@
   --sheet: light-dark(oklch(97% 0.0082 91.5), oklch(23% 0.012 90));
   --paper-all: light-dark(oklch(95.5% 0.0105 95.8), oklch(25% 0.02 95));
   --paper-document: light-dark(oklch(97% 0.004 90), oklch(22% 0.008 90));
-  --paper-essay: light-dark(oklch(89.5% 0.025 145), oklch(29% 0.04 135));
-  --paper-note: light-dark(oklch(91% 0.0454 90.4), oklch(29% 0.04 90));
-  --paper-crumb: light-dark(oklch(90.5% 0.025 308), oklch(29% 0.02 308));
+  --paper-essay: light-dark(oklch(88% 0.035 145), oklch(29% 0.04 135));
+  --paper-note: light-dark(oklch(88% 0.045 90.4), oklch(29% 0.04 90));
+  --paper-crumb: light-dark(oklch(88% 0.025 308), oklch(29% 0.02 308));
   --paper-poem: light-dark(oklch(91.01% 0.0103 325.7), oklch(29% 0.015 325));
   --ink: light-dark(#242522, #eeece5);
   --muted: light-dark(#6f716b, #aaa99f);
@@ -2559,7 +2559,7 @@ time,
 .journal-tabs a[aria-current=page] {
   color: var(--ink);
   font-weight: 600;
-  box-shadow: 0 -1px 8px light-dark(rgb(36 37 34 / 5%), rgb(0 0 0 / 15%))
+  box-shadow: var(--paper-shadow)
 }
 
 /* Folder colors stay on the tabs in every archive state; only documents are neutral. */
