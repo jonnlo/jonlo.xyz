@@ -615,7 +615,7 @@ h3 {
   text-decoration-style: dotted;
   text-decoration-color: currentColor;
   text-decoration-thickness: 1px;
-  text-underline-offset: .3em
+  text-underline-offset: .25em
 }
 
 .prose a:hover,
@@ -648,7 +648,7 @@ h3 {
 
 .margin-note a:hover,
 .margin-note a:focus-visible {
-  color: color-mix(in oklch, var(--muted) 55%, white)
+  color: color-mix(in oklab, var(--muted) 55%, white)
 }
 
 .related {
@@ -1082,35 +1082,35 @@ footer {
 .catalogue {
   --sheet-paper: var(--sheet);
   --archive-ink: var(--ink);
-  --archive-tone: color-mix(in oklch, var(--muted) 62%, var(--accent));
-  --archive-rule: color-mix(in oklch, var(--rule) 70%, var(--accent))
+  --archive-tone: color-mix(in oklab, var(--muted) 62%, var(--accent));
+  --archive-rule: color-mix(in oklab, var(--rule) 70%, var(--accent))
 }
 
 .catalogue-all {
   --sheet-paper: var(--paper-all);
   --archive-tone: light-dark(
-    color-mix(in oklch, var(--ink) 65%, var(--paper-all)),
-    color-mix(in oklch, var(--ink) 72%, var(--paper-all))
+    color-mix(in oklab, var(--ink) 65%, var(--paper-all)),
+    color-mix(in oklab, var(--ink) 72%, var(--paper-all))
   );
   --archive-rule: color-mix(
-    in oklch,
-    color-mix(in oklch, var(--rule) 76%, var(--ink)) 95%,
+    in oklab,
+    color-mix(in oklab, var(--rule) 76%, var(--ink)) 95%,
     var(--paper-all)
   )
 }
 
 .catalogue-essay {
   --sheet-paper: var(--paper-essay);
-  --archive-ink: color-mix(in oklch, var(--ink) 82%, var(--hover-essay));
-  --archive-tone: color-mix(in oklch, var(--muted) 62%, var(--hover-essay));
-  --archive-rule: color-mix(in oklch, var(--rule) 70%, var(--hover-essay))
+  --archive-ink: color-mix(in oklab, var(--ink) 82%, var(--hover-essay));
+  --archive-tone: color-mix(in oklab, var(--muted) 62%, var(--hover-essay));
+  --archive-rule: color-mix(in oklab, var(--rule) 70%, var(--hover-essay))
 }
 
 .catalogue-note {
   --sheet-paper: var(--paper-note);
-  --archive-ink: color-mix(in oklch, var(--ink) 82%, var(--hover-note));
-  --archive-tone: color-mix(in oklch, var(--muted) 62%, var(--hover-note));
-  --archive-rule: color-mix(in oklch, var(--rule) 70%, var(--hover-note))
+  --archive-ink: color-mix(in oklab, var(--ink) 82%, var(--hover-note));
+  --archive-tone: color-mix(in oklab, var(--muted) 62%, var(--hover-note));
+  --archive-rule: color-mix(in oklab, var(--rule) 70%, var(--hover-note))
 }
 
 
@@ -1131,7 +1131,7 @@ footer {
 }
 
 .catalogue .record-concepts a {
-  text-decoration-color: color-mix(in oklch, var(--archive-tone) 55%, transparent)
+  text-decoration-color: color-mix(in oklab, var(--archive-tone) 55%, transparent)
 }
 
 .catalogue .record-concepts a:hover,
@@ -1234,7 +1234,7 @@ footer {
   text-decoration-color: currentColor;
   text-decoration-style: dotted;
   text-decoration-thickness: 1px;
-  text-underline-offset: .3em
+  text-underline-offset: .25em
 }
 
 .record-concepts a:hover,
@@ -1244,7 +1244,7 @@ footer {
   color: var(--ink);
   text-decoration-color: currentColor;
   text-decoration-style: dotted;
-  text-underline-offset: .3em
+  text-underline-offset: .25em
 }
 
 .concept-filter span {
@@ -1252,7 +1252,7 @@ footer {
   text-decoration-line: underline;
   text-decoration-color: currentColor;
   text-decoration-style: dotted;
-  text-underline-offset: .3em
+  text-underline-offset: .25em
 }
 
 .journal.catalogue .journal-intro h1 {
@@ -1316,9 +1316,21 @@ footer {
 
 .about-page>.support-heading,
 .about-page>.support-document,
-.about-page>.now-section {
+.about-page>.now-section,
+.about-page>.about-now-link {
   grid-column: 2;
   min-width: 0
+}
+
+.support-page.about-profile-page,
+.support-page.now-current-page,
+.support-page.now-history-page {
+  padding-top: 56px;
+  padding-bottom: 56px
+}
+
+.about-page > .about-now-link {
+  margin-top: 32px
 }
 
 .about-page .support-heading {
@@ -1355,9 +1367,16 @@ footer {
     padding: 24px 16px
   }
 
+  .support-page.about-profile-page,
+  .support-page.now-current-page,
+  .support-page.now-history-page {
+    padding-top: 32px;
+    padding-bottom: 32px
+  }
+
   .about-page .about-copy {
     font-size: 1.1875rem;
-    line-height: 1.35
+    line-height: 1.45
   }
 
   .about-page .support-heading h1 {
@@ -1601,7 +1620,7 @@ footer {
   text-decoration-line: underline;
   text-decoration-style: dotted;
   text-decoration-color: currentColor;
-  text-underline-offset: .3em
+  text-underline-offset: .25em
 }
 
 .article-concept {
@@ -1649,7 +1668,7 @@ footer {
   align-items: baseline;
   margin: 0;
   padding: 14px 0;
-  border-top: 2px dotted color-mix(in oklch, var(--rule) 65%, var(--sheet));
+  border-top: 2px dotted color-mix(in oklab, var(--rule) 65%, var(--sheet));
   text-decoration: none
 }
 
@@ -1759,7 +1778,7 @@ footer {
 .record-read {
   display: inline-block;
   margin-top: 10px;
-  color: color-mix(in srgb, var(--ink) 75%, var(--muted));
+  color: color-mix(in oklab, var(--ink) 75%, var(--muted));
   font: 500 .8125rem/1.4 var(--ui-font);
   text-decoration: none
 }
@@ -1810,7 +1829,7 @@ footer {
   text-decoration-line: underline;
   text-decoration-style: dotted;
   text-decoration-color: currentColor;
-  text-underline-offset: .3em
+  text-underline-offset: .25em
 }
 
 .record>time:hover .record-date-arrow,
@@ -2079,8 +2098,8 @@ footer {
 
 .record {
   --record-rule: color-mix(
-    in oklch,
-    color-mix(in oklch, var(--rule) 70%, var(--accent)) 55%,
+    in oklab,
+    color-mix(in oklab, var(--rule) 70%, var(--accent)) 55%,
     var(--sheet-paper)
   );
   border-top: 2px dotted var(--record-rule)
@@ -2088,16 +2107,16 @@ footer {
 
 .record-essay {
   --record-rule: color-mix(
-    in oklch,
-    color-mix(in oklch, var(--rule) 70%, var(--hover-essay)) 55%,
+    in oklab,
+    color-mix(in oklab, var(--rule) 70%, var(--hover-essay)) 55%,
     var(--sheet-paper)
   )
 }
 
 .record-note {
   --record-rule: color-mix(
-    in oklch,
-    color-mix(in oklch, var(--rule) 70%, var(--hover-note)) 55%,
+    in oklab,
+    color-mix(in oklab, var(--rule) 70%, var(--hover-note)) 55%,
     var(--sheet-paper)
   )
 }
@@ -2112,7 +2131,7 @@ footer {
 
 
 .catalogue-all .record {
-  --record-rule: color-mix(in oklch, var(--archive-rule) 55%, var(--paper-all))
+  --record-rule: color-mix(in oklab, var(--archive-rule) 55%, var(--paper-all))
 }
 
 .catalogue-all .record-crumb {
@@ -2150,7 +2169,7 @@ footer {
   text-decoration-style: dotted;
   text-decoration-thickness: 1px;
   text-decoration-color: transparent;
-  text-underline-offset: .3em;
+  text-underline-offset: .25em;
   transition: text-decoration-color .15s ease
 }
 
@@ -2216,12 +2235,12 @@ footer {
 
 .record-essay > time .record-date-link,
 .record-essay .record-concepts a {
-  color: color-mix(in oklch, var(--muted) 62%, var(--hover-essay))
+  color: color-mix(in oklab, var(--muted) 62%, var(--hover-essay))
 }
 
 .record-note > time .record-date-link,
 .record-note .record-concepts a {
-  color: color-mix(in oklch, var(--muted) 62%, var(--hover-note))
+  color: color-mix(in oklab, var(--muted) 62%, var(--hover-note))
 }
 
 .record-crumb > time .record-date-link,
@@ -2244,12 +2263,12 @@ footer {
 
 .catalogue-all .record-essay .record-body h2 a:not(:hover):not(:focus-visible),
 .catalogue-all .record-essay .record-read:not(:hover):not(:focus-visible) {
-  color: color-mix(in oklch, var(--ink) 82%, var(--hover-essay))
+  color: color-mix(in oklab, var(--ink) 82%, var(--hover-essay))
 }
 
 .catalogue-all .record-note .record-body h2 a:not(:hover):not(:focus-visible),
 .catalogue-all .record-note .record-read:not(:hover):not(:focus-visible) {
-  color: color-mix(in oklch, var(--ink) 82%, var(--hover-note))
+  color: color-mix(in oklab, var(--ink) 82%, var(--hover-note))
 }
 
 .catalogue-all .record-crumb .record-body h2 a:not(:hover):not(:focus-visible),
@@ -2272,11 +2291,11 @@ footer {
 
 
 .record-essay .record-preview {
-  color: color-mix(in oklch, var(--ink) 82%, var(--hover-essay))
+  color: color-mix(in oklab, var(--ink) 82%, var(--hover-essay))
 }
 
 .record-note .record-preview {
-  color: color-mix(in oklch, var(--ink) 82%, var(--hover-note))
+  color: color-mix(in oklab, var(--ink) 82%, var(--hover-note))
 }
 
 .record-crumb .record-preview {
@@ -2287,13 +2306,13 @@ footer {
 .catalogue-all .record .record-body h2 a:not(:hover):not(:focus-visible),
 .catalogue-all .record .record-preview,
 .catalogue-all .record .record-read:not(:hover):not(:focus-visible) {
-  color: color-mix(in oklch, var(--ink) 82%, var(--paper-all))
+  color: color-mix(in oklab, var(--ink) 82%, var(--paper-all))
 }
 
 @media(max-width:650px) {
   .record-sheet {
-    padding-right: 14px;
-    padding-left: 14px
+    padding-right: 16px;
+    padding-left: 16px
   }
 
   .record-columns,
@@ -2351,7 +2370,7 @@ footer {
   color: var(--ink);
   text-decoration-color: currentColor;
   text-decoration-style: dotted;
-  text-underline-offset: .3em
+  text-underline-offset: .25em
 }
 
 .concept-filter {
@@ -2579,7 +2598,7 @@ time,
 .article-concept {
   text-decoration-line: underline;
   text-decoration-style: dotted;
-  text-decoration-color: color-mix(in srgb, var(--muted) 55%, transparent);
+  text-decoration-color: color-mix(in oklab, var(--muted) 55%, transparent);
   text-underline-offset: .28em;
   transition: color 160ms ease, text-decoration-color 160ms ease
 }
@@ -2615,7 +2634,8 @@ time,
 
 .now-heading .archive-line {
   margin: 8px 0 0;
-  font-size: var(--meta-size)
+  font-size: var(--meta-size);
+  font-weight: 400
 }
 
 .now-heading .archive-line time {
@@ -2631,7 +2651,7 @@ time,
   align-items: first baseline;
   gap: 20px;
   padding: 16px 0;
-  border-top: 2px dotted color-mix(in oklch, var(--rule) 65%, var(--sheet))
+  border-top: 2px dotted color-mix(in oklab, var(--rule) 65%, var(--sheet))
 }
 
 .now-section .status-log > div:first-child {
@@ -2649,7 +2669,7 @@ time,
 
 .now-section .status-log dd {
   font-size: 1.1875rem;
-  line-height: 1.6
+  line-height: 1.5
 }
 
 .now-rich-text p + p,
@@ -2693,16 +2713,6 @@ time,
     padding: 16px 0
   }
 
-  .now-section .status-log dd {
-    font-size: 1.125rem
-  }
-}
-
-@media(max-width:360px) {
-  .now-section .status-log > div {
-    grid-template-columns: 1fr;
-    gap: 6px
-  }
 }
 
 /* Dates and timestamps share the mono companion to the interface face. */
@@ -2818,12 +2828,14 @@ time,
 }
 
 @media(max-width:650px) {
-  .record {
+  .record,
+  .now-section .status-log > div {
     border-top-width: 1.5px
   }
 }
 
 .article-content-sheet .article-heading h1,
+.now-page .support-heading h1,
 .article-content-sheet .prose h1 {
   font-size: 1.875rem
 }
@@ -2834,12 +2846,37 @@ time,
 
 @media(max-width:650px) {
   .article-content-sheet .article-heading h1,
+  .now-page .support-heading h1,
   .article-content-sheet .prose h1 {
     font-size: 1.6rem
   }
 
   .article-content-sheet .prose h2 {
     font-size: 1.3rem
+  }
+}
+
+.now-current-page > .now-intro {
+  grid-column: 2;
+  min-width: 0;
+  width: 100%;
+  max-width: 70ch;
+  font-size: 1.25rem;
+}
+
+.now-page .support-heading h1 {
+  font-weight: 500;
+  line-height: 1.08;
+}
+
+.now-current-page > .now-intro p {
+  margin: 0;
+}
+
+@media (max-width: 650px) {
+  .now-current-page > .now-intro {
+    font-size: 1.1875rem;
+    line-height: 1.45;
   }
 }
 
@@ -2868,7 +2905,7 @@ time,
 }
 
 .article-content-sheet .prose blockquote {
-  border-left-color: color-mix(in srgb, var(--muted) 65%, var(--paper-document));
+  border-left-color: color-mix(in oklab, var(--muted) 65%, var(--paper-document));
   color: var(--muted)
 }
 
@@ -2903,8 +2940,8 @@ time,
 
 .article-content-sheet .prose pre {
   padding: 1rem 1.125rem;
-  border: 1px solid color-mix(in srgb, var(--muted) 22%, var(--paper-document));
-  background: color-mix(in srgb, var(--muted) 8%, var(--paper-document))
+  border: 1px solid color-mix(in oklab, var(--muted) 22%, var(--paper-document));
+  background: color-mix(in oklab, var(--muted) 8%, var(--paper-document))
 }
 
 .article-content-sheet .prose table {
@@ -2917,13 +2954,13 @@ time,
 .article-content-sheet .prose th,
 .article-content-sheet .prose td {
   padding: .45em .6em;
-  border: 1px solid color-mix(in srgb, var(--muted) 35%, var(--paper-document));
+  border: 1px solid color-mix(in oklab, var(--muted) 35%, var(--paper-document));
   text-align: left;
   vertical-align: top
 }
 
 .article-content-sheet .prose th {
-  background: color-mix(in srgb, var(--muted) 8%, var(--paper-document));
+  background: color-mix(in oklab, var(--muted) 8%, var(--paper-document));
   font-weight: 600
 }
 
@@ -2961,7 +2998,12 @@ time,
   .article-content-sheet .prose,
   .record-preview {
     font-size: 1.1875rem;
-    line-height: 1.35
+    line-height: 1.45
+  }
+
+  .now-section .status-log dd {
+    font-size: 1.125rem;
+    line-height: 1.45
   }
 }
 @media(max-width:650px) {

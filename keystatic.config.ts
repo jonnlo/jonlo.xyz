@@ -116,8 +116,9 @@ export default config({
       path: 'src/content/now-page',
       format: { data: 'json' },
       schema: {
-        heading: fields.text({ label: 'Heading', validation: { isRequired: true } }),
-        description: fields.text({ label: 'Description', multiline: true, validation: { isRequired: true } }),
+        currentDescription: fields.text({ label: 'Now page blurb', multiline: true, validation: { isRequired: true } }),
+        heading: fields.text({ label: 'History heading', validation: { isRequired: true } }),
+        description: fields.text({ label: 'History description', multiline: true, validation: { isRequired: true } }),
       },
     }),
     about: singleton({

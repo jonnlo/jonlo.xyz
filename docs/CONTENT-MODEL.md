@@ -86,8 +86,8 @@ The wrapper supports ordinary rich text and preserves the order of the writing.
 
 ## About and Now
 
-The `/now/` history page heading and introductory description are editable in
-the **Now page** Keystatic singleton. Its JSON data is stored at
+The current `/now/` blurb and the `/now/history/` heading and introductory
+description are editable in the **Now page** Keystatic singleton. Its JSON data is stored at
 `src/content/now-page.json`; Astro validates the same required fields before
 rendering the page. The dated updates remain in the separate **Now updates**
 collection.
@@ -108,10 +108,12 @@ Each JSON snapshot has `name`, `date`, `status`, and
 Activity descriptions use a small rich-text editor: links, bold, italics,
 paragraphs, and ordered/bullet lists. They are stored as inline Markdoc strings
 in the same JSON `text` field, so earlier plain-text updates remain compatible.
-About displays the newest published snapshot. `/now/` lists every published
-snapshot, newest first, with stable links such as `/now/#update-2026-09-10`.
-Drafts stay out of both views. Same-date records sort by record ID descending;
-use distinct names/IDs if saving multiple updates on the same day.
+`/now/` displays only the newest published snapshot. Its **Past updates** link
+opens `/now/history/`, which lists every published snapshot, newest first, with
+stable links such as `/now/history/#update-2026-09-10`. About links to the Now
+page without embedding a snapshot. Drafts stay out of both views. Same-date
+records sort by record ID descending; use distinct names/IDs if saving multiple
+updates on the same day.
 The original September 10, 2026 snapshot was preserved without changing its text.
 
 ## Sample provenance

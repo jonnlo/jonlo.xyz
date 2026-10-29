@@ -49,6 +49,7 @@ const about = defineCollection({
 const nowPage = defineCollection({
   loader: glob({ pattern: 'now-page.json', base: './src/content' }),
   schema: z.object({
+    currentDescription: z.string().min(1),
     heading: z.string().min(1),
     description: z.string().min(1),
   }),

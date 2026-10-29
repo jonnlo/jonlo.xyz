@@ -1,22 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
 import { getEntry, render } from 'astro:content';
-import { articleDate } from '../lib/entries';
-import { publishedNowUpdates } from '../lib/now';
-import NowItems from '../components/NowItems.astro';
 const about = await getEntry('about', 'about');
 if (!about) throw new Error('About content is missing.');
 const { Content } = await render(about);
-const latest = (await publishedNowUpdates())[0];
 ---
 <Base title="About" section="about">
-  <section class="support-page about-page">
+  <section class="support-page about-page about-profile-page">
     <header class="support-heading"><h1>{about.data.heading}</h1></header>
     <div class="support-document"><div class="about-copy about-rich-text"><Content /></div></div>
-    {latest && <section class="now-section" id="now" aria-labelledby="now-heading">
-      <header class="now-heading"><h2 id="now-heading">Now</h2><p class="archive-line"><time datetime={latest.data.date}>{articleDate(latest.data.date)}</time></p></header>
-      <NowItems items={latest.data.items} />
-      <p class="now-history-link"><a class="nav-link" href="/now/">Past updates<span aria-hidden="true"> →</span></a></p>
-    </section>}
+    <p class="now-history-link about-now-link"><a class="nav-link" href="/now/">What I’m up to now<span aria-hidden="true"> →</span></a></p>
   </section>
 </Base>

@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-interface Props { title?: string; description?: string; section?: 'journal' | 'about'; noindex?: boolean; }
+interface Props { title?: string; description?: string; section?: 'journal' | 'about' | 'now'; noindex?: boolean; }
 const { title = 'Jon’s log', description = 'A personal archive of essays, notes and recurring thoughts.', section = 'journal', noindex = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const configuredSite = Astro.site && !['localhost', '127.0.0.1'].includes(Astro.site.hostname);
@@ -37,7 +37,7 @@ const configuredSite = Astro.site && !['localhost', '127.0.0.1'].includes(Astro.
     <div class="page">
       <header class="header">
         <a class="identity" href="/">Jon’s log</a>
-        <nav aria-label="Main navigation"><a href="/about/" aria-current={section === 'about' ? 'page' : undefined}>About</a><button class="theme-toggle" type="button" aria-label="Switch to dark appearance" title="Switch to dark appearance" data-next-theme="dark"><span class="theme-symbol" aria-hidden="true">◐</span></button></nav>
+        <nav aria-label="Main navigation"><a href="/now/" aria-current={section === 'now' ? 'page' : undefined}>Now</a><a href="/about/" aria-current={section === 'about' ? 'page' : undefined}>About</a><button class="theme-toggle" type="button" aria-label="Switch to dark appearance" title="Switch to dark appearance" data-next-theme="dark"><span class="theme-symbol" aria-hidden="true">◐</span></button></nav>
       </header>
       <main id="main" tabindex="-1"><slot /></main>
       <footer><span>personal archive / ongoing · <time datetime="2026">2026—</time></span><div class="footer-links"><a href="/feed.xml">RSS ↗</a></div></footer>
@@ -83,11 +83,17 @@ const configuredSite = Astro.site && !['localhost', '127.0.0.1'].includes(Astro.
       });
 
       // Preserve links copied from the HTML prototype, including combined filters.
+      if (location.pathname === '/about/' && location.hash === '#now') {
+        location.replace('/now/');
+      } else if (location.pathname === '/now/' && location.hash.startsWith('#update-')) {
+        location.replace(`/now/history/${location.hash}`);
+      }
       if (location.hash.startsWith('#/')) {
         const parts = location.hash.slice(2).split('/');
         let target = '/';
         if (parts[0] === 'thought' && parts[1]) target = `/entries/${parts[1]}/`;
-        else if (parts[0] === 'about' || parts[0] === 'now') target = '/about/' + (parts[0] === 'now' ? '#now' : '');
+        else if (parts[0] === 'about') target = '/about/';
+        else if (parts[0] === 'now') target = '/now/';
         else if (['journal', 'archive', 'form'].includes(parts[0])) {
           target = parts[1] && parts[1] !== 'all' ? `/formats/${parts[1]}/` : '/';
           if (parts[2]) target += `tags/${parts[2]}/`;

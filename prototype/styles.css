@@ -620,7 +620,7 @@ h3 {
   text-decoration-style: dotted;
   text-decoration-color: currentColor;
   text-decoration-thickness: 1px;
-  text-underline-offset: .3em
+  text-underline-offset: .25em
 }
 
 .prose a:hover,
@@ -1243,7 +1243,7 @@ footer {
   text-decoration-color: currentColor;
   text-decoration-style: dotted;
   text-decoration-thickness: 1px;
-  text-underline-offset: .3em
+  text-underline-offset: .25em
 }
 
 .record-concepts a:hover,
@@ -1253,7 +1253,7 @@ footer {
   color: var(--ink);
   text-decoration-color: currentColor;
   text-decoration-style: dotted;
-  text-underline-offset: .3em
+  text-underline-offset: .25em
 }
 
 .concept-filter span {
@@ -1261,7 +1261,7 @@ footer {
   text-decoration-line: underline;
   text-decoration-color: currentColor;
   text-decoration-style: dotted;
-  text-underline-offset: .3em
+  text-underline-offset: .25em
 }
 
 .journal.catalogue .journal-intro h1 {
@@ -1610,7 +1610,7 @@ footer {
   text-decoration-line: underline;
   text-decoration-style: dotted;
   text-decoration-color: currentColor;
-  text-underline-offset: .3em
+  text-underline-offset: .25em
 }
 
 .article-concept {
@@ -1819,7 +1819,7 @@ footer {
   text-decoration-line: underline;
   text-decoration-style: dotted;
   text-decoration-color: currentColor;
-  text-underline-offset: .3em
+  text-underline-offset: .25em
 }
 
 .record>time:hover .record-date-arrow,
@@ -2166,7 +2166,7 @@ footer {
   text-decoration-style: dotted;
   text-decoration-thickness: 1px;
   text-decoration-color: transparent;
-  text-underline-offset: .3em;
+  text-underline-offset: .25em;
   transition: text-decoration-color .15s ease
 }
 
@@ -2386,7 +2386,7 @@ footer {
   color: var(--ink);
   text-decoration-color: currentColor;
   text-decoration-style: dotted;
-  text-underline-offset: .3em
+  text-underline-offset: .25em
 }
 
 .concept-filter {
